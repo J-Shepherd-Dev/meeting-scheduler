@@ -1,0 +1,61 @@
+name: GitHub CD
+on: push
+
+jobs:
+    build:
+        name: Build
+        # Build on the latest Windows image.
+        # This will usually be an image of Windows Server, which is compatible with Windows 10
+        # All Windows images (and Linux ones, for that matter) include a myriad of software for building, so it comes 'batteries-included', as to say.
+        # You can check the software that's included with Windows Server 2019 at this link:
+        # - https://github.com/actions/virtual-environments/blob/main/images/win/Windows2019-Readme.md#microsoft-windows-server-2019-datacenter
+        # If you're reading this in the far future, and Windows Server 2019 is a mere relic of the past,
+        #  then you can check what software is available on whatever future version or OS you're using for your builds from here:
+        # - https://docs.github.com/en/free-pro-team@latest/actions/reference/specifications-for-github-hosted-runners#supported-software
+        runs-on: windows-latest
+
+        steps:
+            # First, check out the repository.
+            # It's customary to lock the version of your actions, even if you rely on no particular aspect of how they operate, as it can prevent
+            #  awkward build failures in the future if something changes algorithmically within those actions.
+            - uses: actions/checkout@v2
+              with:
+                  submodules: true  # See [git submodules]: https://git-scm.com/book/en/v2/Git-Tools-Submodules
+            
+            - name: Build solution
+              shell: pwsh  # Use PowerShell to run this script, since it's cooler than CMD.
+              run: |
+                  # While the Windows images do come with the MSBuild tools, they're not immediately accessible by default.
+                  # First, we need to find where MSBuild actually is.
+                  # To do this, we use VSWhere, which finds where Visual Studio components are located.
+                  # We get back a list of where the component can be find, in order of highest to lowest priority.
+                  # Select-Object lets us select the first (the highest priority one), and then we use Split-Path to get the parent directory of the executable.
+                  $msbuildPath = Split-Path (& "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe" -latest -requires Microsoft.Component.MSBuild -find MSBuild\Current\Bin\amd64\MSBuild.exe | Select-Object -First 1) -Parent
+
+                  # Now we know which directory MSBuild is in, we can add it to PATH, which allows us to use it directly.
+                  # You could also omit this line and use MSBuild by doing `${msbuildPath}/MSBuild.exe`, but this way, we can just type `msbuild`.
+                  $env:PATH = $msbuildPath + ';' + $env:PATH
+
+                  # Use MSBuild to build the solution in Release mode.
+                  # This specifies that it targets `net460`, which is the ID for the .NET Framework v4.6
+                  # You can find documentation on using MSBuild from the command line here:
+                  # - https://docs.microsoft.com/en-us/visualstudio/msbuild/msbuild-command-line-reference?view=vs-2019
+                  msbuild -v:m -m -restore -t:Build -p:Configuration=Release -p:TargetFramework=net460 "MeetingScheduler.sln"
+
+                  # This 'git clean' removes any changes inside MeetingScheduler/ from HEAD, which means it gets rid of anything that would be ignored by .gitignore,
+                  #  as well as just generally any changes in that directory since the repository was pulled.
+                  # I had my solution configured to output to a folder called 'dist' outside of the source directory, so this does a good cleanup job.
+                  git clean -x -d -f MeetingScheduler/
+
+                  # Make a directory to hold the contents of the artifact
+                  mkdir C:/MeetingScheduler
+
+                  # Copy the contents for the artifact to the directory
+                  Copy-Item -Path "dist","MeetingScheduler","MeetingScheduler.sln" -Destination "C:/MeetingScheduler" -Recurse
+
+            # Upload the artifact.
+            - uses: actions/upload-artifact@v2
+              if: true  # if: true means this step always runs.
+              with:
+                name: MeetingScheduler
+                path: C:/MeetingScheduler/
