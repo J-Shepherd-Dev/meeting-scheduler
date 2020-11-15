@@ -12,9 +12,13 @@ namespace MeetingScheduler
 {
     public partial class MainForm : Form
     {
+        //preset variables
+        List<User> presetUsers = new List<User>(){new User("John"), new User("Jack"), new User("Tom"), new User("Ryan"), new User("Mehmet") };
         public MainForm()
         {
             InitializeComponent();
+            impersonationComboBox.DataSource = presetUsers;
+            impersonationComboBox.DisplayMember = "Name";
         }
 
         //this function is called on ResizeEnd
@@ -24,6 +28,11 @@ namespace MeetingScheduler
         }
 
         private void yourMeetingsTab_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void detailsBox_Enter(object sender, EventArgs e)
         {
 
         }

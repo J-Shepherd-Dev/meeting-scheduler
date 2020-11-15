@@ -28,17 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.yourMeetingsTab = new System.Windows.Forms.TabPage();
-            this.scheduledTab = new System.Windows.Forms.TabPage();
             this.proposedTab = new System.Windows.Forms.TabPage();
+            this.scheduledTab = new System.Windows.Forms.TabPage();
             this.detailsBox = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.impersonationComboBox = new System.Windows.Forms.ComboBox();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,25 +71,25 @@
             this.yourMeetingsTab.UseVisualStyleBackColor = true;
             this.yourMeetingsTab.Click += new System.EventHandler(this.yourMeetingsTab_Click);
             // 
-            // scheduledTab
-            // 
-            this.scheduledTab.Location = new System.Drawing.Point(4, 22);
-            this.scheduledTab.Name = "scheduledTab";
-            this.scheduledTab.Padding = new System.Windows.Forms.Padding(3);
-            this.scheduledTab.Size = new System.Drawing.Size(280, 650);
-            this.scheduledTab.TabIndex = 1;
-            this.scheduledTab.Text = "Scheduled";
-            this.scheduledTab.UseVisualStyleBackColor = true;
-            // 
             // proposedTab
             // 
             this.proposedTab.Location = new System.Drawing.Point(4, 22);
             this.proposedTab.Name = "proposedTab";
             this.proposedTab.Padding = new System.Windows.Forms.Padding(3);
-            this.proposedTab.Size = new System.Drawing.Size(280, 650);
+            this.proposedTab.Size = new System.Drawing.Size(226, 623);
             this.proposedTab.TabIndex = 2;
             this.proposedTab.Text = "Proposed";
             this.proposedTab.UseVisualStyleBackColor = true;
+            // 
+            // scheduledTab
+            // 
+            this.scheduledTab.Location = new System.Drawing.Point(4, 22);
+            this.scheduledTab.Name = "scheduledTab";
+            this.scheduledTab.Padding = new System.Windows.Forms.Padding(3);
+            this.scheduledTab.Size = new System.Drawing.Size(226, 623);
+            this.scheduledTab.TabIndex = 1;
+            this.scheduledTab.Text = "Scheduled";
+            this.scheduledTab.UseVisualStyleBackColor = true;
             // 
             // detailsBox
             // 
@@ -96,17 +100,34 @@
             this.detailsBox.TabIndex = 1;
             this.detailsBox.TabStop = false;
             this.detailsBox.Text = "Details Pane";
+            this.detailsBox.Enter += new System.EventHandler(this.detailsBox_Enter);
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.flowLayoutPanel1.Controls.Add(this.impersonationComboBox);
+            this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1123, 27);
             this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // impersonationComboBox
+            // 
+            this.impersonationComboBox.DataSource = this.userBindingSource;
+            this.impersonationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.impersonationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.impersonationComboBox.FormattingEnabled = true;
+            this.impersonationComboBox.Location = new System.Drawing.Point(949, 3);
+            this.impersonationComboBox.Name = "impersonationComboBox";
+            this.impersonationComboBox.Size = new System.Drawing.Size(171, 21);
+            this.impersonationComboBox.TabIndex = 0;
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(MeetingScheduler.User);
             // 
             // panel1
             // 
@@ -118,17 +139,16 @@
             this.panel1.Size = new System.Drawing.Size(1123, 649);
             this.panel1.TabIndex = 3;
             // 
-            // impersonationComboBox
+            // label1
             // 
-            this.impersonationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.impersonationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.impersonationComboBox.FormattingEnabled = true;
-            this.impersonationComboBox.Items.AddRange(new object[] {
-            "(impersonation box)"});
-            this.impersonationComboBox.Location = new System.Drawing.Point(949, 3);
-            this.impersonationComboBox.Name = "impersonationComboBox";
-            this.impersonationComboBox.Size = new System.Drawing.Size(171, 21);
-            this.impersonationComboBox.TabIndex = 0;
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label1.Location = new System.Drawing.Point(867, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 27);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Impersonating:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MainForm
             // 
@@ -144,6 +164,8 @@
             this.ResizeEnd += new System.EventHandler(this.ResizeWindow);
             this.tabControl1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -159,6 +181,8 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox impersonationComboBox;
+        private System.Windows.Forms.BindingSource userBindingSource;
+        private System.Windows.Forms.Label label1;
     }
 }
 
