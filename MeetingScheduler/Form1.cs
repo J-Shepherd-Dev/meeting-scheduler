@@ -22,5 +22,10 @@ namespace MeetingScheduler
         {
             //TODO: resize inner elements, if needed
         }
+
+        private void yourMeetingsTab_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
