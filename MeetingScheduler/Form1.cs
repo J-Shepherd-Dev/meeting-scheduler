@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace MeetingScheduler
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        //this function is called on ResizeEnd
+        private void ResizeWindow(object sender, EventArgs e)
+        {
+            //TODO: resize inner elements, if needed
         }
     }
 }
