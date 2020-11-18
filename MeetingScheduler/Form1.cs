@@ -67,5 +67,11 @@ namespace MeetingScheduler
             TabControl sdr = sender as TabControl;
             Logging.AddMessage("Tab selected: " + sdr.SelectedIndex);
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            CreateMeeting cM = new CreateMeeting();
+            cM.Show();
+        }
     }
 }

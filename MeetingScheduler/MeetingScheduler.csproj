@@ -52,6 +52,12 @@
     <Compile Include="CalendarPanel.Designer.cs">
       <DependentUpon>CalendarPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateMeeting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateMeeting.Designer.cs">
+      <DependentUpon>CreateMeeting.cs</DependentUpon>
+    </Compile>
     <Compile Include="DevLogForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +76,9 @@
     <Compile Include="User.cs" />
     <EmbeddedResource Include="CalendarPanel.resx">
       <DependentUpon>CalendarPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateMeeting.resx">
+      <DependentUpon>CreateMeeting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DevLogForm.resx">
       <DependentUpon>DevLogForm.cs</DependentUpon>
