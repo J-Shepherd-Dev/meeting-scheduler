@@ -31,8 +31,8 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.yourMeetingsTab = new System.Windows.Forms.TabPage();
-            this.proposedTab = new System.Windows.Forms.TabPage();
+            this.initiatedTab = new System.Windows.Forms.TabPage();
+            this.invitedTab = new System.Windows.Forms.TabPage();
             this.scheduledTab = new System.Windows.Forms.TabPage();
             this.detailsBox = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -41,6 +41,7 @@
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
@@ -49,8 +50,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.yourMeetingsTab);
-            this.tabControl1.Controls.Add(this.proposedTab);
+            this.tabControl1.Controls.Add(this.initiatedTab);
+            this.tabControl1.Controls.Add(this.invitedTab);
             this.tabControl1.Controls.Add(this.scheduledTab);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Left;
             this.tabControl1.HotTrack = true;
@@ -62,26 +63,26 @@
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
-            // yourMeetingsTab
+            // initiatedTab
             // 
-            this.yourMeetingsTab.Location = new System.Drawing.Point(4, 22);
-            this.yourMeetingsTab.Name = "yourMeetingsTab";
-            this.yourMeetingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.yourMeetingsTab.Size = new System.Drawing.Size(226, 623);
-            this.yourMeetingsTab.TabIndex = 0;
-            this.yourMeetingsTab.Text = "Your Meetings";
-            this.yourMeetingsTab.UseVisualStyleBackColor = true;
-            this.yourMeetingsTab.Click += new System.EventHandler(this.yourMeetingsTab_Click);
+            this.initiatedTab.Location = new System.Drawing.Point(4, 22);
+            this.initiatedTab.Name = "initiatedTab";
+            this.initiatedTab.Padding = new System.Windows.Forms.Padding(3);
+            this.initiatedTab.Size = new System.Drawing.Size(226, 623);
+            this.initiatedTab.TabIndex = 0;
+            this.initiatedTab.Text = "Initiated";
+            this.initiatedTab.UseVisualStyleBackColor = true;
+            this.initiatedTab.Click += new System.EventHandler(this.yourMeetingsTab_Click);
             // 
-            // proposedTab
+            // invitedTab
             // 
-            this.proposedTab.Location = new System.Drawing.Point(4, 22);
-            this.proposedTab.Name = "proposedTab";
-            this.proposedTab.Padding = new System.Windows.Forms.Padding(3);
-            this.proposedTab.Size = new System.Drawing.Size(226, 623);
-            this.proposedTab.TabIndex = 2;
-            this.proposedTab.Text = "Proposed";
-            this.proposedTab.UseVisualStyleBackColor = true;
+            this.invitedTab.Location = new System.Drawing.Point(4, 22);
+            this.invitedTab.Name = "invitedTab";
+            this.invitedTab.Padding = new System.Windows.Forms.Padding(3);
+            this.invitedTab.Size = new System.Drawing.Size(226, 623);
+            this.invitedTab.TabIndex = 2;
+            this.invitedTab.Text = "Invited";
+            this.invitedTab.UseVisualStyleBackColor = true;
             // 
             // scheduledTab
             // 
@@ -110,6 +111,7 @@
             this.flowLayoutPanel1.Controls.Add(this.devWindowBtn);
             this.flowLayoutPanel1.Controls.Add(this.impersonationComboBox);
             this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.flowLayoutPanel1.Controls.Add(this.button1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
@@ -163,6 +165,15 @@
             this.panel1.Size = new System.Drawing.Size(1123, 649);
             this.panel1.TabIndex = 3;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(684, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(116, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Create Meeting";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -187,8 +198,8 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage yourMeetingsTab;
-        private System.Windows.Forms.TabPage proposedTab;
+        private System.Windows.Forms.TabPage initiatedTab;
+        private System.Windows.Forms.TabPage invitedTab;
         private System.Windows.Forms.TabPage scheduledTab;
         private System.Windows.Forms.GroupBox detailsBox;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
@@ -197,6 +208,7 @@
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button devWindowBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -36,6 +36,13 @@ namespace MeetingScheduler
 
         }
 
+        public void UpdateDetailsPane(Control control) {
+            detailsBox.Controls.Clear();
+            control.Dock = DockStyle.Fill;
+            detailsBox.Text = control.Name;
+            detailsBox.Controls.Add(control);
+        }
+
         private void yourMeetingsTab_Click(object sender, EventArgs e)
         {
         }
