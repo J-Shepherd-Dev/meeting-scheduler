@@ -12,21 +12,17 @@ namespace MeetingScheduler
 {
     public partial class DevLogForm : Form
     {
-        List<String> messages = new List<String>();
         public DevLogForm()
         {
             InitializeComponent();
+
+            Logging.newMessage += Logging_newMessage;
         }
-        public void AddMessage(String msg) {
-            messages.Add(msg);
-            //if there are now more than 20 messages
-            if (messages.Count > 20) {
-                //remove the one at the top
-                messages.RemoveAt(0);
-            }
+
+        public void UpdateMessages() {
             devLogFlowPanel.SuspendLayout();
             devLogFlowPanel.Controls.Clear();
-            foreach (String message in messages) {
+            foreach (String message in Logging.messageBuffer) {
                 Label lbl = new Label();
                 lbl.AutoSize = true;
                 lbl.Text = message;
@@ -36,6 +32,16 @@ namespace MeetingScheduler
                 devLogFlowPanel.Controls.Add(lbl);
             }
             devLogFlowPanel.ResumeLayout();
+        }
+
+        private void Logging_newMessage(object sender, EventArgs e)
+        {
+            UpdateMessages();
+        }
+
+        private void DevLogForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Logging.newMessage -= Logging_newMessage;
         }
     }
 }

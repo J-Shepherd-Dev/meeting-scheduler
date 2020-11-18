@@ -26,7 +26,7 @@ namespace MeetingScheduler
             //set up the devForm
             devForm.ShowIcon = false;
             devForm.ShowInTaskbar = true;
-            devForm.AddMessage("Initialisation complete");
+            Logging.AddMessage("Initialisation complete");
         }
 
         //this function is called on ResizeEnd
@@ -49,11 +49,15 @@ namespace MeetingScheduler
 
         private void detailsBox_Enter(object sender, EventArgs e)
         {
-            devForm.AddMessage("Details Entered");
+            Logging.AddMessage("Details Entered");
         }
 
         private void devWindowBtn_Click(object sender, EventArgs e)
         {
+            if (devForm.IsDisposed)
+                // The last dev form was closed and we need to make a new one
+                devForm = new DevLogForm();
+
             devForm.Show();
             devForm.Activate();
         }
@@ -61,7 +65,7 @@ namespace MeetingScheduler
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             TabControl sdr = sender as TabControl;
-            devForm.AddMessage("Tab selected: " + sdr.SelectedIndex);
+            Logging.AddMessage("Tab selected: " + sdr.SelectedIndex);
         }
     }
 }
