@@ -36,10 +36,11 @@
             this.scheduledTab = new System.Windows.Forms.TabPage();
             this.detailsBox = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.devWindowBtn = new System.Windows.Forms.Button();
             this.impersonationComboBox = new System.Windows.Forms.ComboBox();
             this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.tabControl1.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
@@ -59,6 +60,7 @@
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(234, 649);
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // yourMeetingsTab
             // 
@@ -105,6 +107,7 @@
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.flowLayoutPanel1.Controls.Add(this.devWindowBtn);
             this.flowLayoutPanel1.Controls.Add(this.impersonationComboBox);
             this.flowLayoutPanel1.Controls.Add(this.label1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -114,13 +117,23 @@
             this.flowLayoutPanel1.Size = new System.Drawing.Size(1123, 27);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
+            // devWindowBtn
+            // 
+            this.devWindowBtn.Location = new System.Drawing.Point(1065, 3);
+            this.devWindowBtn.Name = "devWindowBtn";
+            this.devWindowBtn.Size = new System.Drawing.Size(55, 23);
+            this.devWindowBtn.TabIndex = 2;
+            this.devWindowBtn.Text = "Dev log";
+            this.devWindowBtn.UseVisualStyleBackColor = true;
+            this.devWindowBtn.Click += new System.EventHandler(this.devWindowBtn_Click);
+            // 
             // impersonationComboBox
             // 
             this.impersonationComboBox.DataSource = this.userBindingSource;
             this.impersonationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.impersonationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.impersonationComboBox.FormattingEnabled = true;
-            this.impersonationComboBox.Location = new System.Drawing.Point(949, 3);
+            this.impersonationComboBox.Location = new System.Drawing.Point(888, 3);
             this.impersonationComboBox.Name = "impersonationComboBox";
             this.impersonationComboBox.Size = new System.Drawing.Size(171, 21);
             this.impersonationComboBox.TabIndex = 0;
@@ -128,6 +141,17 @@
             // userBindingSource
             // 
             this.userBindingSource.DataSource = typeof(MeetingScheduler.User);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.label1.Location = new System.Drawing.Point(806, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 29);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Impersonating:";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // panel1
             // 
@@ -138,17 +162,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1123, 649);
             this.panel1.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label1.Location = new System.Drawing.Point(867, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 27);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Impersonating:";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // MainForm
             // 
@@ -183,6 +196,7 @@
         private System.Windows.Forms.ComboBox impersonationComboBox;
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button devWindowBtn;
     }
 }
 
