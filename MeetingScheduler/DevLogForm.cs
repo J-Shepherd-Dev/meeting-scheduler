@@ -28,6 +28,7 @@ namespace MeetingScheduler
             devLogFlowPanel.Controls.Clear();
             foreach (String message in messages) {
                 Label lbl = new Label();
+                lbl.AutoSize = true;
                 lbl.Text = message;
                 lbl.ForeColor = Color.White;
                 lbl.BackColor = Color.Black;
