@@ -44,9 +44,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.Controls.Add(this.label1);
             this.Name = "CalendarPanel";
             this.Size = new System.Drawing.Size(789, 513);
+            this.Load += new System.EventHandler(this.CalendarPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

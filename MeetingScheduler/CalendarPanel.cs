@@ -16,5 +16,10 @@ namespace MeetingScheduler
         {
             InitializeComponent();
         }
+
+        private void CalendarPanel_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
