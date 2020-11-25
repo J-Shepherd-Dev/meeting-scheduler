@@ -68,5 +68,15 @@ namespace MeetingScheduler
             // Advance 7 days
             CurrentWeek += new TimeSpan(7, 0, 0, 0);
         }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            this.CurrentWeek = (sender as DateTimePicker).Value;
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
