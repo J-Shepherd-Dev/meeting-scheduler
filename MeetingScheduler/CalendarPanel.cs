@@ -30,8 +30,13 @@ namespace MeetingScheduler
                 // Technically speaking usually you'd just want to do string interpolation e.g.
                 // $"{_currentWeek:ddd d MMM yyyy}" but then we can't set locale
                 labelWeek.Text = $"{FormatDate(_currentWeek)} - {FormatDate(_currentWeek + oneWeek)}";
+
+                DrawMeetings();
             }
         }
+
+        public Meeting[] meetings = new Meeting[0];
+        public List<Panel> meetingPanels = new List<Panel>();
 
         public CalendarPanel()
         {
@@ -41,6 +46,21 @@ namespace MeetingScheduler
         private void CalendarPanel_Load(object sender, EventArgs e)
         {
             CurrentWeek = DateTime.Today;
+
+            // Make a meeting
+            meetings = new Meeting[]
+            {
+                new Meeting(
+                    "National Mehmet Funky Dance Party",
+                    CurrentWeek + new TimeSpan(
+                        2,  // Tuesday
+                        12, 0, 0  // At 12 pm
+                    ),
+                    2
+                )
+            };
+
+            DrawMeetings();
         }
 
         private DateTime GetWeekStart(DateTime date)
@@ -55,6 +75,59 @@ namespace MeetingScheduler
         {
             CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
             return date.ToString("ddd d MMM yyyy", culture);
+        }
+
+        private void DrawMeetings()
+        {
+            // If panels for meetings already exist, remove them
+            foreach (Panel panel in meetingPanels)
+            {
+                panel.Dispose();
+            }
+
+            // Clear collection
+            meetingPanels.Clear();
+
+            // Recreate panels
+            foreach (Meeting meeting in meetings)
+            {
+                // Ignore meetings not in this week
+                if (meeting.Time < _currentWeek || meeting.Time > (_currentWeek + new TimeSpan(7, 0, 0, 0)))
+                    continue;
+
+                // Ignore meetings not between 8am and 7pm
+                if (meeting.Time.Hour < 8 || meeting.Time.Hour > 18)
+                    continue;
+
+                // Make a panel
+                Panel panel = new Panel();
+                tableLayoutPanel1.Controls.Add(panel, meeting.Time.Hour - 7, (int)meeting.Time.DayOfWeek + 1);  // Associate it with the table
+                tableLayoutPanel1.SetColumnSpan(panel, meeting.Length);
+                panel.Dock = DockStyle.Fill;  // Dock the panel
+                panel.BackColor = Color.White;
+
+                // Create the side color thing
+                Panel colorTab = new Panel();
+                panel.Controls.Add(colorTab);
+                colorTab.Dock = DockStyle.Left;
+                colorTab.Width = 10;
+                colorTab.Margin = new Padding(0);
+                colorTab.BackColor = Color.Red;
+
+                // Meeting label
+                Label label = new Label();
+                panel.Controls.Add(label);
+                label.AutoSize = false;
+                label.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+                label.Text = meeting.Name;
+                label.Location = new Point(13, 3);
+                label.Size = new Size(panel.Width - 15, 50);
+                label.Margin = new Padding(3);
+                label.TabIndex = 1;
+
+                // Push panel
+                meetingPanels.Add(panel);
+            }
         }
 
         private void buttonLastWeek_Click(object sender, EventArgs e)
@@ -76,12 +149,12 @@ namespace MeetingScheduler
 
         private void tableLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
         {
-            Point mouse = PointToClient(MousePosition);
+            Point mouse = tableLayoutPanel1.PointToClient(MousePosition);
 
             // The left header has a relative width of 1
             // Each of the 11 time slots has a relative width of 3
             // This rounds into column number, starting from 0
-            float clickX = (mouse.X * (11.5f / Width)) + 0.6666f;
+            float clickX = (mouse.X * (11.5f / Width)) - 0.3333f;
 
             // The top header has a relative height of 1
             // Each of the 7 week days has a relative height of 2
@@ -92,8 +165,10 @@ namespace MeetingScheduler
             if (clickX > 0.0f && clickY > 0.0f)
             {
                 SuspendLayout();
-                tableLayoutPanel1.SetRow(panel4, (int)clickY);
-                tableLayoutPanel1.SetColumn(panel4, (int)clickX);
+
+                meetings[0].Time = CurrentWeek + new TimeSpan((int)clickY, (int)clickX + 8, 0, 0);
+                DrawMeetings();
+
                 ResumeLayout();
             }
         }

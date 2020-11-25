@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace MeetingScheduler
 {
-    class Meeting
+    public class Meeting
     {
         public string Name = "Meeting";
-        public Meeting(string name)
+        public DateTime Time;
+        public int Length;  // in hours
+
+        public Meeting(string name, DateTime time, int length = 1)
         {
             this.Name = name;
+            this.Time = time;
+            this.Length = length;
         }
 
         public override string ToString()
