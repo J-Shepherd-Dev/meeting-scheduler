@@ -60,7 +60,6 @@
             // 
             this.groupBox1.Controls.Add(this.newMeetingTitle);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
@@ -82,7 +81,6 @@
             // 
             this.groupBox2.Controls.Add(this.newMeetingDetails);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(0, 54);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
@@ -107,7 +105,6 @@
             // 
             this.newMeetingInvitees.Controls.Add(this.tableLayoutPanel1);
             this.newMeetingInvitees.Dock = System.Windows.Forms.DockStyle.Left;
-            this.newMeetingInvitees.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newMeetingInvitees.Location = new System.Drawing.Point(0, 0);
             this.newMeetingInvitees.Name = "newMeetingInvitees";
             this.newMeetingInvitees.Padding = new System.Windows.Forms.Padding(6);
@@ -150,7 +147,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(335, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(63, 20);
@@ -164,7 +160,6 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(52, 20);
@@ -176,7 +171,6 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(61, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(195, 20);
@@ -188,7 +182,6 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(262, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 20);
@@ -200,7 +193,6 @@
             // 
             this.newMeetingSlotsGroupBox.Controls.Add(this.calendarPanel1);
             this.newMeetingSlotsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.newMeetingSlotsGroupBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newMeetingSlotsGroupBox.Location = new System.Drawing.Point(413, 0);
             this.newMeetingSlotsGroupBox.Name = "newMeetingSlotsGroupBox";
             this.newMeetingSlotsGroupBox.Padding = new System.Windows.Forms.Padding(6);
@@ -224,7 +216,6 @@
             // newMeetingCancelBtn
             // 
             this.newMeetingCancelBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.newMeetingCancelBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newMeetingCancelBtn.Location = new System.Drawing.Point(1136, 3);
             this.newMeetingCancelBtn.Name = "newMeetingCancelBtn";
             this.newMeetingCancelBtn.Size = new System.Drawing.Size(75, 29);
@@ -236,7 +227,6 @@
             // newMeetingSaveBtn
             // 
             this.newMeetingSaveBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.newMeetingSaveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.newMeetingSaveBtn.Location = new System.Drawing.Point(1211, 3);
             this.newMeetingSaveBtn.Name = "newMeetingSaveBtn";
             this.newMeetingSaveBtn.Size = new System.Drawing.Size(75, 29);
