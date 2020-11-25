@@ -8,8 +8,15 @@ namespace MeetingScheduler
 {
     public static class AllEquipment
     {
-        public static Equipment Projector = new Equipment("Projector", 0);
-        public static Equipment Assisitant = new Equipment("Assistant/Translator", 1);
+        /*Equipment*/
+        public static Equipment Projector = new Equipment("Projector");
+        public static Equipment Whiteboard = new Equipment("Whiteboard");
+        public static Equipment LaptopRack = new Equipment("Laptop Rack");
+        public static Equipment Printer = new Equipment("Printer");
+        public static Equipment Computer = new Equipment("Computer");
 
+        /*Humans*/
+        public static Equipment Assisitant = new Equipment("Assistant", 1);
+        public static Equipment Translator = new Equipment("Translator", 1);
     }
 }
