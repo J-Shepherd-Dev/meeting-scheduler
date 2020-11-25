@@ -73,5 +73,10 @@ namespace MeetingScheduler
             CreateMeeting cM = new CreateMeeting();
             cM.Show();
         }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

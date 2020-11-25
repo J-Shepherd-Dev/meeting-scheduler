@@ -185,7 +185,8 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(735, 715);
             this.Name = "MainForm";
-            this.Text = "SECM Meeting Scheduler - Group 4 2020/21";
+            this.Text = "SECM: Meet";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResizeEnd += new System.EventHandler(this.ResizeWindow);
             this.tabControl1.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);

@@ -31,5 +31,10 @@ namespace MeetingScheduler
         {
             this.Close();
         }
+
+        private void CreateMeeting_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
