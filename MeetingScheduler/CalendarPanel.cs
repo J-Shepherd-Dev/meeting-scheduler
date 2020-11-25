@@ -71,7 +71,31 @@ namespace MeetingScheduler
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            this.CurrentWeek = (sender as DateTimePicker).Value;
+            CurrentWeek = (sender as DateTimePicker).Value;
+        }
+
+        private void tableLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
+        {
+            Point mouse = PointToClient(MousePosition);
+
+            // The left header has a relative width of 1
+            // Each of the 11 time slots has a relative width of 3
+            // This rounds into column number, starting from 0
+            float clickX = (mouse.X * (11.5f / Width)) + 0.6666f;
+
+            // The top header has a relative height of 1
+            // Each of the 7 week days has a relative height of 2
+            // This rounds into the row number, starting from 0
+            float clickY = (mouse.Y * (8.6666f / Height)) - 0.5f;
+
+            //MessageBox.Show($"{clickX}, {clickY}");
+            if (clickX > 0.0f && clickY > 0.0f)
+            {
+                SuspendLayout();
+                tableLayoutPanel1.SetRow(panel4, (int)clickY);
+                tableLayoutPanel1.SetColumn(panel4, (int)clickX);
+                ResumeLayout();
+            }
         }
     }
 }
