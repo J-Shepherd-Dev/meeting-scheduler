@@ -9,6 +9,7 @@ namespace MeetingScheduler
     class Location
     {
         public string Name = "Location";
+        public bool isWheelChairAccessible = false;
         public Location(string name)
         {
             this.Name = name;
