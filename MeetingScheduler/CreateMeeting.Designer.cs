@@ -33,10 +33,6 @@
             this.newMeetingTitle = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.newMeetingDetails = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox2 = new System.Windows.Forms.CheckedListBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.newMeetingInvitees = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
@@ -44,16 +40,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.newMeetingSlotsGroupBox = new System.Windows.Forms.GroupBox();
-            this.calendarPanel1 = new MeetingScheduler.CalendarPanel();
             this.newMeetingBtnPanel = new System.Windows.Forms.Panel();
             this.newMeetingCancelBtn = new System.Windows.Forms.Button();
             this.newMeetingSaveBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.calendarPanel1 = new MeetingScheduler.CalendarPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
             this.newMeetingInvitees.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.newMeetingSlotsGroupBox.SuspendLayout();
@@ -87,8 +81,6 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.newMeetingDetails);
-            this.groupBox2.Controls.Add(this.groupBox4);
-            this.groupBox2.Controls.Add(this.groupBox3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(0, 54);
@@ -107,51 +99,9 @@
             this.newMeetingDetails.Multiline = true;
             this.newMeetingDetails.Name = "newMeetingDetails";
             this.newMeetingDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.newMeetingDetails.Size = new System.Drawing.Size(880, 199);
+            this.newMeetingDetails.Size = new System.Drawing.Size(1280, 199);
             this.newMeetingDetails.TabIndex = 0;
             this.newMeetingDetails.Text = "Your meeting description...";
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.Controls.Add(this.checkedListBox2);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(886, 25);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(200, 199);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Potential Locations";
-            // 
-            // checkedListBox2
-            // 
-            this.checkedListBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBox2.FormattingEnabled = true;
-            this.checkedListBox2.Location = new System.Drawing.Point(3, 22);
-            this.checkedListBox2.Name = "checkedListBox2";
-            this.checkedListBox2.Size = new System.Drawing.Size(194, 174);
-            this.checkedListBox2.TabIndex = 0;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.checkedListBox1);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(1086, 25);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(200, 199);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Equipment";
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(3, 22);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(194, 174);
-            this.checkedListBox1.TabIndex = 0;
             // 
             // newMeetingInvitees
             // 
@@ -173,7 +123,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.47191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.52809F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 73F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 67F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 68F));
             this.tableLayoutPanel1.Controls.Add(this.label4, 3, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
@@ -201,9 +151,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(336, 0);
+            this.label4.Location = new System.Drawing.Point(335, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 20);
+            this.label4.Size = new System.Drawing.Size(63, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Remove";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -229,7 +179,7 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(61, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(196, 20);
+            this.label2.Size = new System.Drawing.Size(195, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Name";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -239,7 +189,7 @@
             this.label3.AutoSize = true;
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(263, 0);
+            this.label3.Location = new System.Drawing.Point(262, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(67, 20);
             this.label3.TabIndex = 2;
@@ -259,16 +209,6 @@
             this.newMeetingSlotsGroupBox.TabIndex = 3;
             this.newMeetingSlotsGroupBox.TabStop = false;
             this.newMeetingSlotsGroupBox.Text = "Meeting Slots";
-            // 
-            // calendarPanel1
-            // 
-            this.calendarPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.calendarPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.calendarPanel1.Location = new System.Drawing.Point(6, 25);
-            this.calendarPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.calendarPanel1.Name = "calendarPanel1";
-            this.calendarPanel1.Size = new System.Drawing.Size(867, 354);
-            this.calendarPanel1.TabIndex = 0;
             // 
             // newMeetingBtnPanel
             // 
@@ -324,6 +264,16 @@
             this.panel2.Size = new System.Drawing.Size(1292, 385);
             this.panel2.TabIndex = 5;
             // 
+            // calendarPanel1
+            // 
+            this.calendarPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.calendarPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calendarPanel1.Location = new System.Drawing.Point(6, 25);
+            this.calendarPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.calendarPanel1.Name = "calendarPanel1";
+            this.calendarPanel1.Size = new System.Drawing.Size(867, 354);
+            this.calendarPanel1.TabIndex = 0;
+            // 
             // CreateMeeting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -341,8 +291,6 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
             this.newMeetingInvitees.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -370,11 +318,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.CheckedListBox checkedListBox2;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }
