@@ -68,7 +68,7 @@ namespace MeetingScheduler
             // The amount of days until the last Sunday, as a TimeSpan
             TimeSpan untilBeginning = new TimeSpan((int)date.DayOfWeek, 0, 0, 0);
 
-            return date - untilBeginning;
+            return (date - untilBeginning).Date;
         }
 
         private string FormatDate(DateTime date)
