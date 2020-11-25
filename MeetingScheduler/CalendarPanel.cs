@@ -149,28 +149,28 @@ namespace MeetingScheduler
 
         private void tableLayoutPanel1_MouseClick(object sender, MouseEventArgs e)
         {
-            Point mouse = tableLayoutPanel1.PointToClient(MousePosition);
+            Point mouse = tableLayoutPanel1.PointToClient(Cursor.Position);
 
-            // The left header has a relative width of 1
-            // Each of the 11 time slots has a relative width of 3
-            // This rounds into column number, starting from 0
-            float clickX = (mouse.X * (11.5f / Width)) - 0.3333f;
+            // We now have to figure out the row and column indices
+            int[] widths = tableLayoutPanel1.GetColumnWidths();
+            int[] heights = tableLayoutPanel1.GetRowHeights();
+            int currentWidth = tableLayoutPanel1.Width;
+            int currentHeight = tableLayoutPanel1.Height;
 
-            // The top header has a relative height of 1
-            // Each of the 7 week days has a relative height of 2
-            // This rounds into the row number, starting from 0
-            float clickY = (mouse.Y * (8.6666f / Height)) - 0.5f;
+            // Traverse column widths
+            int column;
+            for (column = widths.Length - 1; column >= 0 && mouse.X < currentWidth; column--)
+                currentWidth -= widths[column];
 
-            //MessageBox.Show($"{clickX}, {clickY}");
-            if (clickX > 0.0f && clickY > 0.0f)
-            {
-                SuspendLayout();
+            // Traverse row widths
+            int row;
+            for (row = heights.Length - 1; row >= 0 && mouse.Y < currentHeight; row--)
+                currentHeight -= heights[row];
 
-                meetings[0].Time = CurrentWeek + new TimeSpan((int)clickY, (int)clickX + 8, 0, 0);
-                DrawMeetings();
+            // Move Mehmet dance party
+            meetings[0].Time = CurrentWeek + new TimeSpan(row, column + 8, 0, 0);
 
-                ResumeLayout();
-            }
+            DrawMeetings();
         }
     }
 }
