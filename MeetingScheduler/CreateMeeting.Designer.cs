@@ -256,7 +256,6 @@
             // 
             // calendarPanel1
             // 
-            this.calendarPanel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.calendarPanel1.CurrentWeek = new System.DateTime(2020, 11, 22, 0, 0, 0, 0);
             this.calendarPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.calendarPanel1.Location = new System.Drawing.Point(6, 19);

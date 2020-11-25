@@ -73,10 +73,5 @@ namespace MeetingScheduler
         {
             this.CurrentWeek = (sender as DateTimePicker).Value;
         }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
 }
