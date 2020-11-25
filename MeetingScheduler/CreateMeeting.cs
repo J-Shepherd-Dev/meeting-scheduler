@@ -36,5 +36,15 @@ namespace MeetingScheduler
         {
 
         }
+
+        private void CreateMeeting_ResizeBegin(object sender, EventArgs e)
+        {
+            calendarPanel1.SuspendLayout();
+        }
+
+        private void CreateMeeting_ResizeEnd(object sender, EventArgs e)
+        {
+            calendarPanel1.ResumeLayout();
+        }
     }
 }
