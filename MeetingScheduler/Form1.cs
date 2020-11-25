@@ -78,5 +78,10 @@ namespace MeetingScheduler
         {
 
         }
+
+        private void userBindingSource_CurrentChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

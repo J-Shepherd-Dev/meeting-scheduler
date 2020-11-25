@@ -8,15 +8,23 @@ namespace MeetingScheduler
 {
     class Slot
     {
-        public string Name = "Slot";
+        private string name = "Slot";
+        private DateTime dateTime;
+        private int hour = 0;
         public Slot(string name)
         {
-            this.Name = name;
+            this.name = name;
+            this.dateTime = new DateTime();
+            this.hour = this.dateTime.Hour;
+        }
+        public Slot(DateTime dt) {
+            this.dateTime = dt;
+            this.hour = this.dateTime.Hour;
         }
 
         public override string ToString()
         {
-            return this.Name;
+            return this.name + " " + this.hour + (this.hour < 12? "am" : "pm") ;
         }
     }
 }

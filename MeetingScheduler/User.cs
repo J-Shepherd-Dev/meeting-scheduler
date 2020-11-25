@@ -8,13 +8,18 @@ namespace MeetingScheduler
 {
     class User
     {
-        public string Name = "User";
+        private string Name = "User";
+        private string imgPath = "";
         public User(string name) {
             this.Name = name;
         }
 
         public override string ToString()
         {
+            return this.Name;
+        }
+
+        public string getName() {
             return this.Name;
         }
     }

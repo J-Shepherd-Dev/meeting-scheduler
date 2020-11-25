@@ -106,7 +106,7 @@ namespace MeetingScheduler
                 panel.Dock = DockStyle.Fill;  // Dock the panel
                 panel.BackColor = Color.White;
 
-                // Create the side color thing
+                // Create the accent panel
                 Panel colorTab = new Panel();
                 panel.Controls.Add(colorTab);
                 colorTab.Dock = DockStyle.Left;
