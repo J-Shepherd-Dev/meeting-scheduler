@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MeetingScheduler
 {
-    class Slot
+    public class Slot
     {
         private string name = "Slot";
         private DateTime dateTime;

@@ -9,6 +9,7 @@ namespace MeetingScheduler
     public class Equipment
     {
         public string Name = "Equipment";
+        //if the piece of 'equipment' is actually a person, they will require extra capacity in the room
         public int requiresCapacity = 0;
         public Equipment(string name)
         {

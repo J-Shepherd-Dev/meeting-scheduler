@@ -13,6 +13,11 @@ namespace MeetingScheduler
         public int Length;  // in hours
         public HashSet<Participant> Participants;
 
+        public Meeting() {
+            this.Time = System.DateTime.Today;
+            this.Length = 1;
+            this.Participants = new HashSet<Participant>();
+        }
         public Meeting(string name, DateTime time, int length = 1)
         {
             this.Name = name;

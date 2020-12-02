@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace MeetingScheduler
 {
-    class User
+    public class User
     {
-        private string Name = "User";
-        private string imgPath = "";
+        public string Name = "User";
+        //the users profile image
+        public string ImageName = "";
         public User(string name) {
             this.Name = name;
+        }
+        public User(string name,string imageName)
+        {
+            this.Name = name=="" ? "User" : name;
+            this.ImageName = imageName=="" ? "" : imageName;
         }
 
         public override string ToString()

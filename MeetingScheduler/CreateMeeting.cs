@@ -12,8 +12,10 @@ namespace MeetingScheduler
 {
     public partial class CreateMeeting : Form
     {
-        public CreateMeeting()
+        private Meeting _thisMeeting;
+        public CreateMeeting(Meeting m)
         {
+            this._thisMeeting = m;
             InitializeComponent();
         }
 
@@ -45,6 +47,11 @@ namespace MeetingScheduler
         private void CreateMeeting_ResizeEnd(object sender, EventArgs e)
         {
             calendarPanel1.ResumeLayout();
+    
+
+        private void addParticipantButton_Click(object sender, EventArgs e)
+        {
+                this._thisMeeting.Participants.Add(new Participant("Jack","jack"));
         }
     }
 }

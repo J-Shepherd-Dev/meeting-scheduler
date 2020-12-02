@@ -129,5 +129,14 @@
   <ItemGroup>
     <None Include="default_user_icon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\jack.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\mehmet.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\Mehmet_Oezcan.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

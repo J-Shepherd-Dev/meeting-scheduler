@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace MeetingScheduler
 {
-    public class Participant
+    public class Participant : User
     {
-        private User user;
-        Participant(User user) {
-            this.user = user;
-        }
+        public Dictionary<String, Equipment> dTest = new Dictionary<string, Equipment>();
+        //0 = ordinary
+        //1 = important
+        //2 = guest speaker
+        public int status = 0;
+        public Participant(string name) : base(name) {}
+        public Participant(string name, string imageName) : base(name,imageName){}
 
-        public string getName() { return this.user.getName(); }
     }
 }

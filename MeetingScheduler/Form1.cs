@@ -70,7 +70,8 @@ namespace MeetingScheduler
 
         private void button1_Click(object sender, EventArgs e)
         {
-            CreateMeeting cM = new CreateMeeting();
+            Meeting m = new Meeting();
+            CreateMeeting cM = new CreateMeeting(m);
             cM.Show();
         }
 
