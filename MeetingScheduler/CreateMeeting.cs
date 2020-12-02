@@ -35,6 +35,8 @@ namespace MeetingScheduler
 
         private void newMeetingCancelBtn_Click(object sender, EventArgs e)
         {
+            Logging.AddMessage($"Cancelled creation of meeting {_thisMeeting}");
+
             this.Close();
         }
 
@@ -62,9 +64,12 @@ namespace MeetingScheduler
         private void DrawParticipants() {
             this.participantFlowPanel.SuspendLayout();
             this.participantFlowPanel.Controls.Clear();
+
             foreach(Participant p in this._thisMeeting.Participants) {
                 this.AddParticipantToPanel(p);
+                Logging.AddMessage($"Added participant {p} to panel");
             }
+
             this.participantFlowPanel.ResumeLayout();
         }
         public void AddParticipantButton_Click(object sender, EventArgs e)
@@ -103,6 +108,7 @@ namespace MeetingScheduler
                 }
             }
 
+            Logging.AddMessage($"Found {meetings.Count} existing meetings amongst selected participants.");
             calendarPanel1.meetings = meetings.ToArray();
         }
 
@@ -114,6 +120,9 @@ namespace MeetingScheduler
 
             // Push meeting
             AllMeetings.Add(_thisMeeting);
+
+            Logging.AddMessage($"Created meeting {_thisMeeting}");
+
             this.Close();
         }
     }

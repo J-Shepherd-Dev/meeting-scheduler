@@ -24,6 +24,9 @@ namespace MeetingScheduler
             set
             {
                 _currentWeek = GetWeekStart(value);
+
+                Logging.AddMessage($"Current week set to {_currentWeek}");
+
                 // 6 days to display 7 days including current day
                 TimeSpan oneWeek = new TimeSpan(6, 0, 0, 0);
 
@@ -197,9 +200,17 @@ namespace MeetingScheduler
             for (row = heights.Length - 1; row >= 0 && mouse.Y < currentHeight; row--)
                 currentHeight -= heights[row];
 
+            DateTime time = CurrentWeek + new TimeSpan(row, column + 8, 0, 0);
+
             // Move edited meeting
             if (editedMeeting != null)
-                editedMeeting.Time = CurrentWeek + new TimeSpan(row, column + 8, 0, 0);
+            {
+                editedMeeting.Time = time;
+                Logging.AddMessage($"Moved meeting {editedMeeting} to {time}");
+            } else
+            {
+                Logging.AddMessage($"Selected time {time} but there is no meeting to move");
+            }
 
             DrawMeetings();
         }
