@@ -34,5 +34,11 @@ namespace MeetingScheduler
         {
 
         }
+
+        private void removeBtn_Click(object sender, EventArgs e)
+        {
+            this.meeting.Participants.Remove(this.participant);
+            this.Parent.Controls.Remove(this);
+        }
     }
 }
