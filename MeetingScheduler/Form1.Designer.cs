@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.initiatedTab = new System.Windows.Forms.TabPage();
+            this.initiatedTabList = new System.Windows.Forms.ListBox();
             this.invitedTab = new System.Windows.Forms.TabPage();
+            this.invitedTabList = new System.Windows.Forms.ListBox();
             this.scheduledTab = new System.Windows.Forms.TabPage();
             this.detailsBox = new System.Windows.Forms.GroupBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
@@ -40,11 +42,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.initiatedTabList = new System.Windows.Forms.ListBox();
-            this.invitedTabList = new System.Windows.Forms.ListBox();
+            this.scheduledTabList = new System.Windows.Forms.ListBox();
             this.tabControl1.SuspendLayout();
             this.initiatedTab.SuspendLayout();
             this.invitedTab.SuspendLayout();
+            this.scheduledTab.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -58,45 +60,64 @@
             this.tabControl1.HotTrack = true;
             this.tabControl1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(312, 749);
+            this.tabControl1.Size = new System.Drawing.Size(234, 649);
             this.tabControl1.TabIndex = 0;
             this.tabControl1.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // initiatedTab
             // 
             this.initiatedTab.Controls.Add(this.initiatedTabList);
-            this.initiatedTab.Location = new System.Drawing.Point(4, 25);
-            this.initiatedTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.initiatedTab.Location = new System.Drawing.Point(4, 22);
             this.initiatedTab.Name = "initiatedTab";
-            this.initiatedTab.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.initiatedTab.Size = new System.Drawing.Size(304, 720);
+            this.initiatedTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.initiatedTab.Size = new System.Drawing.Size(226, 623);
             this.initiatedTab.TabIndex = 0;
             this.initiatedTab.Text = "Initiated";
             this.initiatedTab.UseVisualStyleBackColor = true;
             this.initiatedTab.Click += new System.EventHandler(this.yourMeetingsTab_Click);
             // 
+            // initiatedTabList
+            // 
+            this.initiatedTabList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.initiatedTabList.FormattingEnabled = true;
+            this.initiatedTabList.Location = new System.Drawing.Point(3, 3);
+            this.initiatedTabList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.initiatedTabList.Name = "initiatedTabList";
+            this.initiatedTabList.Size = new System.Drawing.Size(220, 617);
+            this.initiatedTabList.TabIndex = 0;
+            this.initiatedTabList.SelectedIndexChanged += new System.EventHandler(this.initiatedTabList_SelectedIndexChanged);
+            // 
             // invitedTab
             // 
             this.invitedTab.Controls.Add(this.invitedTabList);
-            this.invitedTab.Location = new System.Drawing.Point(4, 25);
-            this.invitedTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.invitedTab.Location = new System.Drawing.Point(4, 22);
             this.invitedTab.Name = "invitedTab";
-            this.invitedTab.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.invitedTab.Size = new System.Drawing.Size(304, 720);
+            this.invitedTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.invitedTab.Size = new System.Drawing.Size(226, 623);
             this.invitedTab.TabIndex = 2;
             this.invitedTab.Text = "Invited";
             this.invitedTab.UseVisualStyleBackColor = true;
             // 
+            // invitedTabList
+            // 
+            this.invitedTabList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.invitedTabList.FormattingEnabled = true;
+            this.invitedTabList.Location = new System.Drawing.Point(3, 3);
+            this.invitedTabList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.invitedTabList.Name = "invitedTabList";
+            this.invitedTabList.Size = new System.Drawing.Size(220, 617);
+            this.invitedTabList.TabIndex = 0;
+            this.invitedTabList.SelectedIndexChanged += new System.EventHandler(this.invitedTabList_SelectedIndexChanged);
+            // 
             // scheduledTab
             // 
-            this.scheduledTab.Location = new System.Drawing.Point(4, 25);
-            this.scheduledTab.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.scheduledTab.Controls.Add(this.scheduledTabList);
+            this.scheduledTab.Location = new System.Drawing.Point(4, 22);
             this.scheduledTab.Name = "scheduledTab";
-            this.scheduledTab.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.scheduledTab.Size = new System.Drawing.Size(304, 720);
+            this.scheduledTab.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.scheduledTab.Size = new System.Drawing.Size(226, 623);
             this.scheduledTab.TabIndex = 1;
             this.scheduledTab.Text = "Scheduled";
             this.scheduledTab.UseVisualStyleBackColor = true;
@@ -104,11 +125,9 @@
             // detailsBox
             // 
             this.detailsBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.detailsBox.Location = new System.Drawing.Point(312, 0);
-            this.detailsBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.detailsBox.Location = new System.Drawing.Point(234, 0);
             this.detailsBox.Name = "detailsBox";
-            this.detailsBox.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.detailsBox.Size = new System.Drawing.Size(1185, 749);
+            this.detailsBox.Size = new System.Drawing.Size(889, 649);
             this.detailsBox.TabIndex = 1;
             this.detailsBox.TabStop = false;
             this.detailsBox.Text = "Details Pane";
@@ -124,17 +143,15 @@
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1497, 31);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1123, 27);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // devWindowBtn
             // 
-            this.devWindowBtn.Location = new System.Drawing.Point(1420, 3);
-            this.devWindowBtn.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.devWindowBtn.Location = new System.Drawing.Point(1065, 3);
             this.devWindowBtn.Name = "devWindowBtn";
-            this.devWindowBtn.Size = new System.Drawing.Size(73, 27);
+            this.devWindowBtn.Size = new System.Drawing.Size(55, 23);
             this.devWindowBtn.TabIndex = 2;
             this.devWindowBtn.Text = "Dev log";
             this.devWindowBtn.UseVisualStyleBackColor = true;
@@ -145,10 +162,9 @@
             this.impersonationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.impersonationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.impersonationComboBox.FormattingEnabled = true;
-            this.impersonationComboBox.Location = new System.Drawing.Point(1185, 3);
-            this.impersonationComboBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.impersonationComboBox.Location = new System.Drawing.Point(888, 3);
             this.impersonationComboBox.Name = "impersonationComboBox";
-            this.impersonationComboBox.Size = new System.Drawing.Size(227, 23);
+            this.impersonationComboBox.Size = new System.Drawing.Size(171, 21);
             this.impersonationComboBox.TabIndex = 0;
             this.impersonationComboBox.SelectionChangeCommitted += new System.EventHandler(this.impersonationComboBox_SelectionChangeCommitted);
             // 
@@ -156,20 +172,18 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label1.Location = new System.Drawing.Point(1079, 0);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(806, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 33);
+            this.label1.Size = new System.Drawing.Size(76, 29);
             this.label1.TabIndex = 1;
             this.label1.Text = "Impersonating:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(916, 3);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.button1.Location = new System.Drawing.Point(684, 3);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(155, 27);
+            this.button1.Size = new System.Drawing.Size(116, 23);
             this.button1.TabIndex = 3;
             this.button1.Text = "Create Meeting";
             this.button1.UseVisualStyleBackColor = true;
@@ -180,42 +194,31 @@
             this.panel1.Controls.Add(this.detailsBox);
             this.panel1.Controls.Add(this.tabControl1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 31);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1497, 749);
+            this.panel1.Size = new System.Drawing.Size(1123, 649);
             this.panel1.TabIndex = 3;
             // 
-            // initiatedTabList
+            // scheduledTabList
             // 
-            this.initiatedTabList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.initiatedTabList.FormattingEnabled = true;
-            this.initiatedTabList.ItemHeight = 15;
-            this.initiatedTabList.Location = new System.Drawing.Point(4, 3);
-            this.initiatedTabList.Name = "initiatedTabList";
-            this.initiatedTabList.Size = new System.Drawing.Size(296, 714);
-            this.initiatedTabList.TabIndex = 0;
-            // 
-            // invitedTabList
-            // 
-            this.invitedTabList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.invitedTabList.FormattingEnabled = true;
-            this.invitedTabList.ItemHeight = 15;
-            this.invitedTabList.Location = new System.Drawing.Point(4, 3);
-            this.invitedTabList.Name = "invitedTabList";
-            this.invitedTabList.Size = new System.Drawing.Size(296, 714);
-            this.invitedTabList.TabIndex = 0;
+            this.scheduledTabList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.scheduledTabList.FormattingEnabled = true;
+            this.scheduledTabList.Location = new System.Drawing.Point(3, 3);
+            this.scheduledTabList.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.scheduledTabList.Name = "scheduledTabList";
+            this.scheduledTabList.Size = new System.Drawing.Size(220, 617);
+            this.scheduledTabList.TabIndex = 1;
+            this.scheduledTabList.SelectedIndexChanged += new System.EventHandler(this.scheduledTabList_SelectedIndexChanged);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1497, 780);
+            this.ClientSize = new System.Drawing.Size(1123, 676);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.MinimumSize = new System.Drawing.Size(974, 818);
+            this.MinimumSize = new System.Drawing.Size(734, 714);
             this.Name = "MainForm";
             this.Text = "SECM: Meet";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -224,6 +227,7 @@
             this.tabControl1.ResumeLayout(false);
             this.initiatedTab.ResumeLayout(false);
             this.invitedTab.ResumeLayout(false);
+            this.scheduledTab.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -246,6 +250,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListBox initiatedTabList;
         private System.Windows.Forms.ListBox invitedTabList;
+        private System.Windows.Forms.ListBox scheduledTabList;
     }
 }
 

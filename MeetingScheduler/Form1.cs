@@ -66,6 +66,7 @@ namespace MeetingScheduler
             // Update tabs
             initiatedTabList.Items.Clear();
             invitedTabList.Items.Clear();
+            scheduledTabList.Items.Clear();
 
             foreach(Meeting m in AllMeetings.meetings)
             {
@@ -147,6 +148,21 @@ namespace MeetingScheduler
         private void impersonationComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             UpdateDisplay();
+        }
+
+        private void initiatedTabList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void invitedTabList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void scheduledTabList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -13,14 +13,13 @@ namespace MeetingScheduler
     public partial class CreateMeeting : Form
     {
         public Meeting _thisMeeting;
-        SelectPartcipantsWindow sPW;
         public CreateMeeting(User initiator)
         {
             this._thisMeeting = new Meeting(initiator);
-            this.sPW = new SelectPartcipantsWindow(this);
             InitializeComponent();
             UpdatePanels();
-
+            //ensure all users are displayed in the 'search' dropdown
+            userToAddBox.Items.AddRange(AllUsers.Users.ToArray());
             calendarPanel1.editedMeeting = _thisMeeting;
         }
 
@@ -67,7 +66,7 @@ namespace MeetingScheduler
          }
 
         private void AddParticipantToPanel(Participant p) {
-            ParticipantPanel pPanel = new ParticipantPanel(ref this._thisMeeting, ref p);
+            ParticipantPanel pPanel = new ParticipantPanel(this._thisMeeting, p,0, this);
             pPanel.Dock = DockStyle.Top;
             pPanel.Width = this.participantFlowPanel.Width - this.participantFlowPanel.Padding.Left - this.participantFlowPanel.Padding.Right;
             this.participantFlowPanel.Controls.Add(pPanel);
@@ -83,15 +82,26 @@ namespace MeetingScheduler
 
             this.participantFlowPanel.ResumeLayout();
         }
-        public void EditParticipantsBtnClick(object sender, EventArgs e)
-        {
-            if (sPW.IsDisposed)
+
+        public void AddUserToDropdown(User u) {
+            if (!userToAddBox.Items.Contains(u))
             {
-                // The last  form was closed and we need to make a new one
-                sPW = new SelectPartcipantsWindow(this);
+                userToAddBox.Items.Add(u);
             }
-            sPW.Show();
-            sPW.Activate();
+        }
+        public void AddParticipantBtnClick(object sender, EventArgs e)
+        {
+            if (userToAddBox.SelectedItem != null) {
+                Participant p = new Participant((User)userToAddBox.SelectedItem);
+                //add this partic0ant to the meeting
+                this._thisMeeting.Participants.Add(p);
+                //add this participant to the displayed list
+                AddParticipantToPanel(p);
+                //remove the selected option from the search sinc ethey've been added to the meeting
+                userToAddBox.Items.RemoveAt(userToAddBox.SelectedIndex);
+                //update the calendar panel
+                RefreshParticipantMeetings();
+            }
         }
 
         public void UpdatePanels() {
@@ -102,7 +112,7 @@ namespace MeetingScheduler
             RefreshParticipantMeetings();
         }
 
-        private void RefreshParticipantMeetings()
+        public void RefreshParticipantMeetings()
         {
             List<Meeting> meetings = new List<Meeting>();
             List<User> users = new List<User>();
@@ -142,6 +152,16 @@ namespace MeetingScheduler
             Logging.AddMessage($"Created meeting {_thisMeeting}");
 
             this.Close();
+        }
+
+        private void panel3_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void userToAddBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            addParticipantButton.Enabled = userToAddBox.SelectedItem == null || !this._thisMeeting.ContainsUser((User)userToAddBox.SelectedItem);
         }
     }
 }
