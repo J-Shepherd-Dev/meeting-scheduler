@@ -15,7 +15,7 @@ namespace MeetingScheduler
         public int status = 0;
         public Participant(string name) : base(name) {}
         public Participant(string name, string imageName) : base(name,imageName){}
-        public Participant(User u) : base(u.Name,u.ImageName) { }
+        public Participant(User u) : base(u.Name, u.ImageName) { }
 
     }
 }

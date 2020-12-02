@@ -51,6 +51,7 @@ namespace MeetingScheduler
             meetings = new Meeting[]
             {
                 new Meeting(
+                    AllUsers.tom,
                     "National Mehmet Funky Dance Party",
                     CurrentWeek + new TimeSpan(
                         2,  // Tuesday

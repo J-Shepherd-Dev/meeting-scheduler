@@ -8,12 +8,18 @@ namespace MeetingScheduler
 {
     static class AllUsers
     {
+        public static User jack = new User("Jack", "jack");
+        public static User mehmet = new User("Mehmet", "mehmet");
+        public static User ryan = new User("Ryan");
+        public static User john = new User("John");
+        public static User tom = new User("Tom", "tom");
+
         public static HashSet<User> Users = new HashSet<User>() {
-            new User("Jack","jack"),
-            new User("Mehmet","mehmet"),
-            new User("Ryan"),
-            new User("John"),
-            new User("Tom","tom")
+            jack,
+            mehmet,
+            ryan,
+            john,
+            tom
         };
         public static void Add(User u) {
             if (!AllUsers.Users.Contains(u))

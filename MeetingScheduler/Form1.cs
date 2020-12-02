@@ -23,7 +23,35 @@ namespace MeetingScheduler
             //set up the devForm
             devForm.ShowIcon = false;
             devForm.ShowInTaskbar = true;
+
+            // Assign event handler for new meetings
+            AllMeetings.newMeeting += AllMeetings_newMeeting;
+
             Logging.AddMessage("Initialisation complete");
+        }
+
+        private void AllMeetings_newMeeting(object sender, EventArgs e)
+        {
+            UpdateDisplay();
+        }
+
+        private void UpdateDisplay()
+        {
+            // Active user
+            User activeUser = (User)impersonationComboBox.SelectedItem;
+
+            // Update tabs
+            initiatedTabList.Items.Clear();
+            invitedTabList.Items.Clear();
+
+            foreach(Meeting m in AllMeetings.meetings)
+            {
+                if (m.Initiator == activeUser)
+                    initiatedTabList.Items.Add(m);
+
+                if (m.Participants.Contains(activeUser))
+                    invitedTabList.Items.Add(m);
+            }
         }
 
         //this function is called on ResizeEnd
@@ -67,8 +95,7 @@ namespace MeetingScheduler
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Meeting m = new Meeting();
-            CreateMeeting cM = new CreateMeeting(m);
+            CreateMeeting cM = new CreateMeeting((User)(impersonationComboBox.SelectedItem));
             cM.Show();
         }
 
@@ -80,6 +107,16 @@ namespace MeetingScheduler
         private void userBindingSource_CurrentChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            AllMeetings.newMeeting -= AllMeetings_newMeeting;
+        }
+
+        private void impersonationComboBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            UpdateDisplay();
         }
     }
 }

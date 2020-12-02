@@ -14,9 +14,9 @@ namespace MeetingScheduler
     {
         private Meeting _thisMeeting;
         SelectPartcipantsWindow sPW;
-        public CreateMeeting(Meeting m)
+        public CreateMeeting(User initiator)
         {
-            this._thisMeeting = m;
+            this._thisMeeting = new Meeting(initiator);
             this.sPW = new SelectPartcipantsWindow(this._thisMeeting);
             InitializeComponent();
         }
@@ -71,6 +71,17 @@ namespace MeetingScheduler
             Participant p = new Participant("Jack", "jack");
             this._thisMeeting.Participants.Add(p);
             this.AddParticipantToPanel(p);
+        }
+
+        private void newMeetingSaveBtn_Click(object sender, EventArgs e)
+        {
+            // Set meeting attributes
+            _thisMeeting.Name = newMeetingTitle.Text;
+            _thisMeeting.Details = newMeetingDetails.Text;
+
+            // Push meeting
+            AllMeetings.Add(_thisMeeting);
+            this.Close();
         }
     }
 }

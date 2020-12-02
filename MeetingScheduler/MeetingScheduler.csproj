@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="AllEquipment.cs" />
     <Compile Include="AllLocations.cs" />
+    <Compile Include="AllMeetings.cs" />
     <Compile Include="AllUsers.cs" />
     <Compile Include="CalendarPanel.cs">
       <SubType>UserControl</SubType>
