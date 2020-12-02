@@ -19,6 +19,8 @@ namespace MeetingScheduler
             this._thisMeeting = new Meeting(initiator);
             this.sPW = new SelectPartcipantsWindow(this._thisMeeting);
             InitializeComponent();
+
+            calendarPanel1.editedMeeting = _thisMeeting;
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -69,8 +71,39 @@ namespace MeetingScheduler
         {
             sPW.Show();
             Participant p = new Participant(AllUsers.jack);
+
+            // This is temporary but somewhere when participants are added we need to refresh the meetings for CalendarPanel
             this._thisMeeting.Participants.Add(p);
+            RefreshParticipantMeetings();
+
             this.AddParticipantToPanel(p);
+        }
+
+        private void RefreshParticipantMeetings()
+        {
+            List<Meeting> meetings = new List<Meeting>();
+            List<User> users = new List<User>();
+
+            // Get users from participants
+            foreach (Participant p in _thisMeeting.Participants)
+            {
+                users.Add(p.user);
+            }
+
+            // Find meetings that our participants are in
+            foreach (Meeting m in AllMeetings.meetings)
+            {
+                foreach (Participant p in m.Participants)
+                {
+                    if (users.Contains(p.user))
+                    {
+                        meetings.Add(m);
+                        break;
+                    }
+                }
+            }
+
+            calendarPanel1.meetings = meetings.ToArray();
         }
 
         private void newMeetingSaveBtn_Click(object sender, EventArgs e)

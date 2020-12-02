@@ -35,7 +35,38 @@ namespace MeetingScheduler
             }
         }
 
-        public Meeting[] meetings = new Meeting[0];
+        private Meeting _editedMeeting = null;
+
+        public Meeting editedMeeting
+        {
+            get
+            {
+                return _editedMeeting;
+            }
+            set
+            {
+                _editedMeeting = value;
+
+                DrawMeetings();
+            }
+        }
+
+        private Meeting[] _meetings = new Meeting[0];
+
+        public Meeting[] meetings
+        {
+            get
+            {
+                return _meetings;
+            }
+            set
+            {
+                _meetings = value;
+
+                DrawMeetings();
+            }
+        }
+
         public List<Panel> meetingPanels = new List<Panel>();
 
         public CalendarPanel()
@@ -48,18 +79,7 @@ namespace MeetingScheduler
             CurrentWeek = DateTime.Today;
 
             // Make a meeting
-            meetings = new Meeting[]
-            {
-                new Meeting(
-                    AllUsers.tom,
-                    "National Mehmet Funky Dance Party",
-                    CurrentWeek + new TimeSpan(
-                        2,  // Tuesday
-                        12, 0, 0  // At 12 pm
-                    ),
-                    2
-                )
-            };
+            meetings = new Meeting[] {};
 
             DrawMeetings();
         }
@@ -90,6 +110,10 @@ namespace MeetingScheduler
             meetingPanels.Clear();
 
             // Recreate panels
+
+            if (editedMeeting != null)
+                meetingPanels.Add(CreatePanelFromMeeting(editedMeeting, Color.DarkGray));
+
             foreach (Meeting meeting in meetings)
             {
                 // Ignore meetings not in this week
@@ -100,35 +124,40 @@ namespace MeetingScheduler
                 if (meeting.Time.Hour < 8 || meeting.Time.Hour > 18)
                     continue;
 
-                // Make a panel
-                Panel panel = new Panel();
-                tableLayoutPanel1.Controls.Add(panel, meeting.Time.Hour - 7, (int)meeting.Time.DayOfWeek + 1);  // Associate it with the table
-                tableLayoutPanel1.SetColumnSpan(panel, meeting.Length);
-                panel.Dock = DockStyle.Fill;  // Dock the panel
-                panel.BackColor = Color.White;
-
-                // Create the accent panel
-                Panel colorTab = new Panel();
-                panel.Controls.Add(colorTab);
-                colorTab.Dock = DockStyle.Left;
-                colorTab.Width = 10;
-                colorTab.Margin = new Padding(0);
-                colorTab.BackColor = Color.Red;
-
-                // Meeting label
-                Label label = new Label();
-                panel.Controls.Add(label);
-                label.AutoSize = false;
-                label.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-                label.Text = meeting.Name;
-                label.Location = new Point(13, 3);
-                label.Size = new Size(panel.Width - 15, 50);
-                label.Margin = new Padding(3);
-                label.TabIndex = 1;
-
                 // Push panel
-                meetingPanels.Add(panel);
+                meetingPanels.Add(CreatePanelFromMeeting(meeting));
             }
+        }
+
+        private Panel CreatePanelFromMeeting(Meeting meeting, Color? color = null)
+        {
+            // Make a panel
+            Panel panel = new Panel();
+            tableLayoutPanel1.Controls.Add(panel, meeting.Time.Hour - 7, (int)meeting.Time.DayOfWeek + 1);  // Associate it with the table
+            tableLayoutPanel1.SetColumnSpan(panel, meeting.Length);
+            panel.Dock = DockStyle.Fill;  // Dock the panel
+            panel.BackColor = Color.White;
+
+            // Create the accent panel
+            Panel colorTab = new Panel();
+            panel.Controls.Add(colorTab);
+            colorTab.Dock = DockStyle.Left;
+            colorTab.Width = 10;
+            colorTab.Margin = new Padding(0);
+            colorTab.BackColor = color ?? Color.Red;
+
+            // Meeting label
+            Label label = new Label();
+            panel.Controls.Add(label);
+            label.AutoSize = false;
+            label.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            label.Text = meeting.Name;
+            label.Location = new Point(13, 3);
+            label.Size = new Size(panel.Width - 15, 50);
+            label.Margin = new Padding(3);
+            label.TabIndex = 1;
+
+            return panel;
         }
 
         private void buttonLastWeek_Click(object sender, EventArgs e)
@@ -168,8 +197,9 @@ namespace MeetingScheduler
             for (row = heights.Length - 1; row >= 0 && mouse.Y < currentHeight; row--)
                 currentHeight -= heights[row];
 
-            // Move Mehmet dance party
-            meetings[0].Time = CurrentWeek + new TimeSpan(row, column + 8, 0, 0);
+            // Move edited meeting
+            if (editedMeeting != null)
+                editedMeeting.Time = CurrentWeek + new TimeSpan(row, column + 8, 0, 0);
 
             DrawMeetings();
         }
