@@ -16,7 +16,6 @@ namespace MeetingScheduler
         public SelectPartcipantsWindow(Meeting m)
         {
             this.meeting = m;
-            //this.Text = "Select Participants: " + this.meeting.Name.Substring(0, 20) + (this.meeting.Name.Length > 20 ? "..." : "");
             InitializeComponent();
             foreach (User u in AllUsers.Users) {
                 Participant p = new Participant(u);

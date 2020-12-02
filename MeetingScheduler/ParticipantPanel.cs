@@ -47,18 +47,18 @@ namespace MeetingScheduler
             //if this panel is being created in view of a user who is not the initiator, hide edit options
             if (mode!=0)
             {
-                this.tableLayoutPanel1.ColumnCount = 2;
+                this.roleBox.Visible = false;
+                this.roleBox.Enabled = false;
+                //if we're also not in 'add' mode, hide the button
+                if (mode == 2) {
+                    this.removeBtn.Enabled = false;
+                    this.removeBtn.Visible = false;
+                }
             }
             //if this panel is in 'add mode', change the button appearance
             if (mode == 1) {
                 this.removeBtn.Text = "Add";
             }
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            //remove this participant from the meeting
-            this.meeting.Participants.Remove(this.participant);
-            this.Dispose();
         }
 
         private void roleBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -74,7 +74,11 @@ namespace MeetingScheduler
                 this.Parent.Controls.Remove(this);
             }
             if (this.mode == 1) {
-
+                if (this.meeting.Participants.Contains(this.participant)) {
+                    this.meeting.Participants.Remove(this.participant);
+                } else {
+                    this.meeting.Participants.Add(this.participant);
+                }
             }
         }
     }
