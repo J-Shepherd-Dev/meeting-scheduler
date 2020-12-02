@@ -8,8 +8,8 @@ namespace MeetingScheduler
 {
     public class Meeting
     {
-        public string Name = "Meeting";
-        public string Details = "";
+        public string Name = "Default Meeting";
+        public string Details = "A meeting is happening";
         public DateTime Time;
         public int Length;  // in hours
         public User Initiator;

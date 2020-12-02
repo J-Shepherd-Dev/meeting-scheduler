@@ -114,6 +114,7 @@ namespace MeetingScheduler
 
             devForm.Show();
             devForm.Activate();
+            devForm.TopMost = true;
         }
 
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)

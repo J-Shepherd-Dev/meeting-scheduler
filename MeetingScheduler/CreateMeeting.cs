@@ -19,8 +19,19 @@ namespace MeetingScheduler
             this._thisMeeting = new Meeting(initiator);
             this.sPW = new SelectPartcipantsWindow(this);
             InitializeComponent();
+            UpdatePanels();
 
             calendarPanel1.editedMeeting = _thisMeeting;
+        }
+
+        private void newMeetingDetails_TextChanged(object sender, EventArgs e)
+        {
+            this._thisMeeting.Details = (sender as TextBox).Text;
+        }
+
+        private void newMeetingTitle_TextChanged(object sender, EventArgs e)
+        {
+            this._thisMeeting.Name = (sender as TextBox).Text;
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -42,7 +53,7 @@ namespace MeetingScheduler
 
         private void CreateMeeting_Load(object sender, EventArgs e)
         {
-            this.DrawParticipants();
+            this.UpdatePanels();
         }
 
         private void CreateMeeting_ResizeBegin(object sender, EventArgs e)
@@ -56,15 +67,15 @@ namespace MeetingScheduler
          }
 
         private void AddParticipantToPanel(Participant p) {
-            ParticipantPanel pPanel = new ParticipantPanel(this._thisMeeting, p);
+            ParticipantPanel pPanel = new ParticipantPanel(ref this._thisMeeting, ref p);
             pPanel.Dock = DockStyle.Top;
             pPanel.Width = this.participantFlowPanel.Width - this.participantFlowPanel.Padding.Left - this.participantFlowPanel.Padding.Right;
             this.participantFlowPanel.Controls.Add(pPanel);
         }
-        private void DrawParticipants() {
+        private void DrawParticipantList() {
             this.participantFlowPanel.SuspendLayout();
             this.participantFlowPanel.Controls.Clear();
-
+            Logging.AddMessage("There are "+this._thisMeeting.Participants.Count+" participants in the created meeting.");
             foreach(Participant p in this._thisMeeting.Participants) {
                 this.AddParticipantToPanel(p);
                 Logging.AddMessage($"Added participant {p} to panel");
@@ -72,16 +83,23 @@ namespace MeetingScheduler
 
             this.participantFlowPanel.ResumeLayout();
         }
-        public void AddParticipantButton_Click(object sender, EventArgs e)
+        public void EditParticipantsBtnClick(object sender, EventArgs e)
         {
+            if (sPW.IsDisposed)
+            {
+                // The last  form was closed and we need to make a new one
+                sPW = new SelectPartcipantsWindow(this);
+            }
             sPW.Show();
-            Participant p = new Participant(AllUsers.jack);
+            sPW.Activate();
+        }
 
-            // This is temporary but somewhere when participants are added we need to refresh the meetings for CalendarPanel
-            this._thisMeeting.Participants.Add(p);
+        public void UpdatePanels() {
+            this.addParticipantButton.Text =  this._thisMeeting.Participants.Count == 0 ? "Add" : "Edit";
+            this.newMeetingTitle.Text = this._thisMeeting.Name;
+            this.newMeetingDetails.Text = this._thisMeeting.Details;
+            DrawParticipantList();
             RefreshParticipantMeetings();
-
-            this.AddParticipantToPanel(p);
         }
 
         private void RefreshParticipantMeetings()
