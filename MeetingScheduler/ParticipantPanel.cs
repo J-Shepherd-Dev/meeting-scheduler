@@ -20,11 +20,11 @@ namespace MeetingScheduler
             this.meeting = m;
             this.participant = p;
             InitializeComponent();
-            this.nameLbl.Text = this.participant.getName();
+            this.nameLbl.Text = this.participant.user.getName();
             //try to set the persons image, if this fails then the background image will be used by default
             try
             {
-                this.pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(this.participant.ImageName.ToString());
+                this.pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(this.participant.user.ImageName.ToString());
             }
             catch (Exception e) {
                 Logging.AddMessage(e.Message);

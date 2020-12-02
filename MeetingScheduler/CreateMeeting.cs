@@ -68,7 +68,7 @@ namespace MeetingScheduler
         public void AddParticipantButton_Click(object sender, EventArgs e)
         {
             sPW.Show();
-            Participant p = new Participant("Jack", "jack");
+            Participant p = new Participant(AllUsers.jack);
             this._thisMeeting.Participants.Add(p);
             this.AddParticipantToPanel(p);
         }
