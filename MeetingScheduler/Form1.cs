@@ -27,6 +27,29 @@ namespace MeetingScheduler
             // Assign event handler for new meetings
             AllMeetings.newMeeting += AllMeetings_newMeeting;
 
+            // Create Mehmet's funky dance party
+            TimeSpan untilBeginning = new TimeSpan((int)DateTime.Today.DayOfWeek, 0, 0, 0);
+
+            DateTime currentWeek = (DateTime.Today - untilBeginning).Date;
+
+            Meeting funkyDanceParty = new Meeting(
+                AllUsers.tom,
+                "National Mehmet Funky Dance Party",
+                currentWeek + new TimeSpan(
+                    2,  // Tuesday
+                    12, 0, 0  // At 12 pm
+                ),
+                2
+            );
+
+            // Everyone is invited to Mehmet's funky dance party
+            foreach (User u in AllUsers.Users)
+            {
+                funkyDanceParty.Participants.Add(new Participant(u));
+            }
+
+            AllMeetings.Add(funkyDanceParty);
+
             Logging.AddMessage("Initialisation complete");
         }
 
@@ -52,8 +75,10 @@ namespace MeetingScheduler
                 foreach (Participant p in m.Participants)
                 {
                     if (p.user == activeUser)
+                    {
                         invitedTabList.Items.Add(m);
                         break;
+                    }
                 }
             }
         }

@@ -16,7 +16,7 @@ namespace MeetingScheduler
         public HashSet<Participant> Participants;
 
         public Meeting(User initiator) {
-            this.Time = System.DateTime.Today;
+            this.Time = System.DateTime.Today + new TimeSpan(8, 0, 0);
             this.Length = 1;
             this.Initiator = initiator;
             this.Participants = new HashSet<Participant>();

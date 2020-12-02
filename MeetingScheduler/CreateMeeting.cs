@@ -19,6 +19,8 @@ namespace MeetingScheduler
             this._thisMeeting = new Meeting(initiator);
             this.sPW = new SelectPartcipantsWindow(this);
             InitializeComponent();
+
+            calendarPanel1.editedMeeting = _thisMeeting;
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -33,6 +35,8 @@ namespace MeetingScheduler
 
         private void newMeetingCancelBtn_Click(object sender, EventArgs e)
         {
+            Logging.AddMessage($"Cancelled creation of meeting {_thisMeeting}");
+
             this.Close();
         }
 
@@ -60,14 +64,52 @@ namespace MeetingScheduler
         private void DrawParticipants() {
             this.participantFlowPanel.SuspendLayout();
             this.participantFlowPanel.Controls.Clear();
+
             foreach(Participant p in this._thisMeeting.Participants) {
                 this.AddParticipantToPanel(p);
+                Logging.AddMessage($"Added participant {p} to panel");
             }
+
             this.participantFlowPanel.ResumeLayout();
         }
         public void AddParticipantButton_Click(object sender, EventArgs e)
         {
             sPW.Show();
+            Participant p = new Participant(AllUsers.jack);
+
+            // This is temporary but somewhere when participants are added we need to refresh the meetings for CalendarPanel
+            this._thisMeeting.Participants.Add(p);
+            RefreshParticipantMeetings();
+
+            this.AddParticipantToPanel(p);
+        }
+
+        private void RefreshParticipantMeetings()
+        {
+            List<Meeting> meetings = new List<Meeting>();
+            List<User> users = new List<User>();
+
+            // Get users from participants
+            foreach (Participant p in _thisMeeting.Participants)
+            {
+                users.Add(p.user);
+            }
+
+            // Find meetings that our participants are in
+            foreach (Meeting m in AllMeetings.meetings)
+            {
+                foreach (Participant p in m.Participants)
+                {
+                    if (users.Contains(p.user))
+                    {
+                        meetings.Add(m);
+                        break;
+                    }
+                }
+            }
+
+            Logging.AddMessage($"Found {meetings.Count} existing meetings amongst selected participants.");
+            calendarPanel1.meetings = meetings.ToArray();
         }
 
         private void newMeetingSaveBtn_Click(object sender, EventArgs e)
@@ -78,6 +120,9 @@ namespace MeetingScheduler
 
             // Push meeting
             AllMeetings.Add(_thisMeeting);
+
+            Logging.AddMessage($"Created meeting {_thisMeeting}");
+
             this.Close();
         }
     }
