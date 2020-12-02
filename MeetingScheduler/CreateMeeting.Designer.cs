@@ -146,7 +146,7 @@ namespace MeetingScheduler
             this.addParticipantButton.TabIndex = 1;
             this.addParticipantButton.Text = "➕";
             this.addParticipantButton.UseVisualStyleBackColor = true;
-            this.addParticipantButton.Click += new System.EventHandler(this.addParticipantButton_Click);
+            this.addParticipantButton.Click += new System.EventHandler(this.AddParticipantButton_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -306,11 +306,6 @@ namespace MeetingScheduler
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
-        }
-
-        private void addParticipantButton_Click(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

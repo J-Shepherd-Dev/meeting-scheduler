@@ -39,6 +39,7 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tableLayoutPanel1.ColumnCount = 4;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 70F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -68,16 +69,21 @@
             // 
             // roleBox
             // 
+            this.roleBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.roleBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.roleBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.roleBox.FormattingEnabled = true;
             this.roleBox.Items.AddRange(new object[] {
             "Standard",
             "Important",
             "Guest Speaker"});
             this.roleBox.Location = new System.Drawing.Point(362, 3);
+            this.roleBox.MaxDropDownItems = 3;
             this.roleBox.Name = "roleBox";
             this.roleBox.Size = new System.Drawing.Size(134, 21);
             this.roleBox.TabIndex = 1;
+            this.roleBox.Text = "Standard";
+            this.roleBox.SelectedIndexChanged += new System.EventHandler(this.roleBox_SelectedIndexChanged);
             // 
             // nameLbl
             // 
@@ -106,6 +112,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ParticipantPanel";
             this.Size = new System.Drawing.Size(569, 30);

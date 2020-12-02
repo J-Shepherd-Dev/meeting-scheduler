@@ -36,7 +36,7 @@ namespace MeetingScheduler
 
         private void CreateMeeting_Load(object sender, EventArgs e)
         {
-
+            this.DrawParticipants();
         }
 
         private void CreateMeeting_ResizeBegin(object sender, EventArgs e)
@@ -47,11 +47,26 @@ namespace MeetingScheduler
         private void CreateMeeting_ResizeEnd(object sender, EventArgs e)
         {
             calendarPanel1.ResumeLayout();
-    
+         }
 
-        private void addParticipantButton_Click(object sender, EventArgs e)
+        private void AddParticipantToPanel(Participant p) {
+            ParticipantPanel pPanel = new ParticipantPanel(this._thisMeeting, p);
+            pPanel.Width = this.participantFlowPanel.Width - this.participantFlowPanel.Padding.Left - this.participantFlowPanel.Padding.Right;
+            this.participantFlowPanel.Controls.Add(pPanel);
+        }
+        private void DrawParticipants() {
+            this.participantFlowPanel.SuspendLayout();
+            this.participantFlowPanel.Controls.Clear();
+            foreach(Participant p in this._thisMeeting.Participants) {
+                this.AddParticipantToPanel(p);
+            }
+            this.participantFlowPanel.ResumeLayout();
+        }
+        public void AddParticipantButton_Click(object sender, EventArgs e)
         {
-                this._thisMeeting.Participants.Add(new Participant("Jack","jack"));
+            Participant p = new Participant("Jack", "jack");
+            this._thisMeeting.Participants.Add(p);
+            this.AddParticipantToPanel(p);
         }
     }
 }

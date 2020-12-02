@@ -18,15 +18,21 @@ namespace MeetingScheduler
         {
             this.meeting = m;
             this.participant = new Participant("Jack Carey","jack");
+            InitializeComponent();
             this.nameLbl.Text = this.participant.getName();
             this.pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(this.participant.ImageName.ToString());
-            InitializeComponent();
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
         private void button1_Click(object sender, EventArgs e)
         {
             //remove this participant from the meeting
             this.meeting.Participants.Remove(this.participant);
             this.Dispose();
+        }
+
+        private void roleBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
