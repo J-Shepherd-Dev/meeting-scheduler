@@ -50,6 +50,7 @@ namespace MeetingScheduler
             this.newMeetingSaveBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.calendarPanel1 = new MeetingScheduler.CalendarPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.newMeetingInvitees.SuspendLayout();
@@ -215,7 +216,8 @@ namespace MeetingScheduler
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // newMeetingSlotsGroupBox
-            // 
+            //
+            this.newMeetingSlotsGroupBox.Controls.Add(this.calendarPanel1);
             this.newMeetingSlotsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.newMeetingSlotsGroupBox.Location = new System.Drawing.Point(413, 0);
             this.newMeetingSlotsGroupBox.Name = "newMeetingSlotsGroupBox";
@@ -277,6 +279,16 @@ namespace MeetingScheduler
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(944, 387);
             this.panel2.TabIndex = 5;
+            // 
+            // calendarPanel1
+            // 
+            this.calendarPanel1.CurrentWeek = new System.DateTime(2020, 11, 22, 0, 0, 0, 0);
+            this.calendarPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calendarPanel1.Location = new System.Drawing.Point(6, 20);
+            this.calendarPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.calendarPanel1.Name = "calendarPanel1";
+            this.calendarPanel1.Size = new System.Drawing.Size(519, 360);
+            this.calendarPanel1.TabIndex = 0;
             // 
             // CreateMeeting
             // 
