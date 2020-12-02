@@ -83,9 +83,9 @@ namespace MeetingScheduler.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Mehmet_Oezcan {
+        internal static System.Drawing.Bitmap mehmet {
             get {
-                object obj = ResourceManager.GetObject("Mehmet_Oezcan", resourceCulture);
+                object obj = ResourceManager.GetObject("mehmet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

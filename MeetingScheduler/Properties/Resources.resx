@@ -124,7 +124,7 @@
   <data name="jack" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\jack.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Mehmet_Oezcan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+  <data name="mehmet" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\Mehmet_Oezcan.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="tom" type="System.Resources.ResXFileRef, System.Windows.Forms">
