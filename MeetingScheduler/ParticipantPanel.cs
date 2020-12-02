@@ -14,14 +14,45 @@ namespace MeetingScheduler
     {
         private Meeting meeting;
         private Participant participant;
-        public ParticipantPanel(Meeting m, Participant p)
-        {
+        private int mode = 0;
+
+        private void _basicConstructor(Meeting m,Participant p) {
             this.meeting = m;
-            this.participant = new Participant("Jack Carey","jack");
+            this.participant = p;
             InitializeComponent();
             this.nameLbl.Text = this.participant.getName();
-            this.pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(this.participant.ImageName.ToString());
+            //try to set the persons image, if this fails then the background image will be used by default
+            try
+            {
+                this.pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(this.participant.ImageName.ToString());
+            }
+            catch (Exception e) {
+                Logging.AddMessage(e.Message);
+            }
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+        }
+        public ParticipantPanel(Meeting m, Participant p)
+        {
+            this._basicConstructor(m,p);
+            this.tableLayoutPanel1.ColumnCount = 4;
+        }
+        public ParticipantPanel(Meeting m, Participant p,int mode=0)
+        {
+            /*Modes:
+             * 0 = initiator (default)
+             * 1 = adding to meeting (instead of selecting role and removing)
+             * 2 = non initiator (hide controls);
+             * */
+            this._basicConstructor(m, p);
+            //if this panel is being created in view of a user who is not the initiator, hide edit options
+            if (mode!=0)
+            {
+                this.tableLayoutPanel1.ColumnCount = 2;
+            }
+            //if this panel is in 'add mode', change the button appearance
+            if (mode == 1) {
+                this.removeBtn.Text = "Add";
+            }
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -37,8 +68,14 @@ namespace MeetingScheduler
 
         private void removeBtn_Click(object sender, EventArgs e)
         {
-            this.meeting.Participants.Remove(this.participant);
-            this.Parent.Controls.Remove(this);
+            if (this.mode == 0)
+            {
+                this.meeting.Participants.Remove(this.participant);
+                this.Parent.Controls.Remove(this);
+            }
+            if (this.mode == 1) {
+
+            }
         }
     }
 }

@@ -51,6 +51,7 @@ namespace MeetingScheduler
 
         private void AddParticipantToPanel(Participant p) {
             ParticipantPanel pPanel = new ParticipantPanel(this._thisMeeting, p);
+            pPanel.Dock = DockStyle.Top;
             pPanel.Width = this.participantFlowPanel.Width - this.participantFlowPanel.Padding.Left - this.participantFlowPanel.Padding.Right;
             this.participantFlowPanel.Controls.Add(pPanel);
         }
@@ -64,6 +65,8 @@ namespace MeetingScheduler
         }
         public void AddParticipantButton_Click(object sender, EventArgs e)
         {
+            SelectPartcipantsWindow sPW = new SelectPartcipantsWindow(this._thisMeeting);
+            sPW.Show();
             Participant p = new Participant("Jack", "jack");
             this._thisMeeting.Participants.Add(p);
             this.AddParticipantToPanel(p);

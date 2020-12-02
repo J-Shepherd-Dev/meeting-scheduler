@@ -14,14 +14,11 @@ namespace MeetingScheduler
     {
         //other forms
         DevLogForm devForm = new DevLogForm();
-
-        //preset variables
-        List<User> presetUsers = new List<User>(){new User("John"), new User("Jack"), new User("Tom"), new User("Ryan"), new User("Mehmet") };
         public MainForm()
         {
             InitializeComponent();
             // set the drop down options
-            impersonationComboBox.DataSource = presetUsers;
+            impersonationComboBox.DataSource = AllUsers.Users.ToList();
             impersonationComboBox.DisplayMember = "Name";
             //set up the devForm
             devForm.ShowIcon = false;
