@@ -75,8 +75,10 @@ namespace MeetingScheduler
                 foreach (Participant p in m.Participants)
                 {
                     if (p.user == activeUser)
+                    {
                         invitedTabList.Items.Add(m);
                         break;
+                    }
                 }
             }
         }
