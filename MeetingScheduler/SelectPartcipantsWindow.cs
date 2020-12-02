@@ -13,14 +13,16 @@ namespace MeetingScheduler
     public partial class SelectPartcipantsWindow : Form
     {
         private Meeting meeting;
-        public SelectPartcipantsWindow(Meeting m)
+        private CreateMeeting cMForm;
+        public SelectPartcipantsWindow(CreateMeeting createMeetingCaller)
         {
-            this.meeting = m;
+            this.cMForm = createMeetingCaller;
+            this.meeting = createMeetingCaller._thisMeeting;
             InitializeComponent();
             foreach (User u in AllUsers.Users) {
                 Participant p = new Participant(u);
                 //set up the panel in add mode
-                ParticipantPanel pPanel = new ParticipantPanel(m,p,1);
+                ParticipantPanel pPanel = new ParticipantPanel(meeting,p,1);
                 pPanel.Dock = DockStyle.Top;
                 pPanel.Width = this.flowLayoutPanel1.Width - this.flowLayoutPanel1.Padding.Left - this.flowLayoutPanel1.Padding.Right;
                 this.flowLayoutPanel1.Controls.Add(pPanel);

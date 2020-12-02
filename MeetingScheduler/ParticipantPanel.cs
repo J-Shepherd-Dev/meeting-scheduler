@@ -20,7 +20,7 @@ namespace MeetingScheduler
             this.meeting = m;
             this.participant = p;
             InitializeComponent();
-            this.nameLbl.Text = this.participant.user.getName();
+            this.nameLbl.Text = this.participant.user.Name;
             //try to set the persons image, if this fails then the background image will be used by default
             try
             {
@@ -31,11 +31,6 @@ namespace MeetingScheduler
             }
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
-        public ParticipantPanel(Meeting m, Participant p)
-        {
-            this._basicConstructor(m,p);
-            this.tableLayoutPanel1.ColumnCount = 4;
-        }
         public ParticipantPanel(Meeting m, Participant p,int mode=0)
         {
             /*Modes:
@@ -44,11 +39,15 @@ namespace MeetingScheduler
              * 2 = non initiator (hide controls);
              * */
             this._basicConstructor(m, p);
+            this.mode = mode;
             //if this panel is being created in view of a user who is not the initiator, hide edit options
             if (mode!=0)
             {
                 this.roleBox.Visible = false;
                 this.roleBox.Enabled = false;
+                if (mode == 1) {
+                    this.removeBtn.Text = this.meeting.Participants.Contains(p) ? "Remove" : "Add";
+                }
                 //if we're also not in 'add' mode, hide the button
                 if (mode == 2) {
                     this.removeBtn.Enabled = false;
@@ -72,12 +71,13 @@ namespace MeetingScheduler
             {
                 this.meeting.Participants.Remove(this.participant);
                 this.Parent.Controls.Remove(this);
-            }
-            if (this.mode == 1) {
+            }else if (this.mode == 1) {
                 if (this.meeting.Participants.Contains(this.participant)) {
                     this.meeting.Participants.Remove(this.participant);
+                    this.removeBtn.Text = "Add";
                 } else {
                     this.meeting.Participants.Add(this.participant);
+                    this.removeBtn.Text = "Remove";
                 }
             }
         }

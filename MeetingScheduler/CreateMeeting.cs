@@ -12,12 +12,12 @@ namespace MeetingScheduler
 {
     public partial class CreateMeeting : Form
     {
-        private Meeting _thisMeeting;
+        public Meeting _thisMeeting;
         SelectPartcipantsWindow sPW;
         public CreateMeeting(User initiator)
         {
             this._thisMeeting = new Meeting(initiator);
-            this.sPW = new SelectPartcipantsWindow(this._thisMeeting);
+            this.sPW = new SelectPartcipantsWindow(this);
             InitializeComponent();
         }
 
@@ -68,9 +68,6 @@ namespace MeetingScheduler
         public void AddParticipantButton_Click(object sender, EventArgs e)
         {
             sPW.Show();
-            Participant p = new Participant(AllUsers.jack);
-            this._thisMeeting.Participants.Add(p);
-            this.AddParticipantToPanel(p);
         }
 
         private void newMeetingSaveBtn_Click(object sender, EventArgs e)

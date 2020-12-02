@@ -11,7 +11,7 @@ namespace MeetingScheduler
         public static User jack = new User("Jack", "jack");
         public static User mehmet = new User("Mehmet", "mehmet");
         public static User ryan = new User("Ryan");
-        public static User john = new User("John");
+        public static User john = new User("John","john");
         public static User tom = new User("Tom", "tom");
 
         public static HashSet<User> Users = new HashSet<User>() {
