@@ -394,6 +394,7 @@ namespace MeetingScheduler
             this.MinimumSize = new System.Drawing.Size(1085, 691);
             this.Name = "CreateMeeting";
             this.Text = "Create Meeting - SECM:Meet";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateMeeting_FormClosing);
             this.Load += new System.EventHandler(this.CreateMeeting_Load);
             this.ResizeBegin += new System.EventHandler(this.CreateMeeting_ResizeBegin);
             this.ResizeEnd += new System.EventHandler(this.CreateMeeting_ResizeEnd);
