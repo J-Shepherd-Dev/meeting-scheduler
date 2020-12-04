@@ -176,5 +176,16 @@ namespace MeetingScheduler
             this.Close();
         }
 
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            this._thisMeeting.Length = (int)(sender as NumericUpDown).Value;
+            if (this._thisMeeting.Time.Hour + this._thisMeeting.Length > 19) {
+                //TODO: set this to the correct value, not 1
+                this._thisMeeting.Length = 1;
+                (sender as NumericUpDown).Value = this._thisMeeting.Length;
+            }
+            //update the calendar panel
+            RefreshParticipantMeetings();
+        }
     }
 }
