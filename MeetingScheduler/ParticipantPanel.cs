@@ -24,7 +24,7 @@ namespace MeetingScheduler
             this.nameLbl.Text = p.user.getName();
             ToolTip tTip = new ToolTip();
             tTip.ToolTipTitle = "Roles";
-            tTip.SetToolTip(this.roleBox, "Standard: can request equipment.\nImportant: can request equipment & locations\nGuest Speaker: can request equipment & locations. 1 per meeting.");
+            tTip.SetToolTip(this.roleBox, "Standard: can request equipment.\nImportant: can request equipment & locations.\nGuest Speaker: can request equipment & locations. 1 per meeting.");
             this.mode = mode;
             //if this panel is being created in view of a user who is not the initiator, hide edit options
             if (mode != 0)
