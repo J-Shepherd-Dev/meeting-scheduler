@@ -107,9 +107,9 @@ namespace MeetingScheduler
             Logging.AddMessage("There are "+this._thisMeeting.Participants.Count+" participants in the created meeting.");
             foreach(Participant p in this._thisMeeting.Participants) {
                 this.AddParticipantToPanel(p);
+                userToAddBox.Items.Remove(p.user);
                 Logging.AddMessage($"Added participant {p} to panel");
             }
-
             this.participantFlowPanel.ResumeLayout();
         }
 
@@ -177,7 +177,7 @@ namespace MeetingScheduler
             _thisMeeting.Details = newMeetingDetails.Text;
 
             // Push meeting if it's newly created
-            AllMeetings.Update(_thisMeeting);
+            AllMeetings.Update(this._thisMeeting);
 
             if (editing)
                 Logging.AddMessage($"Edited meeting {_thisMeeting}");

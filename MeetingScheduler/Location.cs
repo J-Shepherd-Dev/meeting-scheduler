@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MeetingScheduler
 {
-    class Location
+    public class Location
     {
         public string Name = "Location";
         public bool isWheelChairAccessible = false;

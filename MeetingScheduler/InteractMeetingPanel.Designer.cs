@@ -38,16 +38,16 @@
             this.meetingDescTB = new System.Windows.Forms.TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.equipmentGB = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.equipmentCheckList = new System.Windows.Forms.CheckedListBox();
+            this.locationGB = new System.Windows.Forms.GroupBox();
+            this.locationCheckList = new System.Windows.Forms.CheckedListBox();
             this.participantGB = new System.Windows.Forms.GroupBox();
             this.participantFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.locationCheckList = new System.Windows.Forms.CheckedListBox();
-            this.equipmentCheckList = new System.Windows.Forms.CheckedListBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.equipmentGB.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.locationGB.SuspendLayout();
             this.participantGB.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -149,7 +149,7 @@
             // panel3
             // 
             this.panel3.Controls.Add(this.equipmentGB);
-            this.panel3.Controls.Add(this.groupBox2);
+            this.panel3.Controls.Add(this.locationGB);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 132);
             this.panel3.Name = "panel3";
@@ -169,17 +169,37 @@
             this.equipmentGB.TabStop = false;
             this.equipmentGB.Text = "Your Equipment Requests";
             // 
-            // groupBox2
+            // equipmentCheckList
             // 
-            this.groupBox2.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.groupBox2.Controls.Add(this.locationCheckList);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupBox2.Location = new System.Drawing.Point(319, 6);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(326, 366);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Your Location Preference";
+            this.equipmentCheckList.BackColor = System.Drawing.SystemColors.Control;
+            this.equipmentCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.equipmentCheckList.FormattingEnabled = true;
+            this.equipmentCheckList.Location = new System.Drawing.Point(3, 16);
+            this.equipmentCheckList.Name = "equipmentCheckList";
+            this.equipmentCheckList.Size = new System.Drawing.Size(307, 347);
+            this.equipmentCheckList.TabIndex = 0;
+            // 
+            // locationGB
+            // 
+            this.locationGB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.locationGB.Controls.Add(this.locationCheckList);
+            this.locationGB.Dock = System.Windows.Forms.DockStyle.Right;
+            this.locationGB.Location = new System.Drawing.Point(319, 6);
+            this.locationGB.Name = "locationGB";
+            this.locationGB.Size = new System.Drawing.Size(326, 366);
+            this.locationGB.TabIndex = 1;
+            this.locationGB.TabStop = false;
+            this.locationGB.Text = "Your Location Preference";
+            // 
+            // locationCheckList
+            // 
+            this.locationCheckList.BackColor = System.Drawing.SystemColors.Control;
+            this.locationCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.locationCheckList.FormattingEnabled = true;
+            this.locationCheckList.Location = new System.Drawing.Point(3, 16);
+            this.locationCheckList.Name = "locationCheckList";
+            this.locationCheckList.Size = new System.Drawing.Size(320, 347);
+            this.locationCheckList.TabIndex = 0;
             // 
             // participantGB
             // 
@@ -200,26 +220,6 @@
             this.participantFlowPanel.Size = new System.Drawing.Size(273, 491);
             this.participantFlowPanel.TabIndex = 0;
             // 
-            // locationCheckList
-            // 
-            this.locationCheckList.BackColor = System.Drawing.SystemColors.Control;
-            this.locationCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.locationCheckList.FormattingEnabled = true;
-            this.locationCheckList.Location = new System.Drawing.Point(3, 16);
-            this.locationCheckList.Name = "locationCheckList";
-            this.locationCheckList.Size = new System.Drawing.Size(320, 347);
-            this.locationCheckList.TabIndex = 0;
-            // 
-            // equipmentCheckList
-            // 
-            this.equipmentCheckList.BackColor = System.Drawing.SystemColors.Control;
-            this.equipmentCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equipmentCheckList.FormattingEnabled = true;
-            this.equipmentCheckList.Location = new System.Drawing.Point(3, 16);
-            this.equipmentCheckList.Name = "equipmentCheckList";
-            this.equipmentCheckList.Size = new System.Drawing.Size(307, 347);
-            this.equipmentCheckList.TabIndex = 0;
-            // 
             // InteractMeetingPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,7 +235,7 @@
             this.panel1.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.equipmentGB.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.locationGB.ResumeLayout(false);
             this.participantGB.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -252,7 +252,7 @@
         private System.Windows.Forms.TextBox meetingDescTB;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.GroupBox equipmentGB;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox locationGB;
         private System.Windows.Forms.GroupBox participantGB;
         private System.Windows.Forms.FlowLayoutPanel participantFlowPanel;
         private System.Windows.Forms.CheckedListBox equipmentCheckList;

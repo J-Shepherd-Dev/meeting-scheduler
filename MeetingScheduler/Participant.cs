@@ -9,7 +9,8 @@ namespace MeetingScheduler
     public class Participant
     {
         public User user;
-        public Dictionary<String, Equipment> dTest = new Dictionary<string, Equipment>();
+        public List<Equipment> equipmentRequests = new List<Equipment>();
+        public List<Location> locationPreferences = new List<Location>();
         //0 = ordinary
         //1 = important
         //2 = guest speaker

@@ -37,9 +37,11 @@ namespace MeetingScheduler
                     ParticipantPanel pPanel = new ParticipantPanel(this._meeting, p);
                     participantFlowPanel.Controls.Add(pPanel);
                     //participant specific changes:
-
                     //such as location and equipment requests made by this particopant
-
+                    if (this._impersonator == p.user) {
+                        //if this user is not important, hide the location choices
+                        this.locationGB.Visible = p.status != 0;
+                    }
                     //and attendance yes/no given by this partipant
 
                 }

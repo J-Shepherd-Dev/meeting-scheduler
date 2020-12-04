@@ -22,6 +22,7 @@ namespace MeetingScheduler
             this.participant = p;
             InitializeComponent();
             this.nameLbl.Text = p.user.getName();
+            this.roleBox.SelectedIndex = p.status;
             ToolTip tTip = new ToolTip();
             tTip.ToolTipTitle = "Roles";
             tTip.SetToolTip(this.roleBox, "Standard: can request equipment.\nImportant: can request equipment & locations.\nGuest Speaker: can request equipment & locations. 1 per meeting.");
