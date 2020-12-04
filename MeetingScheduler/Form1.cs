@@ -150,19 +150,19 @@ namespace MeetingScheduler
             UpdateDisplay();
         }
 
-        private void initiatedTabList_SelectedIndexChanged(object sender, EventArgs e)
+        private void initiatedTabList_SelectedValueChanged(object sender, EventArgs e)
         {
-
+            interactMeetingPanel1.Meeting = (Meeting)initiatedTabList.SelectedItem;
         }
 
-        private void invitedTabList_SelectedIndexChanged(object sender, EventArgs e)
+        private void invitedTabList_SelectedValueChanged(object sender, EventArgs e)
         {
-
+            interactMeetingPanel1.Meeting = (Meeting)invitedTabList.SelectedItem;
         }
 
-        private void scheduledTabList_SelectedIndexChanged(object sender, EventArgs e)
+        private void scheduledTabList_SelectedValueChanged(object sender, EventArgs e)
         {
-
+            interactMeetingPanel1.Meeting = (Meeting)scheduledTabList.SelectedItem;
         }
     }
 }
