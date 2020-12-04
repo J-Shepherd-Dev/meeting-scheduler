@@ -57,5 +57,15 @@ namespace MeetingScheduler
                 cM.Show();
             }
         }
+
+        private void equipmentCheckList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void locationCheckList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

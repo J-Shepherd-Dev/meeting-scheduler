@@ -178,6 +178,7 @@
             this.equipmentCheckList.Name = "equipmentCheckList";
             this.equipmentCheckList.Size = new System.Drawing.Size(307, 347);
             this.equipmentCheckList.TabIndex = 0;
+            this.equipmentCheckList.SelectedIndexChanged += new System.EventHandler(this.equipmentCheckList_SelectedIndexChanged);
             // 
             // locationGB
             // 
@@ -200,6 +201,7 @@
             this.locationCheckList.Name = "locationCheckList";
             this.locationCheckList.Size = new System.Drawing.Size(320, 347);
             this.locationCheckList.TabIndex = 0;
+            this.locationCheckList.SelectedIndexChanged += new System.EventHandler(this.locationCheckList_SelectedIndexChanged);
             // 
             // participantGB
             // 
