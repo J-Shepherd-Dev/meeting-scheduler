@@ -177,10 +177,12 @@ namespace MeetingScheduler
             _thisMeeting.Details = newMeetingDetails.Text;
 
             // Push meeting if it's newly created
-            if (!editing)
-                AllMeetings.Add(_thisMeeting);
+            AllMeetings.Update(_thisMeeting);
 
-            Logging.AddMessage($"Created meeting {_thisMeeting}");
+            if (editing)
+                Logging.AddMessage($"Edited meeting {_thisMeeting}");
+            else
+                Logging.AddMessage($"Created meeting {_thisMeeting}");
 
             this.Close();
         }

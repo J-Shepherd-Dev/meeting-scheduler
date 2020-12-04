@@ -28,7 +28,7 @@ namespace MeetingScheduler
             devForm.ShowInTaskbar = true;
 
             // Assign event handler for new meetings
-            AllMeetings.newMeeting += AllMeetings_newMeeting;
+            AllMeetings.meetingsUpdated += AllMeetings_meetingsUpdated;
 
             // Create Mehmet's funky dance party
             TimeSpan untilBeginning = new TimeSpan((int)DateTime.Today.DayOfWeek, 0, 0, 0);
@@ -51,12 +51,12 @@ namespace MeetingScheduler
                 funkyDanceParty.Participants.Add(new Participant(u));
             }
 
-            AllMeetings.Add(funkyDanceParty);
+            AllMeetings.Update(funkyDanceParty);
 
             Logging.AddMessage("Initialisation complete");
         }
 
-        private void AllMeetings_newMeeting(object sender, EventArgs e)
+        private void AllMeetings_meetingsUpdated(object sender, EventArgs e)
         {
             UpdateDisplay();
         }
@@ -65,15 +65,33 @@ namespace MeetingScheduler
         {
             this._activeMeeting = null;
 
+            // Index to select in the initiated meeting list, if applicable
+            int? selectIndex = null;
+
             // Update tabs
             initiatedTabList.Items.Clear();
             invitedTabList.Items.Clear();
             scheduledTabList.Items.Clear();
 
-            foreach(Meeting m in AllMeetings.meetings)
+            foreach (Meeting m in AllMeetings.meetings)
             {
+                // If this user initiated this meeting, add it to the initiated list
                 if (m.Initiator == _activeUser)
-                    initiatedTabList.Items.Add(m);
+                {
+                    // Record the index the meeting is added at.
+                    int index = initiatedTabList.Items.Add(m);
+
+                    // If this meeting is also the meeting that was updated
+                    if (m == AllMeetings.lastMeeting)
+                    {
+                        // Set the index to select to be this meeting
+                        // This means when a user creates or updates a meeting it will select itself by default
+                        selectIndex = index;
+
+                        // Also set it to be the active meeting so it shows in the details pane
+                        _activeMeeting = m;
+                    }
+                }
 
                 foreach (Participant p in m.Participants)
                 {
@@ -83,6 +101,16 @@ namespace MeetingScheduler
                         break;
                     }
                 }
+            }
+
+            if (selectIndex != null)
+            {
+                // Set us to the "Initiated" tab
+                tabControl1.SelectedIndex = 0;
+
+                // Select the current meeting in that list
+                // We shouldn't need to null coalesce this but the compiler can't detect we've already checked for null
+                initiatedTabList.SelectedIndex = selectIndex ?? 0;
             }
 
             this.interactMeetingPanel1.UpdatePanels(this._activeMeeting, this._activeUser);
@@ -146,7 +174,7 @@ namespace MeetingScheduler
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            AllMeetings.newMeeting -= AllMeetings_newMeeting;
+            AllMeetings.meetingsUpdated -= AllMeetings_meetingsUpdated;
         }
 
         private void impersonationComboBox_SelectionChangeCommitted(object sender, EventArgs e)

@@ -9,14 +9,19 @@ namespace MeetingScheduler
     public static class AllMeetings
     {
         public static List<Meeting> meetings = new List<Meeting>();
-        public static event EventHandler newMeeting;
+        public static Meeting lastMeeting = null;
+        public static event EventHandler meetingsUpdated;
 
-        public static void Add(Meeting instance)
+
+        public static void Update(Meeting instance)
         {
-            meetings.Add(instance);
+            if (!meetings.Contains(instance))
+                meetings.Add(instance);
+
+            lastMeeting = instance;
 
             // Send event
-            newMeeting?.Invoke(null, new EventArgs());
+            meetingsUpdated?.Invoke(null, new EventArgs());
         }
     }
 }
