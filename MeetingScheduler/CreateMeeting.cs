@@ -72,6 +72,7 @@ namespace MeetingScheduler
 
         private void CreateMeeting_Load(object sender, EventArgs e)
         {
+            calendarPanel1.Changed += CheckMeetingLength;
             this.UpdatePanels();
         }
 
@@ -176,20 +177,30 @@ namespace MeetingScheduler
             this.Close();
         }
 
+        private void CheckMeetingLength(object sender, EventArgs e)
+        {
+            DateTime seven_pm = this._thisMeeting.StartTime.Date + new TimeSpan(19, 0, 0);
+
+            if (this._thisMeeting.EndTime > seven_pm)
+            {
+                this._thisMeeting.EndTime = seven_pm;
+
+                numericUpDown1.Value = this._thisMeeting.Length;
+            }
+        }
+
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             this._thisMeeting.Length = (int)(sender as NumericUpDown).Value;
+            CheckMeetingLength(sender, e);
 
-            DateTime seven_pm = this._thisMeeting.StartTime.Date + new TimeSpan(19, 0, 0);
-
-            if (this._thisMeeting.EndTime > seven_pm) {
-
-                this._thisMeeting.EndTime = seven_pm;
-
-                (sender as NumericUpDown).Value = this._thisMeeting.Length;
-            }
             //update the calendar panel
             RefreshParticipantMeetings();
+        }
+
+        private void CreateMeeting_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            calendarPanel1.Changed -= CheckMeetingLength;
         }
     }
 }

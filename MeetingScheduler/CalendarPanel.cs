@@ -13,6 +13,8 @@ namespace MeetingScheduler
 {
     public partial class CalendarPanel : UserControl
     {
+        public event EventHandler Changed;
+
         private DateTime _currentWeek;
 
         public DateTime CurrentWeek
@@ -210,6 +212,7 @@ namespace MeetingScheduler
             if (editedMeeting != null)
             {
                 editedMeeting.StartTime = time;
+                Changed?.Invoke(null, new EventArgs());
                 Logging.AddMessage($"Moved meeting {editedMeeting} to {time}");
             } else
             {
