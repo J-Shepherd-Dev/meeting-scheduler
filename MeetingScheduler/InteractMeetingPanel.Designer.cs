@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.attendLabel = new System.Windows.Forms.Label();
             this.attendYesBtn = new System.Windows.Forms.Button();
             this.attendNoBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
@@ -53,28 +53,28 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.attendLabel);
             this.panel2.Controls.Add(this.attendYesBtn);
             this.panel2.Controls.Add(this.attendNoBtn);
             this.panel2.Controls.Add(this.editBtn);
             this.panel2.Controls.Add(this.meetingTitleLbl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(6, 6);
+            this.panel2.Location = new System.Drawing.Point(6, 7);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(639, 44);
             this.panel2.TabIndex = 2;
             // 
-            // label1
+            // attendLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(326, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(6, 12, 0, 0);
-            this.label1.Size = new System.Drawing.Size(88, 32);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Attending:";
+            this.attendLabel.AutoSize = true;
+            this.attendLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.attendLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attendLabel.Location = new System.Drawing.Point(326, 0);
+            this.attendLabel.Name = "attendLabel";
+            this.attendLabel.Padding = new System.Windows.Forms.Padding(6, 12, 0, 0);
+            this.attendLabel.Size = new System.Drawing.Size(88, 32);
+            this.attendLabel.TabIndex = 4;
+            this.attendLabel.Text = "Attending:";
             // 
             // attendYesBtn
             // 
@@ -86,6 +86,7 @@
             this.attendYesBtn.TabIndex = 3;
             this.attendYesBtn.Text = "Yes";
             this.attendYesBtn.UseVisualStyleBackColor = false;
+            this.attendYesBtn.Click += new System.EventHandler(this.attendYesBtn_Click);
             // 
             // attendNoBtn
             // 
@@ -98,6 +99,7 @@
             this.attendNoBtn.TabIndex = 2;
             this.attendNoBtn.Text = "No";
             this.attendNoBtn.UseVisualStyleBackColor = false;
+            this.attendNoBtn.Click += new System.EventHandler(this.attendNoBtn_Click);
             // 
             // editBtn
             // 
@@ -128,7 +130,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Padding = new System.Windows.Forms.Padding(6);
+            this.panel1.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.panel1.Size = new System.Drawing.Size(651, 132);
             this.panel1.TabIndex = 2;
             // 
@@ -137,12 +139,12 @@
             this.meetingDescTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.meetingDescTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.meetingDescTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.meetingDescTB.Location = new System.Drawing.Point(6, 50);
-            this.meetingDescTB.Margin = new System.Windows.Forms.Padding(12);
+            this.meetingDescTB.Location = new System.Drawing.Point(6, 51);
+            this.meetingDescTB.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.meetingDescTB.Multiline = true;
             this.meetingDescTB.Name = "meetingDescTB";
             this.meetingDescTB.ReadOnly = true;
-            this.meetingDescTB.Size = new System.Drawing.Size(639, 76);
+            this.meetingDescTB.Size = new System.Drawing.Size(639, 74);
             this.meetingDescTB.TabIndex = 3;
             this.meetingDescTB.Text = "meetingDescription";
             // 
@@ -153,7 +155,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 132);
             this.panel3.Name = "panel3";
-            this.panel3.Padding = new System.Windows.Forms.Padding(6);
+            this.panel3.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
             this.panel3.Size = new System.Drawing.Size(651, 378);
             this.panel3.TabIndex = 3;
             // 
@@ -162,9 +164,9 @@
             this.equipmentGB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.equipmentGB.Controls.Add(this.equipmentCheckList);
             this.equipmentGB.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.equipmentGB.Location = new System.Drawing.Point(6, 6);
+            this.equipmentGB.Location = new System.Drawing.Point(6, 7);
             this.equipmentGB.Name = "equipmentGB";
-            this.equipmentGB.Size = new System.Drawing.Size(313, 366);
+            this.equipmentGB.Size = new System.Drawing.Size(313, 364);
             this.equipmentGB.TabIndex = 0;
             this.equipmentGB.TabStop = false;
             this.equipmentGB.Text = "Your Equipment Requests";
@@ -176,7 +178,7 @@
             this.equipmentCheckList.FormattingEnabled = true;
             this.equipmentCheckList.Location = new System.Drawing.Point(3, 16);
             this.equipmentCheckList.Name = "equipmentCheckList";
-            this.equipmentCheckList.Size = new System.Drawing.Size(307, 347);
+            this.equipmentCheckList.Size = new System.Drawing.Size(307, 345);
             this.equipmentCheckList.TabIndex = 0;
             this.equipmentCheckList.SelectedIndexChanged += new System.EventHandler(this.equipmentCheckList_SelectedIndexChanged);
             // 
@@ -185,9 +187,9 @@
             this.locationGB.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.locationGB.Controls.Add(this.locationCheckList);
             this.locationGB.Dock = System.Windows.Forms.DockStyle.Right;
-            this.locationGB.Location = new System.Drawing.Point(319, 6);
+            this.locationGB.Location = new System.Drawing.Point(319, 7);
             this.locationGB.Name = "locationGB";
-            this.locationGB.Size = new System.Drawing.Size(326, 366);
+            this.locationGB.Size = new System.Drawing.Size(326, 364);
             this.locationGB.TabIndex = 1;
             this.locationGB.TabStop = false;
             this.locationGB.Text = "Your Location Preference";
@@ -199,7 +201,7 @@
             this.locationCheckList.FormattingEnabled = true;
             this.locationCheckList.Location = new System.Drawing.Point(3, 16);
             this.locationCheckList.Name = "locationCheckList";
-            this.locationCheckList.Size = new System.Drawing.Size(320, 347);
+            this.locationCheckList.Size = new System.Drawing.Size(320, 345);
             this.locationCheckList.TabIndex = 0;
             this.locationCheckList.SelectedIndexChanged += new System.EventHandler(this.locationCheckList_SelectedIndexChanged);
             // 
@@ -247,7 +249,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label meetingTitleLbl;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label attendLabel;
         private System.Windows.Forms.Button attendYesBtn;
         private System.Windows.Forms.Button attendNoBtn;
         private System.Windows.Forms.Button editBtn;

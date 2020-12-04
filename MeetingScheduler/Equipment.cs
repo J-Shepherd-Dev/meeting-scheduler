@@ -11,16 +11,10 @@ namespace MeetingScheduler
         public string Name = "Equipment";
         //if the piece of 'equipment' is actually a person, they will require extra capacity in the room
         public int requiresCapacity = 0;
-        public Equipment(string name)
+        public Equipment(string name, int capacity = 0)
         {
             this.Name = name;
-        }
-
-        public Equipment(string name, int capacity) {
-            this.Name = name;
-            if (capacity>0) {
-                this.requiresCapacity = capacity;
-            }
+            this.requiresCapacity = capacity;
         }
 
         public override string ToString()

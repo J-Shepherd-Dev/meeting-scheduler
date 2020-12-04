@@ -30,14 +30,14 @@ namespace MeetingScheduler
             this.Participants = new HashSet<Participant>();
         }
 
-        public bool ContainsUser(User u) {
-            if(this.Participants.Count==0) return false;
+        public Participant GetParticipant(User u) {
             foreach (Participant p in this.Participants) {
                 if (p.user == u) {
-                    return true;
+                    return p;
                 }
             }
-            return false;
+
+            return null;
         }
 
         public override string ToString()
