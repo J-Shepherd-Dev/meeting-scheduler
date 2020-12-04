@@ -13,12 +13,42 @@ namespace MeetingScheduler
     public partial class CreateMeeting : Form
     {
         public Meeting _thisMeeting;
+        private bool _isEditing = false;
+
+        public bool editing
+        {
+            get
+            {
+                return _isEditing;
+            }
+            set
+            {
+                _isEditing = value;
+                newMeetingSaveBtn.Text = _isEditing ? "Edit" : "Create";
+            }
+        }
+
         public CreateMeeting(User initiator)
         {
             this._thisMeeting = new Meeting(initiator);
             InitializeComponent();
             UpdatePanels();
             //ensure all users are displayed in the 'search' dropdown
+            userToAddBox.Items.AddRange(AllUsers.Users.ToArray());
+            calendarPanel1.editedMeeting = _thisMeeting;
+        }
+
+        public CreateMeeting(Meeting meeting)
+        {
+            this._thisMeeting = meeting;
+            InitializeComponent();
+            UpdatePanels();
+
+            // Ensure data on screen matches the meeting
+            editing = true;
+            newMeetingTitle.Text = meeting.Name;
+            newMeetingDetails.Text = meeting.Details;
+
             userToAddBox.Items.AddRange(AllUsers.Users.ToArray());
             calendarPanel1.editedMeeting = _thisMeeting;
         }
@@ -146,8 +176,9 @@ namespace MeetingScheduler
             _thisMeeting.Name = newMeetingTitle.Text;
             _thisMeeting.Details = newMeetingDetails.Text;
 
-            // Push meeting
-            AllMeetings.Add(_thisMeeting);
+            // Push meeting if it's newly created
+            if (!editing)
+                AllMeetings.Add(_thisMeeting);
 
             Logging.AddMessage($"Created meeting {_thisMeeting}");
 

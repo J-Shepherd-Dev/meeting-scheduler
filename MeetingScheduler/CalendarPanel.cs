@@ -119,6 +119,10 @@ namespace MeetingScheduler
 
             foreach (Meeting meeting in meetings)
             {
+                // Ignore a meeting if it's the edited meeting
+                if (meeting == editedMeeting)
+                    continue;
+
                 // Ignore meetings not in this week
                 if (meeting.Time < _currentWeek || meeting.Time > (_currentWeek + new TimeSpan(7, 0, 0, 0)))
                     continue;
