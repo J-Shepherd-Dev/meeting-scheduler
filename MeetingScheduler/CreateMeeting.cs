@@ -135,7 +135,6 @@ namespace MeetingScheduler
         }
 
         public void UpdatePanels() {
-            this.addParticipantButton.Text =  this._thisMeeting.Participants.Count == 0 ? "Add" : "Edit";
             this.newMeetingTitle.Text = this._thisMeeting.Name;
             this.newMeetingDetails.Text = this._thisMeeting.Details;
             DrawParticipantList();
