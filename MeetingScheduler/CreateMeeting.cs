@@ -180,10 +180,11 @@ namespace MeetingScheduler
         {
             this._thisMeeting.Length = (int)(sender as NumericUpDown).Value;
 
-            if (this._thisMeeting.EndTime.Hour > 19) {
+            DateTime seven_pm = this._thisMeeting.StartTime.Date + new TimeSpan(19, 0, 0);
 
-                TimeSpan timeDifference = new TimeSpan(this._thisMeeting.EndTime.Hour - 19, 0, 0);
-                this._thisMeeting.EndTime -= timeDifference;
+            if (this._thisMeeting.EndTime > seven_pm) {
+
+                this._thisMeeting.EndTime = seven_pm;
 
                 (sender as NumericUpDown).Value = this._thisMeeting.Length;
             }
