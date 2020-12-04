@@ -43,12 +43,15 @@
             this.locationCheckList = new System.Windows.Forms.CheckedListBox();
             this.participantGB = new System.Windows.Forms.GroupBox();
             this.participantFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.dateTimeInfoLbl = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.equipmentGB.SuspendLayout();
             this.locationGB.SuspendLayout();
             this.participantGB.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -61,7 +64,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(6, 7);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(639, 44);
+            this.panel2.Size = new System.Drawing.Size(639, 40);
             this.panel2.TabIndex = 2;
             // 
             // attendLabel
@@ -82,7 +85,7 @@
             this.attendYesBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.attendYesBtn.Location = new System.Drawing.Point(414, 0);
             this.attendYesBtn.Name = "attendYesBtn";
-            this.attendYesBtn.Size = new System.Drawing.Size(75, 44);
+            this.attendYesBtn.Size = new System.Drawing.Size(75, 40);
             this.attendYesBtn.TabIndex = 3;
             this.attendYesBtn.Text = "Yes";
             this.attendYesBtn.UseVisualStyleBackColor = false;
@@ -95,7 +98,7 @@
             this.attendNoBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.attendNoBtn.Location = new System.Drawing.Point(489, 0);
             this.attendNoBtn.Name = "attendNoBtn";
-            this.attendNoBtn.Size = new System.Drawing.Size(75, 44);
+            this.attendNoBtn.Size = new System.Drawing.Size(75, 40);
             this.attendNoBtn.TabIndex = 2;
             this.attendNoBtn.Text = "No";
             this.attendNoBtn.UseVisualStyleBackColor = false;
@@ -106,7 +109,7 @@
             this.editBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.editBtn.Location = new System.Drawing.Point(564, 0);
             this.editBtn.Name = "editBtn";
-            this.editBtn.Size = new System.Drawing.Size(75, 44);
+            this.editBtn.Size = new System.Drawing.Size(75, 40);
             this.editBtn.TabIndex = 1;
             this.editBtn.Text = "Edit";
             this.editBtn.UseVisualStyleBackColor = true;
@@ -126,12 +129,13 @@
             // panel1
             // 
             this.panel1.Controls.Add(this.meetingDescTB);
+            this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.panel1.Size = new System.Drawing.Size(651, 132);
+            this.panel1.Size = new System.Drawing.Size(651, 174);
             this.panel1.TabIndex = 2;
             // 
             // meetingDescTB
@@ -139,12 +143,12 @@
             this.meetingDescTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.meetingDescTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.meetingDescTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.meetingDescTB.Location = new System.Drawing.Point(6, 51);
+            this.meetingDescTB.Location = new System.Drawing.Point(6, 70);
             this.meetingDescTB.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
             this.meetingDescTB.Multiline = true;
             this.meetingDescTB.Name = "meetingDescTB";
             this.meetingDescTB.ReadOnly = true;
-            this.meetingDescTB.Size = new System.Drawing.Size(639, 74);
+            this.meetingDescTB.Size = new System.Drawing.Size(639, 97);
             this.meetingDescTB.TabIndex = 3;
             this.meetingDescTB.Text = "meetingDescription";
             // 
@@ -153,10 +157,10 @@
             this.panel3.Controls.Add(this.equipmentGB);
             this.panel3.Controls.Add(this.locationGB);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 132);
+            this.panel3.Location = new System.Drawing.Point(0, 174);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(6, 7, 6, 7);
-            this.panel3.Size = new System.Drawing.Size(651, 378);
+            this.panel3.Size = new System.Drawing.Size(651, 336);
             this.panel3.TabIndex = 3;
             // 
             // equipmentGB
@@ -166,7 +170,7 @@
             this.equipmentGB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.equipmentGB.Location = new System.Drawing.Point(6, 7);
             this.equipmentGB.Name = "equipmentGB";
-            this.equipmentGB.Size = new System.Drawing.Size(313, 364);
+            this.equipmentGB.Size = new System.Drawing.Size(313, 322);
             this.equipmentGB.TabIndex = 0;
             this.equipmentGB.TabStop = false;
             this.equipmentGB.Text = "Your Equipment Requests";
@@ -178,7 +182,7 @@
             this.equipmentCheckList.FormattingEnabled = true;
             this.equipmentCheckList.Location = new System.Drawing.Point(3, 16);
             this.equipmentCheckList.Name = "equipmentCheckList";
-            this.equipmentCheckList.Size = new System.Drawing.Size(307, 345);
+            this.equipmentCheckList.Size = new System.Drawing.Size(307, 303);
             this.equipmentCheckList.TabIndex = 0;
             this.equipmentCheckList.SelectedIndexChanged += new System.EventHandler(this.equipmentCheckList_SelectedIndexChanged);
             // 
@@ -189,7 +193,7 @@
             this.locationGB.Dock = System.Windows.Forms.DockStyle.Right;
             this.locationGB.Location = new System.Drawing.Point(319, 7);
             this.locationGB.Name = "locationGB";
-            this.locationGB.Size = new System.Drawing.Size(326, 364);
+            this.locationGB.Size = new System.Drawing.Size(326, 322);
             this.locationGB.TabIndex = 1;
             this.locationGB.TabStop = false;
             this.locationGB.Text = "Your Location Preference";
@@ -201,7 +205,7 @@
             this.locationCheckList.FormattingEnabled = true;
             this.locationCheckList.Location = new System.Drawing.Point(3, 16);
             this.locationCheckList.Name = "locationCheckList";
-            this.locationCheckList.Size = new System.Drawing.Size(320, 345);
+            this.locationCheckList.Size = new System.Drawing.Size(320, 303);
             this.locationCheckList.TabIndex = 0;
             this.locationCheckList.SelectedIndexChanged += new System.EventHandler(this.locationCheckList_SelectedIndexChanged);
             // 
@@ -224,6 +228,26 @@
             this.participantFlowPanel.Size = new System.Drawing.Size(273, 491);
             this.participantFlowPanel.TabIndex = 0;
             // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.dateTimeInfoLbl);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(6, 47);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(639, 23);
+            this.panel4.TabIndex = 4;
+            // 
+            // dateTimeInfoLbl
+            // 
+            this.dateTimeInfoLbl.AutoSize = true;
+            this.dateTimeInfoLbl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dateTimeInfoLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimeInfoLbl.Location = new System.Drawing.Point(0, 0);
+            this.dateTimeInfoLbl.Name = "dateTimeInfoLbl";
+            this.dateTimeInfoLbl.Size = new System.Drawing.Size(52, 17);
+            this.dateTimeInfoLbl.TabIndex = 0;
+            this.dateTimeInfoLbl.Text = "label1";
+            // 
             // InteractMeetingPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -241,6 +265,8 @@
             this.equipmentGB.ResumeLayout(false);
             this.locationGB.ResumeLayout(false);
             this.participantGB.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -261,5 +287,7 @@
         private System.Windows.Forms.FlowLayoutPanel participantFlowPanel;
         private System.Windows.Forms.CheckedListBox equipmentCheckList;
         private System.Windows.Forms.CheckedListBox locationCheckList;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label dateTimeInfoLbl;
     }
 }
