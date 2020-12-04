@@ -14,6 +14,8 @@ namespace MeetingScheduler
         //1 = important
         //2 = guest speaker
         public int status = 0;
+        public bool attending = false;
+        public bool hasGivenAttendance = false;
         public Participant(User u) {
             this.user = u;
         }

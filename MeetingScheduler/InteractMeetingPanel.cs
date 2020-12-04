@@ -28,8 +28,23 @@ namespace MeetingScheduler
             editBtn.Enabled = this._meeting!= null && this._meeting.Initiator == impersonating;
             meetingTitleLbl.Text = this._meeting?.Name ?? "No Meeting Selected";
             meetingDescTB.Text = this._meeting?.Details ?? "No description provided...";
+            participantFlowPanel.Controls.Clear();
+            if (this._meeting != null && this._meeting.Participants.Count > 0)
+            {
+                foreach (Participant p in this._meeting.Participants)
+                {
+                    //generic changes such as updating the participant list panel (bit on the right)
+                    ParticipantPanel pPanel = new ParticipantPanel(this._meeting, p);
+                    participantFlowPanel.Controls.Add(pPanel);
+                    //participant specific changes:
 
-            //refresh the displayed panels
+                    //such as location and equipment requests made by this particopant
+
+                    //and attendance yes/no given by this partipant
+
+                }
+            }
+           
         }
 
         private void editBtn_Click(object sender, EventArgs e)
