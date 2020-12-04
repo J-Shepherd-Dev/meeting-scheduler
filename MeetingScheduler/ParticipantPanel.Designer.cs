@@ -51,16 +51,18 @@
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(569, 30);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(569, 28);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // removeBtn
             // 
             this.removeBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.removeBtn.Location = new System.Drawing.Point(502, 3);
+            this.removeBtn.Location = new System.Drawing.Point(502, 2);
+            this.removeBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.removeBtn.Name = "removeBtn";
             this.removeBtn.Size = new System.Drawing.Size(64, 24);
             this.removeBtn.TabIndex = 0;
@@ -78,10 +80,11 @@
             "Standard",
             "Important",
             "Guest Speaker"});
-            this.roleBox.Location = new System.Drawing.Point(362, 3);
+            this.roleBox.Location = new System.Drawing.Point(362, 2);
+            this.roleBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.roleBox.MaxDropDownItems = 3;
             this.roleBox.Name = "roleBox";
-            this.roleBox.Size = new System.Drawing.Size(134, 21);
+            this.roleBox.Size = new System.Drawing.Size(134, 20);
             this.roleBox.TabIndex = 1;
             this.roleBox.Text = "Standard";
             this.roleBox.SelectedIndexChanged += new System.EventHandler(this.roleBox_SelectedIndexChanged);
@@ -92,7 +95,7 @@
             this.nameLbl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.nameLbl.Location = new System.Drawing.Point(73, 0);
             this.nameLbl.Name = "nameLbl";
-            this.nameLbl.Size = new System.Drawing.Size(283, 30);
+            this.nameLbl.Size = new System.Drawing.Size(283, 28);
             this.nameLbl.TabIndex = 2;
             this.nameLbl.Text = "label1";
             this.nameLbl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -103,7 +106,8 @@
             this.pictureBox1.BackgroundImage = global::MeetingScheduler.Properties.Resources.default_user_icon;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(64, 24);
             this.pictureBox1.TabIndex = 3;
@@ -111,12 +115,13 @@
             // 
             // ParticipantPanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.Controls.Add(this.tableLayoutPanel1);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ParticipantPanel";
-            this.Size = new System.Drawing.Size(569, 30);
+            this.Size = new System.Drawing.Size(569, 28);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

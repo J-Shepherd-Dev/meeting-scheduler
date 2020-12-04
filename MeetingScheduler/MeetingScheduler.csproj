@@ -75,6 +75,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="InteractMeetingPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InteractMeetingPanel.Designer.cs">
+      <DependentUpon>InteractMeetingPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Location.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Meeting.cs" />
@@ -87,6 +93,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadOnlyMeetingPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ReadOnlyMeetingPanel.Designer.cs">
+      <DependentUpon>ReadOnlyMeetingPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="Slot.cs" />
     <Compile Include="User.cs" />
     <EmbeddedResource Include="CalendarPanel.resx">
@@ -101,6 +113,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InteractMeetingPanel.resx">
+      <DependentUpon>InteractMeetingPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ParticipantPanel.resx">
       <DependentUpon>ParticipantPanel.cs</DependentUpon>
     </EmbeddedResource>
@@ -114,6 +129,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="ReadOnlyMeetingPanel.resx">
+      <DependentUpon>ReadOnlyMeetingPanel.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\DataSources\AllUsers.datasource" />
     <None Include="Properties\DataSources\User.datasource" />
     <None Include="Properties\Settings.settings">
