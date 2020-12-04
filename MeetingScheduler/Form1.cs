@@ -14,12 +14,15 @@ namespace MeetingScheduler
     {
         //other forms
         DevLogForm devForm = new DevLogForm();
+        private User _activeUser = null;
+        private Meeting _activeMeeting = null;
         public MainForm()
         {
             InitializeComponent();
             // set the drop down options
             impersonationComboBox.DataSource = AllUsers.Users.ToList();
             impersonationComboBox.DisplayMember = "Name";
+            this._activeUser = (User)impersonationComboBox.SelectedItem;
             //set up the devForm
             devForm.ShowIcon = false;
             devForm.ShowInTaskbar = true;
@@ -60,8 +63,7 @@ namespace MeetingScheduler
 
         private void UpdateDisplay()
         {
-            // Active user
-            User activeUser = (User)impersonationComboBox.SelectedItem;
+            this._activeMeeting = null;
 
             // Update tabs
             initiatedTabList.Items.Clear();
@@ -70,18 +72,20 @@ namespace MeetingScheduler
 
             foreach(Meeting m in AllMeetings.meetings)
             {
-                if (m.Initiator == activeUser)
+                if (m.Initiator == _activeUser)
                     initiatedTabList.Items.Add(m);
 
                 foreach (Participant p in m.Participants)
                 {
-                    if (p.user == activeUser)
+                    if (p.user == _activeUser)
                     {
                         invitedTabList.Items.Add(m);
                         break;
                     }
                 }
             }
+
+            this.interactMeetingPanel1.UpdatePanels(this._activeMeeting, this._activeUser);
         }
 
         //this function is called on ResizeEnd
@@ -147,22 +151,31 @@ namespace MeetingScheduler
 
         private void impersonationComboBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
+            this._activeUser = (User)(sender as ComboBox).SelectedItem;
             UpdateDisplay();
         }
 
         private void initiatedTabList_SelectedValueChanged(object sender, EventArgs e)
         {
-            interactMeetingPanel1.Meeting = (Meeting)initiatedTabList.SelectedItem;
+            this._activeMeeting = (Meeting)(sender as ListBox).SelectedItem;
+            this.interactMeetingPanel1.UpdatePanels(this._activeMeeting, this._activeUser);
         }
 
         private void invitedTabList_SelectedValueChanged(object sender, EventArgs e)
         {
-            interactMeetingPanel1.Meeting = (Meeting)invitedTabList.SelectedItem;
+            this._activeMeeting = (Meeting)(sender as ListBox).SelectedItem;
+            this.interactMeetingPanel1.UpdatePanels(this._activeMeeting, this._activeUser);
         }
 
         private void scheduledTabList_SelectedValueChanged(object sender, EventArgs e)
         {
-            interactMeetingPanel1.Meeting = (Meeting)scheduledTabList.SelectedItem;
+            this._activeMeeting = (Meeting)(sender as ListBox).SelectedItem;
+            this.interactMeetingPanel1.UpdatePanels(this._activeMeeting, this._activeUser);
+        }
+
+        private void interactMeetingPanel1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

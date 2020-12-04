@@ -13,39 +13,30 @@ namespace MeetingScheduler
     public partial class InteractMeetingPanel : UserControl
     {
         private Meeting _meeting;
-
-        public Meeting Meeting
-        {
-            get
-            {
-                return _meeting;
-            }
-            set
-            {
-                //set the private attribute to the 'value' keyword which is the object passed to this setter
-                _meeting = value;
-                Logging.AddMessage($"Meeting set to {_meeting}");
-                UpdatePanels();
-            }
-        }
+        private User _impersonator;
         public InteractMeetingPanel()
         {
             InitializeComponent();
-            UpdatePanels();
+            UpdatePanels(null, null);
         }
 
-        private void UpdatePanels()
+        public void UpdatePanels(Meeting m,User impersonating)
         {
-            editBtn.Enabled = this.Meeting!= null;
+            this._meeting = m;
+            this._impersonator = impersonating;
+            Logging.AddMessage($"Meeting set to {_meeting}");
+            editBtn.Enabled = this._meeting!= null && this._meeting.Initiator == impersonating;
+            meetingTitleLbl.Text = this._meeting?.Name ?? "No Meeting Selected";
+            meetingDescTB.Text = this._meeting?.Details ?? "No description provided...";
 
             //refresh the displayed panels
         }
 
         private void editBtn_Click(object sender, EventArgs e)
         {
-            if (Meeting != null)
+            if (this._meeting != null)
             {
-                CreateMeeting cM = new CreateMeeting(this.Meeting);
+                CreateMeeting cM = new CreateMeeting(this._meeting);
                 cM.Show();
             }
         }
