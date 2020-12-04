@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.attendLabel = new System.Windows.Forms.Label();
             this.attendYesBtn = new System.Windows.Forms.Button();
             this.attendNoBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
@@ -53,7 +53,7 @@
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.label1);
+            this.panel2.Controls.Add(this.attendLabel);
             this.panel2.Controls.Add(this.attendYesBtn);
             this.panel2.Controls.Add(this.attendNoBtn);
             this.panel2.Controls.Add(this.editBtn);
@@ -61,20 +61,20 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(6, 6);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(639, 44);
+            this.panel2.Size = new System.Drawing.Size(639, 41);
             this.panel2.TabIndex = 2;
             // 
-            // label1
+            // attendLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(326, 0);
-            this.label1.Name = "label1";
-            this.label1.Padding = new System.Windows.Forms.Padding(6, 12, 0, 0);
-            this.label1.Size = new System.Drawing.Size(88, 32);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Attending:";
+            this.attendLabel.AutoSize = true;
+            this.attendLabel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.attendLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.attendLabel.Location = new System.Drawing.Point(326, 0);
+            this.attendLabel.Name = "attendLabel";
+            this.attendLabel.Padding = new System.Windows.Forms.Padding(6, 11, 0, 0);
+            this.attendLabel.Size = new System.Drawing.Size(88, 31);
+            this.attendLabel.TabIndex = 4;
+            this.attendLabel.Text = "Attending:";
             // 
             // attendYesBtn
             // 
@@ -82,10 +82,11 @@
             this.attendYesBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.attendYesBtn.Location = new System.Drawing.Point(414, 0);
             this.attendYesBtn.Name = "attendYesBtn";
-            this.attendYesBtn.Size = new System.Drawing.Size(75, 44);
+            this.attendYesBtn.Size = new System.Drawing.Size(75, 41);
             this.attendYesBtn.TabIndex = 3;
             this.attendYesBtn.Text = "Yes";
             this.attendYesBtn.UseVisualStyleBackColor = false;
+            this.attendYesBtn.Click += new System.EventHandler(this.attendYesBtn_Click);
             // 
             // attendNoBtn
             // 
@@ -94,17 +95,18 @@
             this.attendNoBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
             this.attendNoBtn.Location = new System.Drawing.Point(489, 0);
             this.attendNoBtn.Name = "attendNoBtn";
-            this.attendNoBtn.Size = new System.Drawing.Size(75, 44);
+            this.attendNoBtn.Size = new System.Drawing.Size(75, 41);
             this.attendNoBtn.TabIndex = 2;
             this.attendNoBtn.Text = "No";
             this.attendNoBtn.UseVisualStyleBackColor = false;
+            this.attendNoBtn.Click += new System.EventHandler(this.attendNoBtn_Click);
             // 
             // editBtn
             // 
             this.editBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.editBtn.Location = new System.Drawing.Point(564, 0);
             this.editBtn.Name = "editBtn";
-            this.editBtn.Size = new System.Drawing.Size(75, 44);
+            this.editBtn.Size = new System.Drawing.Size(75, 41);
             this.editBtn.TabIndex = 1;
             this.editBtn.Text = "Edit";
             this.editBtn.UseVisualStyleBackColor = true;
@@ -129,7 +131,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(6);
-            this.panel1.Size = new System.Drawing.Size(651, 132);
+            this.panel1.Size = new System.Drawing.Size(651, 122);
             this.panel1.TabIndex = 2;
             // 
             // meetingDescTB
@@ -137,12 +139,12 @@
             this.meetingDescTB.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.meetingDescTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.meetingDescTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.meetingDescTB.Location = new System.Drawing.Point(6, 50);
-            this.meetingDescTB.Margin = new System.Windows.Forms.Padding(12);
+            this.meetingDescTB.Location = new System.Drawing.Point(6, 47);
+            this.meetingDescTB.Margin = new System.Windows.Forms.Padding(12, 11, 12, 11);
             this.meetingDescTB.Multiline = true;
             this.meetingDescTB.Name = "meetingDescTB";
             this.meetingDescTB.ReadOnly = true;
-            this.meetingDescTB.Size = new System.Drawing.Size(639, 76);
+            this.meetingDescTB.Size = new System.Drawing.Size(639, 69);
             this.meetingDescTB.TabIndex = 3;
             this.meetingDescTB.Text = "meetingDescription";
             // 
@@ -151,10 +153,10 @@
             this.panel3.Controls.Add(this.equipmentGB);
             this.panel3.Controls.Add(this.locationGB);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 132);
+            this.panel3.Location = new System.Drawing.Point(0, 122);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(6);
-            this.panel3.Size = new System.Drawing.Size(651, 378);
+            this.panel3.Size = new System.Drawing.Size(651, 349);
             this.panel3.TabIndex = 3;
             // 
             // equipmentGB
@@ -164,7 +166,7 @@
             this.equipmentGB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.equipmentGB.Location = new System.Drawing.Point(6, 6);
             this.equipmentGB.Name = "equipmentGB";
-            this.equipmentGB.Size = new System.Drawing.Size(313, 366);
+            this.equipmentGB.Size = new System.Drawing.Size(313, 337);
             this.equipmentGB.TabIndex = 0;
             this.equipmentGB.TabStop = false;
             this.equipmentGB.Text = "Your Equipment Requests";
@@ -201,13 +203,23 @@
             this.locationCheckList.Size = new System.Drawing.Size(320, 347);
             this.locationCheckList.TabIndex = 0;
             // 
+            // locationCheckList
+            // 
+            this.locationCheckList.BackColor = System.Drawing.SystemColors.Control;
+            this.locationCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.locationCheckList.FormattingEnabled = true;
+            this.locationCheckList.Location = new System.Drawing.Point(3, 15);
+            this.locationCheckList.Name = "locationCheckList";
+            this.locationCheckList.Size = new System.Drawing.Size(320, 319);
+            this.locationCheckList.TabIndex = 0;
+            // 
             // participantGB
             // 
             this.participantGB.Controls.Add(this.participantFlowPanel);
             this.participantGB.Dock = System.Windows.Forms.DockStyle.Right;
             this.participantGB.Location = new System.Drawing.Point(651, 0);
             this.participantGB.Name = "participantGB";
-            this.participantGB.Size = new System.Drawing.Size(279, 510);
+            this.participantGB.Size = new System.Drawing.Size(279, 471);
             this.participantGB.TabIndex = 4;
             this.participantGB.TabStop = false;
             this.participantGB.Text = "Participants";
@@ -215,20 +227,20 @@
             // participantFlowPanel
             // 
             this.participantFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.participantFlowPanel.Location = new System.Drawing.Point(3, 16);
+            this.participantFlowPanel.Location = new System.Drawing.Point(3, 15);
             this.participantFlowPanel.Name = "participantFlowPanel";
-            this.participantFlowPanel.Size = new System.Drawing.Size(273, 491);
+            this.participantFlowPanel.Size = new System.Drawing.Size(273, 453);
             this.participantFlowPanel.TabIndex = 0;
             // 
             // InteractMeetingPanel
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.participantGB);
             this.Name = "InteractMeetingPanel";
-            this.Size = new System.Drawing.Size(930, 510);
+            this.Size = new System.Drawing.Size(930, 471);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -245,7 +257,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label meetingTitleLbl;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label attendLabel;
         private System.Windows.Forms.Button attendYesBtn;
         private System.Windows.Forms.Button attendNoBtn;
         private System.Windows.Forms.Button editBtn;

@@ -63,16 +63,6 @@ namespace MeetingScheduler
             this._thisMeeting.Name = (sender as TextBox).Text;
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void newMeetingInvitees_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void newMeetingCancelBtn_Click(object sender, EventArgs e)
         {
             Logging.AddMessage($"Cancelled creation of meeting {_thisMeeting}");
@@ -186,14 +176,5 @@ namespace MeetingScheduler
             this.Close();
         }
 
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void userToAddBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            addParticipantButton.Enabled = userToAddBox.SelectedItem == null || !this._thisMeeting.ContainsUser((User)userToAddBox.SelectedItem);
-        }
     }
 }
