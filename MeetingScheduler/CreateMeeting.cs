@@ -179,9 +179,12 @@ namespace MeetingScheduler
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
             this._thisMeeting.Length = (int)(sender as NumericUpDown).Value;
-            if (this._thisMeeting.Time.Hour + this._thisMeeting.Length > 19) {
-                //TODO: set this to the correct value, not 1
-                this._thisMeeting.Length = 1;
+
+            if (this._thisMeeting.EndTime.Hour > 19) {
+
+                TimeSpan timeDifference = new TimeSpan(this._thisMeeting.EndTime.Hour - 19, 0, 0);
+                this._thisMeeting.EndTime -= timeDifference;
+
                 (sender as NumericUpDown).Value = this._thisMeeting.Length;
             }
             //update the calendar panel

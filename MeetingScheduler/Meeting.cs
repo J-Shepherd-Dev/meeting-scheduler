@@ -10,13 +10,25 @@ namespace MeetingScheduler
     {
         public string Name = "Default Meeting";
         public string Details = "A meeting is happening";
-        public DateTime Time;
+        public DateTime StartTime;
         public int Length;  // in hours
         public User Initiator;
         public HashSet<Participant> Participants;
+        public DateTime EndTime
+        {
+            get
+            {
+                return StartTime + new TimeSpan(Length, 0, 0);
+            }
+
+            set
+            {
+                Length = (value.Hour - StartTime.Hour);
+            }
+        }
 
         public Meeting(User initiator) {
-            this.Time = System.DateTime.Today + new TimeSpan(8, 0, 0);
+            this.StartTime = System.DateTime.Today + new TimeSpan(8, 0, 0);
             this.Length = 1;
             this.Initiator = initiator;
             this.Participants = new HashSet<Participant>();
@@ -24,7 +36,7 @@ namespace MeetingScheduler
         public Meeting(User initiator, string name, DateTime time, int length = 1)
         {
             this.Name = name;
-            this.Time = time;
+            this.StartTime = time;
             this.Length = length;
             this.Initiator = initiator;
             this.Participants = new HashSet<Participant>();

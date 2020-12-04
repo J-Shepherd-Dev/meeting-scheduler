@@ -124,11 +124,11 @@ namespace MeetingScheduler
                     continue;
 
                 // Ignore meetings not in this week
-                if (meeting.Time < _currentWeek || meeting.Time > (_currentWeek + new TimeSpan(7, 0, 0, 0)))
+                if (meeting.StartTime < _currentWeek || meeting.StartTime > (_currentWeek + new TimeSpan(7, 0, 0, 0)))
                     continue;
 
                 // Ignore meetings not between 8am and 7pm
-                if (meeting.Time.Hour < 8 || meeting.Time.Hour > 18)
+                if (meeting.StartTime.Hour < 8 || meeting.StartTime.Hour > 18)
                     continue;
 
                 // Push panel
@@ -140,7 +140,7 @@ namespace MeetingScheduler
         {
             // Make a panel
             Panel panel = new Panel();
-            tableLayoutPanel1.Controls.Add(panel, meeting.Time.Hour - 7, (int)meeting.Time.DayOfWeek + 1);  // Associate it with the table
+            tableLayoutPanel1.Controls.Add(panel, meeting.StartTime.Hour - 7, (int)meeting.StartTime.DayOfWeek + 1);  // Associate it with the table
             tableLayoutPanel1.SetColumnSpan(panel, meeting.Length);
             panel.Dock = DockStyle.Fill;  // Dock the panel
             panel.BackColor = Color.White;
@@ -209,7 +209,7 @@ namespace MeetingScheduler
             // Move edited meeting
             if (editedMeeting != null)
             {
-                editedMeeting.Time = time;
+                editedMeeting.StartTime = time;
                 Logging.AddMessage($"Moved meeting {editedMeeting} to {time}");
             } else
             {
