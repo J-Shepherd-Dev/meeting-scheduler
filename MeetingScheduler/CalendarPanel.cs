@@ -218,5 +218,10 @@ namespace MeetingScheduler
 
             DrawMeetings();
         }
+
+        private void labelWeek_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

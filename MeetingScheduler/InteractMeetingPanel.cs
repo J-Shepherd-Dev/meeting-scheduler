@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Globalization;
 
 namespace MeetingScheduler
 {
@@ -27,8 +28,7 @@ namespace MeetingScheduler
             this._meeting = m;
             this._impersonator = impersonating;
             this._participant = this._meeting?.GetParticipant(impersonating);
-           
-            Logging.AddMessage($"Meeting set to {_meeting}");
+            Logging.AddMessage($"Meeting set to {_meeting} and imersonating {impersonating}");
 
             // Update visibility based on user access and stance
             editBtn.Enabled = this._meeting != null && this._meeting.Initiator == impersonating;
@@ -43,28 +43,58 @@ namespace MeetingScheduler
             // Update text attributes
             meetingTitleLbl.Text = this._meeting?.Name ?? "No Meeting Selected";
             meetingDescTB.Text = this._meeting?.Details ?? "No description provided...";
+            dateTimeInfoLbl.Text = this._meeting==null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
+
+            //if this user is not important or a guest speaker, hide their location choices
+            this.locationGB.Visible = this._participant!=null && this._participant.status != 0;
 
             // Show the participants for this meeting in the flow panel
             participantFlowPanel.Controls.Clear();
-
             if (this._meeting != null && this._meeting.Participants.Count > 0)
             {
                 foreach (Participant p in this._meeting.Participants)
                 {
-                    //generic changes such as updating the participant list panel (bit on the right)
                     ParticipantPanel pPanel = new ParticipantPanel(this._meeting, p);
                     participantFlowPanel.Controls.Add(pPanel);
-                    //participant specific changes:
-                    //such as location and equipment requests made by this particopant
-                    if (this._impersonator == p.user) {
-                        //if this user is not important, hide the location choices
-                        this.locationGB.Visible = p.status != 0;
-                    }
-                    //and attendance yes/no given by this partipant
-
                 }
             }
-           
+
+            //load options into the equipment list and location list
+            this.equipmentCheckList.Items.Clear();
+            this.locationCheckList.Items.Clear();
+            this.equipmentCheckList.Items.AddRange(AllEquipment.Equipment.ToArray());
+            this.locationCheckList.Items.AddRange(AllLocations.Locations.ToArray());
+            if (this._participant != null)
+            {
+                for (int i = 0; i < this.equipmentCheckList.Items.Count; ++i)
+                {
+                    if (this._participant.equipmentRequests.Contains(equipmentCheckList.Items[i]))
+                    {
+                        equipmentCheckList.SetItemChecked(i, true);
+                    }
+                }
+                for (int i = 0; i < this.locationCheckList.Items.Count; ++i)
+                {
+                    if (this._participant.locationPreferences.Contains(locationCheckList.Items[i]))
+                    {
+                        locationCheckList.SetItemChecked(i, true);
+                    }
+                }
+            }
+
+
+        }
+
+        private string FormatDate(DateTime date)
+        {
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
+            return date.ToString("ddd d MMM HH:mm", culture);
+        }
+
+        private string FormatHour(DateTime date)
+        {
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-GB");
+            return date.ToString("HH:mm", culture);
         }
 
         private void editBtn_Click(object sender, EventArgs e)
@@ -100,7 +130,6 @@ namespace MeetingScheduler
 
         private void locationCheckList_SelectedIndexChanged(object sender, EventArgs e)
         {
-
         }
 
         private void equipmentCheckList_SelectedIndexChanged(object sender, EventArgs e)

@@ -8,5 +8,10 @@ namespace MeetingScheduler
 {
     class AllLocations
     {
+        public static Location MeetingRoomA = new Location("Meeting Room A");
+
+        public static List<Location> Locations = new List<Location>(){
+            MeetingRoomA
+};
     }
 }

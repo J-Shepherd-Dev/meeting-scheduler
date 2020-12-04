@@ -141,7 +141,7 @@
             this.detailsBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.detailsBox.Location = new System.Drawing.Point(234, 0);
             this.detailsBox.Name = "detailsBox";
-            this.detailsBox.Size = new System.Drawing.Size(889, 649);
+            this.detailsBox.Size = new System.Drawing.Size(1020, 649);
             this.detailsBox.TabIndex = 1;
             this.detailsBox.TabStop = false;
             this.detailsBox.Text = "Details Pane";
@@ -152,7 +152,7 @@
             this.interactMeetingPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.interactMeetingPanel1.Location = new System.Drawing.Point(3, 16);
             this.interactMeetingPanel1.Name = "interactMeetingPanel1";
-            this.interactMeetingPanel1.Size = new System.Drawing.Size(883, 630);
+            this.interactMeetingPanel1.Size = new System.Drawing.Size(1014, 630);
             this.interactMeetingPanel1.TabIndex = 1;
             this.interactMeetingPanel1.Load += new System.EventHandler(this.interactMeetingPanel1_Load);
             // 
@@ -167,12 +167,12 @@
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1123, 27);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1254, 27);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
             // devWindowBtn
             // 
-            this.devWindowBtn.Location = new System.Drawing.Point(1065, 3);
+            this.devWindowBtn.Location = new System.Drawing.Point(1196, 3);
             this.devWindowBtn.Name = "devWindowBtn";
             this.devWindowBtn.Size = new System.Drawing.Size(55, 23);
             this.devWindowBtn.TabIndex = 2;
@@ -185,7 +185,7 @@
             this.impersonationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.impersonationComboBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.impersonationComboBox.FormattingEnabled = true;
-            this.impersonationComboBox.Location = new System.Drawing.Point(888, 3);
+            this.impersonationComboBox.Location = new System.Drawing.Point(1019, 3);
             this.impersonationComboBox.Name = "impersonationComboBox";
             this.impersonationComboBox.Size = new System.Drawing.Size(171, 21);
             this.impersonationComboBox.TabIndex = 0;
@@ -195,7 +195,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.label1.Location = new System.Drawing.Point(806, 0);
+            this.label1.Location = new System.Drawing.Point(937, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 29);
             this.label1.TabIndex = 1;
@@ -204,7 +204,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(684, 3);
+            this.button1.Location = new System.Drawing.Point(815, 3);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(116, 23);
             this.button1.TabIndex = 3;
@@ -219,18 +219,18 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 27);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1123, 649);
+            this.panel1.Size = new System.Drawing.Size(1254, 649);
             this.panel1.TabIndex = 3;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1123, 676);
+            this.ClientSize = new System.Drawing.Size(1254, 676);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(734, 714);
+            this.MinimumSize = new System.Drawing.Size(1270, 715);
             this.Name = "MainForm";
             this.Text = "SECM: Meet";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);

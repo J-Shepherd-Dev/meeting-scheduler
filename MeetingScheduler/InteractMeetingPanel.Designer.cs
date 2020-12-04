@@ -169,6 +169,7 @@
             this.equipmentGB.Controls.Add(this.equipmentCheckList);
             this.equipmentGB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.equipmentGB.Location = new System.Drawing.Point(6, 7);
+            this.equipmentGB.Margin = new System.Windows.Forms.Padding(3, 3, 3, 9);
             this.equipmentGB.Name = "equipmentGB";
             this.equipmentGB.Size = new System.Drawing.Size(313, 322);
             this.equipmentGB.TabIndex = 0;
@@ -192,6 +193,7 @@
             this.locationGB.Controls.Add(this.locationCheckList);
             this.locationGB.Dock = System.Windows.Forms.DockStyle.Right;
             this.locationGB.Location = new System.Drawing.Point(319, 7);
+            this.locationGB.Margin = new System.Windows.Forms.Padding(9, 3, 3, 3);
             this.locationGB.Name = "locationGB";
             this.locationGB.Size = new System.Drawing.Size(326, 322);
             this.locationGB.TabIndex = 1;
