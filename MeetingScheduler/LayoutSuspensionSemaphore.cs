@@ -22,12 +22,16 @@ namespace MeetingScheduler
             if (users == 0)
                 control.SuspendLayout();
 
+            Logging.AddMessage($"Semaphore for [{control}] increased user count: {users} => {users + 1}");
+
             users++;
         }
 
         public void RemoveUser()
         {
             users--;
+
+            Logging.AddMessage($"Semaphore for [{control}] decreased user count: {users + 1} => {users}");
 
             if (users == 0)
                 control.ResumeLayout();
@@ -70,12 +74,16 @@ namespace MeetingScheduler
             {
                 this.semaphore = semaphore;
 
+                Logging.AddMessage($"Handle for [{semaphore.control}] acquired");
+
                 semaphore.AddUser();
             }
 
             public void Dispose()
             {
                 semaphore.RemoveUser();
+
+                Logging.AddMessage($"Handle for [{semaphore.control}] disposed");
             }
         }
     }
