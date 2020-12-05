@@ -52,9 +52,78 @@ namespace MeetingScheduler
             return null;
         }
 
+        public HashSet<Participant> ImportantParticipants
+        {
+            get
+            {
+                HashSet<Participant> output = new HashSet<Participant>();
+
+                foreach (Participant p in this.Participants)
+                {
+                    if (p.status == 1)
+                        output.Add(p);
+                }
+
+                return output;
+            }
+        }
+
+        public HashSet<Participant> GuestSpeakers
+        {
+            get
+            {
+                HashSet<Participant> output = new HashSet<Participant>();
+
+                foreach (Participant p in this.Participants)
+                {
+                    if (p.status == 2)
+                        output.Add(p);
+                }
+
+                return output;
+            }
+        }
+
         public override string ToString()
         {
             return this.Name;
+        }
+
+        /// <summary>
+        /// Compares this meeting with another meeting, determining which is more important as per our conflict resolution flowchart.
+        ///
+        /// Separating this out into its own function that returns a number is similar to how strcmp works in C++.
+        /// This facilitates easy calculation of any priority comparison operation:
+        ///
+        ///  a == b  |  a.ComparePriority(b) == 0
+        ///  a != b  |  a.ComparePriority(b) != 0
+        ///  a > b   |  a.ComparePriority(b) < 0
+        ///  a >= b  |  a.ComparePriority(b) <= 0
+        ///  a < b   |  a.ComparePriority(b) > 0
+        ///  a <= b  |  a.ComparePriority(b) >= 0
+        ///
+        /// I would implement these as direct operators on the class, but it would override normal comparison,
+        /// making it difficult to check meetings against e.g. null
+        ///
+        /// </summary>
+        /// <param name="other">The meeting to compare to</param>
+        /// <returns>-1 if this meeting has higher priority, 1 if the other meeting has higher priority, 0 if the two meetings have the same priority.</returns>
+        private int ComparePriority(Meeting other)
+        {
+            if (this.GuestSpeakers.Count > other.GuestSpeakers.Count)
+                return -1;
+            else if (this.GuestSpeakers.Count < other.GuestSpeakers.Count)
+                return 1;
+            else if (this.ImportantParticipants.Count > other.ImportantParticipants.Count)
+                return -1;
+            else if (this.ImportantParticipants.Count < other.ImportantParticipants.Count)
+                return 1;
+            else if (this.Participants.Count > other.Participants.Count)
+                return -1;
+            else if (this.Participants.Count < other.Participants.Count)
+                return 1;
+
+            return 0;
         }
     }
 }
