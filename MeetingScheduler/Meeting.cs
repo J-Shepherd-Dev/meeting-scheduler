@@ -108,7 +108,7 @@ namespace MeetingScheduler
         /// </summary>
         /// <param name="other">The meeting to compare to</param>
         /// <returns>-1 if this meeting has higher priority, 1 if the other meeting has higher priority, 0 if the two meetings have the same priority.</returns>
-        private int ComparePriority(Meeting other)
+        public int ComparePriority(Meeting other)
         {
             if (this.GuestSpeakers.Count > other.GuestSpeakers.Count)
                 return -1;
@@ -124,6 +124,16 @@ namespace MeetingScheduler
                 return 1;
 
             return 0;
+        }
+
+        /// <summary>
+        /// Checks whether this meeting intersects with another meeting (their time slots conflict).
+        /// </summary>
+        /// <param name="other">The meeting to check intersection against</param>
+        /// <returns>Whether the two meetings intersect (they take place at the same time for at least one slot)</returns>
+        public bool Intersects(Meeting other)
+        {
+            return (this.EndTime > other.StartTime) || (this.StartTime < other.EndTime);
         }
     }
 }
