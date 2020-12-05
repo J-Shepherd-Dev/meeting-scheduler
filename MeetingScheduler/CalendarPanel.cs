@@ -158,7 +158,7 @@ namespace MeetingScheduler
         {
             // Make a panel
             Panel panel = new Panel();
-            tableLayoutPanel1.Controls.Add(panel, meeting.StartTime.Hour - 7, (int)meeting.StartTime.DayOfWeek + 1);  // Associate it with the table
+            tableLayoutPanel1.Controls.Add(panel, meeting.Column, meeting.Row);  // Associate it with the table
             tableLayoutPanel1.SetColumnSpan(panel, meeting.Length);
             panel.Dock = DockStyle.Fill;  // Dock the panel
             panel.BackColor = Color.White;
@@ -231,9 +231,27 @@ namespace MeetingScheduler
             // Move edited meeting
             if (editedMeeting != null)
             {
-                editedMeeting.StartTime = time;
-                Changed?.Invoke(null, new EventArgs());
-                Logging.AddMessage($"Moved meeting {editedMeeting} to {time}");
+                // We know the time the user wants to move to.
+                // Now we need to check if any meetings intersect with that time.
+                List<Meeting> intersecting = new List<Meeting>();
+
+                foreach (Meeting m in meetings)
+                {
+                    if (m == editedMeeting) continue;
+
+                    if (editedMeeting.WouldIntersect(time, m))
+                        intersecting.Add(m);
+                }
+
+                if (intersecting.Count == 0)
+                {
+                    editedMeeting.StartTime = time;
+                    Changed?.Invoke(null, new EventArgs());
+                    Logging.AddMessage($"Moved meeting {editedMeeting} to {time}");
+                } else
+                {
+                    MessageBox.Show($"There are {intersecting.Count} meeting(s) that conflict with this meeting time.", "Meeting conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             } else
             {
                 Logging.AddMessage($"Selected time {time} but there is no meeting to move");

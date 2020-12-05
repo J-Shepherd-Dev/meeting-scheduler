@@ -52,6 +52,22 @@ namespace MeetingScheduler
             return null;
         }
 
+        public int Column
+        {
+            get
+            {
+                return StartTime.Hour - 7;
+            }
+        }
+
+        public int Row
+        {
+            get
+            {
+                return (int)StartTime.DayOfWeek + 1;
+            }
+        }
+
         public HashSet<Participant> ImportantParticipants
         {
             get
@@ -133,7 +149,17 @@ namespace MeetingScheduler
         /// <returns>Whether the two meetings intersect (they take place at the same time for at least one slot)</returns>
         public bool Intersects(Meeting other)
         {
-            return (this.EndTime > other.StartTime) || (this.StartTime < other.EndTime);
+            return StartTime >= other.EndTime != other.StartTime < EndTime;
+        }
+
+        /// <summary>
+        /// Checks whether this meeting would intersects with another meeting if it was moved to a given start time.
+        /// </summary>
+        /// <param name="other">The meeting to check intersection against</param>
+        /// <returns>Whether the two meetings would intersect (they would take place at the same time for at least one slot)</returns>
+        public bool WouldIntersect(DateTime newStartTime, Meeting other)
+        {
+            return newStartTime >= other.EndTime != other.StartTime < (newStartTime + new TimeSpan(Length, 0, 0));
         }
     }
 }

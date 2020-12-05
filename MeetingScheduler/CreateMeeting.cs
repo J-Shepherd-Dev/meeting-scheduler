@@ -56,6 +56,7 @@ namespace MeetingScheduler
             editing = true;
             newMeetingTitle.Text = meeting.Name;
             newMeetingDetails.Text = meeting.Details;
+            numericUpDown1.Value = meeting.Length;
 
             userToAddBox.Items.AddRange(AllUsers.Users.ToArray());
             calendarPanel1.editedMeeting = _thisMeeting;
@@ -172,6 +173,18 @@ namespace MeetingScheduler
 
         private void newMeetingSaveBtn_Click(object sender, EventArgs e)
         {
+            // Check to make sure the user hasn't put the meeting in an unresolved position
+            foreach (Meeting m in calendarPanel1.meetings)
+            {
+                if (m == _thisMeeting) continue;
+
+                if (_thisMeeting.Intersects(m))
+                {
+                    MessageBox.Show($"The position you have chosen for the new meeting intersects with a meeting one of your participants is already attending. Please resolve the conflict first.", "Meeting conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
             // Set meeting attributes
             _thisMeeting.Name = newMeetingTitle.Text;
             _thisMeeting.Details = newMeetingDetails.Text;
