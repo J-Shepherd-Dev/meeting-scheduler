@@ -92,9 +92,6 @@ namespace MeetingScheduler
         {
             CurrentWeek = DateTime.Today;
 
-            // Make a meeting
-            meetings = new Meeting[] {};
-
             DrawMeetings();
         }
 
@@ -130,9 +127,10 @@ namespace MeetingScheduler
                 meetingPanels.Clear();
 
                 // Recreate panels
+                // Create a hashset for each of the available slots
+                List<Meeting>[,] slots = new List<Meeting>[7, 11];
+                bool editedHasConflict = false;
 
-                if (editedMeeting != null)
-                    meetingPanels.Add(CreatePanelFromMeeting(editedMeeting, Color.DarkGray));
 
                 foreach (Meeting meeting in meetings)
                 {
@@ -148,36 +146,94 @@ namespace MeetingScheduler
                     if (meeting.StartTime.Hour < 8 || meeting.StartTime.Hour > 18)
                         continue;
 
-                    // Push panel
-                    meetingPanels.Add(CreatePanelFromMeeting(meeting));
+                    // If the currently edited meeting conflicts, record it
+                    if (_editedMeeting != null && meeting.Intersects(_editedMeeting))
+                        editedHasConflict = true;
+
+                    // Create an entry for each grid space this meeting takes up
+                    for (int column = meeting.Column; column < meeting.Column + meeting.Length; ++column)
+                    {
+                        if (slots[meeting.Row, column] is null)
+                            slots[meeting.Row, column] = new List<Meeting>();
+
+                        slots[meeting.Row, column].Add(meeting);
+                    }
                 }
+
+                // Now operate on each row and column to create the panels
+                for (int row = 0; row < 7; ++row)
+                {
+                    for (int column = 0; column < 11; ++column)
+                    {
+                        if (slots[row, column] is null) continue;
+
+                        // Skip slots in the edited range because we want the edited meeting to always have display priority
+                        bool isEditedRange = (_editedMeeting != null) && (_editedMeeting.Row == row && column >= _editedMeeting.Column && column < _editedMeeting.Column + _editedMeeting.Length);
+                        if (isEditedRange) continue;
+
+                        var entry = slots[row, column];
+
+                        int rootColumn = column;
+                        int length = 0;
+                        string name = entry.Count == 1 ? entry[0].Name : $"{entry.Count} meetings";
+                        Color backColor = entry.Count == 1 ? Color.White : Color.LightPink;
+
+                        // Now attempt to advance
+                        while (column < 11 && !isEditedRange && slots[row, column] != null && slots[row, column].SequenceEqual(entry))
+                        {
+                            ++column;
+                            ++length;
+                            isEditedRange = (_editedMeeting != null) && (_editedMeeting.Row == row && column >= _editedMeeting.Column && column < _editedMeeting.Column + _editedMeeting.Length);
+                        }
+
+                        // Undo extraneous advance when breaking out of the loop
+                        --column;
+
+                        meetingPanels.Add(CreateMeetingPanel(
+                            rootColumn, row, length,
+                            name,
+                            backColor, entry.Count == 1 ? Color.Red : (Color?)null
+                        ));
+                    }
+                }
+
+                if (editedMeeting != null)
+                    meetingPanels.Add(CreateMeetingPanel(
+                        editedMeeting.Column, editedMeeting.Row, editedMeeting.Length,
+                        editedHasConflict ? $"[CONFLICT] {editedMeeting.Name}" : editedMeeting.Name,
+                        Color.White, Color.DarkGray
+                    ));
             }
         }
 
-        private Panel CreatePanelFromMeeting(Meeting meeting, Color? color = null)
+        private Panel CreateMeetingPanel(int column, int row, int length, string name, Color? backColor = null, Color? color = null)
         {
             // Make a panel
             Panel panel = new Panel();
-            tableLayoutPanel1.Controls.Add(panel, meeting.Column, meeting.Row);  // Associate it with the table
-            tableLayoutPanel1.SetColumnSpan(panel, meeting.Length);
+            tableLayoutPanel1.Controls.Add(panel, column, row);  // Associate it with the table
+            tableLayoutPanel1.SetColumnSpan(panel, length);
             panel.Dock = DockStyle.Fill;  // Dock the panel
-            panel.BackColor = Color.White;
+            panel.BackColor = backColor ?? Color.White;
 
-            // Create the accent panel
-            Panel colorTab = new Panel();
-            panel.Controls.Add(colorTab);
-            colorTab.Dock = DockStyle.Left;
-            colorTab.Width = 10;
-            colorTab.Margin = new Padding(0);
-            colorTab.BackColor = color ?? Color.Red;
+            // If a color has not been specified, do not create an accent panel.
+            if (color != null)
+            {
+                // Create the accent panel
+                Panel colorTab = new Panel();
+                panel.Controls.Add(colorTab);
+                colorTab.Dock = DockStyle.Left;
+                colorTab.Width = 10;
+                colorTab.Margin = new Padding(0);
+                colorTab.BackColor = color ?? Color.Red;
+            }
 
             // Meeting label
             Label label = new Label();
             panel.Controls.Add(label);
             label.AutoSize = false;
             label.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            label.Text = meeting.Name;
-            label.Location = new Point(13, 3);
+            label.Text = name;
+            label.Location = new Point(color == null ? 3 : 13, 3);
             label.Size = new Size(panel.Width - 15, 50);
             label.Margin = new Padding(3);
             label.TabIndex = 1;
