@@ -114,36 +114,43 @@ namespace MeetingScheduler
 
         private void DrawMeetings()
         {
-            // If panels for meetings already exist, remove them
-            foreach (Panel panel in meetingPanels)
+            using (var handle = Suspend())
             {
-                panel.Dispose();
-            }
+                // If panels for meetings already exist, remove them
+                foreach (Panel panel in meetingPanels)
+                {
+                    // Unbind click events
+                    foreach (Control c in panel.Controls)
+                        c.MouseClick -= tableLayoutPanel1_MouseClick;
 
-            // Clear collection
-            meetingPanels.Clear();
+                    panel.Dispose();
+                }
 
-            // Recreate panels
+                // Clear collection
+                meetingPanels.Clear();
 
-            if (editedMeeting != null)
-                meetingPanels.Add(CreatePanelFromMeeting(editedMeeting, Color.DarkGray));
+                // Recreate panels
 
-            foreach (Meeting meeting in meetings)
-            {
-                // Ignore a meeting if it's the edited meeting
-                if (meeting == editedMeeting)
-                    continue;
+                if (editedMeeting != null)
+                    meetingPanels.Add(CreatePanelFromMeeting(editedMeeting, Color.DarkGray));
 
-                // Ignore meetings not in this week
-                if (meeting.StartTime < _currentWeek || meeting.StartTime > (_currentWeek + new TimeSpan(7, 0, 0, 0)))
-                    continue;
+                foreach (Meeting meeting in meetings)
+                {
+                    // Ignore a meeting if it's the edited meeting
+                    if (meeting == editedMeeting)
+                        continue;
 
-                // Ignore meetings not between 8am and 7pm
-                if (meeting.StartTime.Hour < 8 || meeting.StartTime.Hour > 18)
-                    continue;
+                    // Ignore meetings not in this week
+                    if (meeting.StartTime < _currentWeek || meeting.StartTime > (_currentWeek + new TimeSpan(7, 0, 0, 0)))
+                        continue;
 
-                // Push panel
-                meetingPanels.Add(CreatePanelFromMeeting(meeting));
+                    // Ignore meetings not between 8am and 7pm
+                    if (meeting.StartTime.Hour < 8 || meeting.StartTime.Hour > 18)
+                        continue;
+
+                    // Push panel
+                    meetingPanels.Add(CreatePanelFromMeeting(meeting));
+                }
             }
         }
 
@@ -174,6 +181,10 @@ namespace MeetingScheduler
             label.Size = new Size(panel.Width - 15, 50);
             label.Margin = new Padding(3);
             label.TabIndex = 1;
+
+            // Treat clicks on this panel same as on the main table
+            foreach (Control c in panel.Controls)
+                c.MouseClick += tableLayoutPanel1_MouseClick;
 
             return panel;
         }
