@@ -28,10 +28,15 @@ namespace MeetingScheduler
             }
         }
 
+        private LayoutSuspensionSemaphore participantSemaphore;
+
         public CreateMeeting(User initiator)
         {
             this._thisMeeting = new Meeting(initiator);
+
             InitializeComponent();
+            participantSemaphore = new LayoutSuspensionSemaphore(participantFlowPanel);
+
             UpdatePanels();
             //ensure all users are displayed in the 'search' dropdown
             userToAddBox.Items.AddRange(AllUsers.Users.ToArray());
@@ -41,7 +46,10 @@ namespace MeetingScheduler
         public CreateMeeting(Meeting meeting)
         {
             this._thisMeeting = meeting;
+
             InitializeComponent();
+            participantSemaphore = new LayoutSuspensionSemaphore(participantFlowPanel);
+
             UpdatePanels();
 
             // Ensure data on screen matches the meeting
@@ -78,12 +86,12 @@ namespace MeetingScheduler
 
         private void CreateMeeting_ResizeBegin(object sender, EventArgs e)
         {
-            calendarPanel1.SuspendLayout();
+            calendarPanel1.semaphore.AddUser();
         }
 
         private void CreateMeeting_ResizeEnd(object sender, EventArgs e)
         {
-            calendarPanel1.ResumeLayout();
+            calendarPanel1.semaphore.RemoveUser();
          }
 
         private void AddParticipantToPanel(Participant p) {
@@ -93,15 +101,17 @@ namespace MeetingScheduler
             this.participantFlowPanel.Controls.Add(pPanel);
         }
         private void DrawParticipantList() {
-            this.participantFlowPanel.SuspendLayout();
-            this.participantFlowPanel.Controls.Clear();
-            Logging.AddMessage("There are "+this._thisMeeting.Participants.Count+" participants in the created meeting.");
-            foreach(Participant p in this._thisMeeting.Participants) {
-                this.AddParticipantToPanel(p);
-                userToAddBox.Items.Remove(p.user);
-                Logging.AddMessage($"Added participant {p} to panel");
+            using (var handle = participantSemaphore.Acquire())
+            {
+                this.participantFlowPanel.Controls.Clear();
+                Logging.AddMessage("There are " + this._thisMeeting.Participants.Count + " participants in the created meeting.");
+                foreach (Participant p in this._thisMeeting.Participants)
+                {
+                    this.AddParticipantToPanel(p);
+                    userToAddBox.Items.Remove(p.user);
+                    Logging.AddMessage($"Added participant {p} to panel");
+                }
             }
-            this.participantFlowPanel.ResumeLayout();
         }
 
         public void AddUserToDropdown(User u) {
@@ -179,23 +189,29 @@ namespace MeetingScheduler
 
         private void CheckMeetingLength(object sender, EventArgs e)
         {
-            DateTime seven_pm = this._thisMeeting.StartTime.Date + new TimeSpan(19, 0, 0);
-
-            if (this._thisMeeting.EndTime > seven_pm)
+            using (var handle = calendarPanel1.Suspend())
             {
-                this._thisMeeting.EndTime = seven_pm;
+                DateTime seven_pm = this._thisMeeting.StartTime.Date + new TimeSpan(19, 0, 0);
 
-                numericUpDown1.Value = this._thisMeeting.Length;
+                if (this._thisMeeting.EndTime > seven_pm)
+                {
+                    this._thisMeeting.EndTime = seven_pm;
+
+                    numericUpDown1.Value = this._thisMeeting.Length;
+                }
             }
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            this._thisMeeting.Length = (int)(sender as NumericUpDown).Value;
-            CheckMeetingLength(sender, e);
+            using (var handle = calendarPanel1.Suspend())
+            {
+                this._thisMeeting.Length = (int)(sender as NumericUpDown).Value;
+                CheckMeetingLength(sender, e);
 
-            //update the calendar panel
-            RefreshParticipantMeetings();
+                //update the calendar panel
+                RefreshParticipantMeetings();
+            }
         }
 
         private void CreateMeeting_FormClosing(object sender, FormClosingEventArgs e)

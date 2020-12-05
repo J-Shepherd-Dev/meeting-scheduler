@@ -74,9 +74,18 @@ namespace MeetingScheduler
 
         public List<Panel> meetingPanels = new List<Panel>();
 
+        public LayoutSuspensionSemaphore semaphore;
+
         public CalendarPanel()
         {
             InitializeComponent();
+
+            semaphore = new LayoutSuspensionSemaphore(this);
+        }
+
+        public LayoutSuspensionSemaphore.Handle Suspend()
+        {
+            return semaphore.Acquire();
         }
 
         private void CalendarPanel_Load(object sender, EventArgs e)

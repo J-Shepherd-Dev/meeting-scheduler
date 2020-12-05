@@ -77,7 +77,7 @@ namespace MeetingScheduler
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox1.Size = new System.Drawing.Size(1069, 50);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -100,7 +100,7 @@ namespace MeetingScheduler
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 50);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(6);
             this.groupBox2.Size = new System.Drawing.Size(1069, 212);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -171,7 +171,7 @@ namespace MeetingScheduler
             this.newMeetingInvitees.Dock = System.Windows.Forms.DockStyle.Left;
             this.newMeetingInvitees.Location = new System.Drawing.Point(0, 0);
             this.newMeetingInvitees.Name = "newMeetingInvitees";
-            this.newMeetingInvitees.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.newMeetingInvitees.Padding = new System.Windows.Forms.Padding(6);
             this.newMeetingInvitees.Size = new System.Drawing.Size(413, 358);
             this.newMeetingInvitees.TabIndex = 2;
             this.newMeetingInvitees.TabStop = false;
@@ -224,7 +224,7 @@ namespace MeetingScheduler
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(0, 0);
             this.label5.Name = "label5";
-            this.label5.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.label5.Padding = new System.Windows.Forms.Padding(6);
             this.label5.Size = new System.Drawing.Size(54, 24);
             this.label5.TabIndex = 2;
             this.label5.Text = "Search:";
@@ -310,7 +310,7 @@ namespace MeetingScheduler
             this.newMeetingSlotsGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.newMeetingSlotsGroupBox.Location = new System.Drawing.Point(413, 0);
             this.newMeetingSlotsGroupBox.Name = "newMeetingSlotsGroupBox";
-            this.newMeetingSlotsGroupBox.Padding = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.newMeetingSlotsGroupBox.Padding = new System.Windows.Forms.Padding(6);
             this.newMeetingSlotsGroupBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.newMeetingSlotsGroupBox.Size = new System.Drawing.Size(656, 358);
             this.newMeetingSlotsGroupBox.TabIndex = 3;
@@ -319,7 +319,7 @@ namespace MeetingScheduler
             // 
             // calendarPanel1
             // 
-            this.calendarPanel1.CurrentWeek = new System.DateTime(2020, 11, 29, 0, 0, 0, 0);
+            this.calendarPanel1.CurrentWeek = new System.DateTime(2020, 12, 6, 0, 0, 0, 0);
             this.calendarPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.calendarPanel1.editedMeeting = null;
             this.calendarPanel1.Location = new System.Drawing.Point(6, 18);
