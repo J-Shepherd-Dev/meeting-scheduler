@@ -65,6 +65,11 @@ namespace MeetingScheduler
                 {
                     this.pictureBox1.BackgroundImage = (Image)Properties.Resources.ResourceManager.GetObject("funky");
                 }
+   
+                if (p.hasGivenAttendance && p.Attendance == false)
+                {
+                    this.pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject("Grey_thingy");
+                }
             }
             catch (Exception e)
             {
