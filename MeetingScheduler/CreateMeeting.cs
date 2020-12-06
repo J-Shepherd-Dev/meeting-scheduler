@@ -25,7 +25,9 @@ namespace MeetingScheduler
             {
                 _isEditing = value;
                 newMeetingSaveBtn.Text = _isEditing ? "Done" : "Create";
+
                 cancelBtn.Text = _isEditing ? "Cancel Meeting" : "Cancel";
+
             }
         }
 
