@@ -14,7 +14,7 @@ namespace MeetingScheduler
     {
         private Meeting meeting;
         private Participant participant;
-        private int mode = 0;
+        private bool isPriviledged = false;
         private CreateMeeting cMCaller;
         private User impersonator;
 
@@ -22,17 +22,24 @@ namespace MeetingScheduler
         {
             /*Modes:
              * 0 = initiator (default)
-             * 1 = adding to meeting (instead of selecting role and removing)
-             * 2 = non initiator (hide controls);
+             * 1 = non initiator (hide controls);
              * */
-            this.impersonator = _impersonator;
+            this.cMCaller = cMCaller;
             this.meeting = m;
             this.participant = p;
+            this.impersonator = _impersonator;
+            this.isPriviledged = this.impersonator != null && this.meeting!=null && this.impersonator == this.meeting.Initiator;
             InitializeComponent();
             this.nameLbl.Text = p.user.getName();
             // only show if we are not in create meeting view 
-            if (mode == 0 && impersonator == meeting.Initiator)
+            if (isPriviledged)
             {
+                //if this panel is being created in view of a user who is not the initiator, hide edit options
+                this.roleBox.Visible = false;
+                this.roleBox.Enabled = false;
+                this.removeBtn.Enabled = false;
+                this.removeBtn.Visible = false;
+
                 if (p.status == 1)
                 {
                     this.nameLbl.Text += " (Important)";
@@ -41,28 +48,14 @@ namespace MeetingScheduler
                 {
                     this.nameLbl.Text += " (Guest Speaker)";
                 }
-            }
-            if (mode == 1)
-            {
-                if (p.status == 2)
+            }else if (p.status == 2)
                 {
-                    this.nameLbl.Text += " Guest Speaker";
+                    this.nameLbl.Text += " (Guest Speaker)";
                 }
-
-            }
             this.roleBox.SelectedIndex = p.status;
             ToolTip tTip = new ToolTip();
             tTip.ToolTipTitle = "Roles";
             tTip.SetToolTip(this.roleBox, "Standard: can request equipment.\nImportant: can request equipment & locations.\nGuest Speaker: can request equipment & locations. 1 per meeting.");
-            this.mode = mode;
-            //if this panel is being created in view of a user who is not the initiator, hide edit options
-            if (mode != 0)
-            {
-                this.roleBox.Visible = false;
-                this.roleBox.Enabled = false;
-                this.removeBtn.Enabled = false;
-                this.removeBtn.Visible = false;
-            }
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             //try to set the persons image, if this fails then the background image will be used by default
             try
@@ -77,9 +70,6 @@ namespace MeetingScheduler
             {
                 Logging.AddMessage(e.Message);
             }
-            this.cMCaller = cMCaller;
-            this.impersonator = _impersonator;
-
         }
 
         private void roleBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -105,7 +95,7 @@ namespace MeetingScheduler
 
         private void removeBtn_Click(object sender, EventArgs e)
         {
-            if (this.mode == 0)
+            if (isPriviledged)
             {
                 this.meeting.Participants.Remove(this.participant);
                 this.Parent.Controls.Remove(this);
