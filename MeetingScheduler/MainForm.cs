@@ -37,7 +37,7 @@ namespace MeetingScheduler
 
             Meeting funkyDanceParty = new Meeting(
                 AllUsers.tom,
-                "National Mehmet Funky Dance Party",
+                "Mehmet's Funky Dance Party",
                 currentWeek + new TimeSpan(
                     2,  // Tuesday
                     12, 0, 0  // At 12 pm

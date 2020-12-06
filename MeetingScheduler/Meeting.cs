@@ -116,7 +116,7 @@ namespace MeetingScheduler
                 foreach (Participant p in this.Participants)
                 {
                     //if this participant is the one being set, their status becomes 2
-                    //otherwise if their status is 2, make them standard
+                    //otherwise if their status is 2, make them standard.
                     //otherwise keep their status as it is (std or important)
                     p.status = p == value ? 2 : p.status==2 ? 0 :p.status;
                 }

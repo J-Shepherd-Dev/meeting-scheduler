@@ -46,8 +46,9 @@ namespace MeetingScheduler
             dateTimeInfoLbl.Text = this._meeting==null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
             dateTimeInfoLbl.Text += this._meeting != null && this._meeting.GuestSpeaker!=null ? " - Guest speaker: "+ this._meeting.GuestSpeaker : "";
 
-            //if this user is not important or a guest speaker, hide their location choices
-            this.locationGB.Visible = this._participant!=null && this._participant.Attendance && this._participant.status != 0;
+            //if this user is not important or a guest speaker, hide/disable their location choices
+            this.locationGB.Enabled = this._participant!=null && this._participant.Attendance && this._participant.status != 0;
+            this.locationGB.Visible = this._participant != null && this._participant.status != 0;
             //if the participant is not attending, hide their equipment requests
             this.equipmentGB.Enabled = this._participant != null && this._participant.Attendance;
 
