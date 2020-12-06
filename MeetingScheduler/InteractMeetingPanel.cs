@@ -28,7 +28,7 @@ namespace MeetingScheduler
             this._meeting = m;
             this._impersonator = impersonating;
             this._participant = this._meeting?.GetParticipant(impersonating);
-            Logging.AddMessage($"Meeting set to {_meeting} and imersonating {impersonating}");
+            Logging.AddMessage($"Meeting set to {_meeting} and impersonating {impersonating}");
 
             // Update visibility based on user access and stance
             editBtn.Enabled = this._meeting != null && this._meeting.Initiator == impersonating;
@@ -46,7 +46,10 @@ namespace MeetingScheduler
             dateTimeInfoLbl.Text = this._meeting==null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
 
             //if this user is not important or a guest speaker, hide their location choices
-            this.locationGB.Visible = this._participant!=null && this._participant.status != 0;
+            this.locationGB.Visible = this._participant!=null && this._participant.Attendance && this._participant.status != 0;
+            //if the participant is not attending, hide their equipment requests
+            this.equipmentGB.Visible = this._participant != null && this._participant.Attendance;
+
 
             // Show the participants for this meeting in the flow panel
             participantFlowPanel.Controls.Clear();
@@ -130,11 +133,28 @@ namespace MeetingScheduler
 
         private void locationCheckList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (this._participant != null)
+            {
+                CheckedListBox.CheckedItemCollection checkedItems = (sender as CheckedListBox).CheckedItems;
+                this._participant.locationPreferences.Clear();
+                foreach (Object loc in checkedItems)
+                {
+                    this._participant.locationPreferences.Add((Location)loc);
+                }
+            }
         }
 
         private void equipmentCheckList_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            if (this._participant != null)
+            {
+                CheckedListBox.CheckedItemCollection checkedItems = (sender as CheckedListBox).CheckedItems;
+                this._participant.equipmentRequests.Clear();
+                foreach (Object equip in checkedItems)
+                {
+                    this._participant.equipmentRequests.Add((Equipment)equip);
+                }
+            }
         }
     }
 }

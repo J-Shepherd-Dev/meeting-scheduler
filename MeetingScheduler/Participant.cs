@@ -17,6 +17,16 @@ namespace MeetingScheduler
         public int status = 0;
         public bool attending = false;
         public bool hasGivenAttendance = false;
+
+        public bool Attendance { 
+            get {
+                return hasGivenAttendance && attending;
+                    }
+            set {
+                this.hasGivenAttendance = true;
+                this.attending = value;
+            }
+        }
         public Participant(User u) {
             this.user = u;
         }
