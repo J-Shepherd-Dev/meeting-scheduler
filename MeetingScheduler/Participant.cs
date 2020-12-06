@@ -27,8 +27,9 @@ namespace MeetingScheduler
                 this.attending = value;
             }
         }
-        public Participant(User u) {
+        public Participant(User u,int status=0) {
             this.user = u;
+            this.status = status;
         }
 
         public override string ToString()

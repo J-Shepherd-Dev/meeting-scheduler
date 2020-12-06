@@ -176,7 +176,6 @@ namespace MeetingScheduler
             Logging.AddMessage($"Found {meetings.Count} existing meetings amongst selected participants.");
             calendarPanel1.meetings = meetings.ToArray();
         }
-
         private void newMeetingSaveBtn_Click(object sender, EventArgs e)
         {
             // Check to make sure the user hasn't put the meeting in an unresolved position
