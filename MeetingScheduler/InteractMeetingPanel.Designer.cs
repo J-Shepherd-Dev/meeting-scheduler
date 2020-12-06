@@ -111,7 +111,7 @@
             this.editBtn.Name = "editBtn";
             this.editBtn.Size = new System.Drawing.Size(75, 40);
             this.editBtn.TabIndex = 1;
-            this.editBtn.Text = "Edit";
+            this.editBtn.Text = "Edit Meeting";
             this.editBtn.UseVisualStyleBackColor = true;
             this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
             // 

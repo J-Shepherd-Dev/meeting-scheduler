@@ -99,16 +99,28 @@ namespace MeetingScheduler
                 return output;
             }
         }
-        
-        public Participant GetGuestSpeaker() {
-            foreach (Participant p in this.Participants)
-            {
-                if (p.status == 2)
+
+        public Participant GuestSpeaker {
+            get {
+                foreach (Participant p in this.Participants)
                 {
-                    return p;
+                    if (p.status == 2)
+                    {
+                        return p;
+                    }
+                }
+                return null;
+            }
+            set
+            {
+                foreach (Participant p in this.Participants)
+                {
+                    //if this participant is the one being set, their status becomes 2
+                    //otherwise if their status is 2, make them standard
+                    //otherwise keep their status as it is (std or important)
+                    p.status = p == value ? 2 : p.status==2 ? 0 :p.status;
                 }
             }
-            return null;
         }
 
         public override string ToString()

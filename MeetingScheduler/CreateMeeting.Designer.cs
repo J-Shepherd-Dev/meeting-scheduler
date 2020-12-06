@@ -40,8 +40,8 @@ namespace MeetingScheduler
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.newMeetingInvitees = new System.Windows.Forms.GroupBox();
             this.participantFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.inviteeControlPanel = new System.Windows.Forms.Panel();
+            this.inviteeSearchPanel = new System.Windows.Forms.Panel();
             this.addParticipantButton = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.userToAddBox = new System.Windows.Forms.ComboBox();
@@ -51,24 +51,27 @@ namespace MeetingScheduler
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.newMeetingSlotsGroupBox = new System.Windows.Forms.GroupBox();
-            this.calendarPanel1 = new MeetingScheduler.CalendarPanel();
             this.newMeetingBtnPanel = new System.Windows.Forms.Panel();
             this.newMeetingCancelBtn = new System.Windows.Forms.Button();
             this.newMeetingSaveBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.participantInfoLbl = new System.Windows.Forms.Label();
+            this.calendarPanel1 = new MeetingScheduler.CalendarPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.newMeetingInvitees.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
+            this.inviteeControlPanel.SuspendLayout();
+            this.inviteeSearchPanel.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.newMeetingSlotsGroupBox.SuspendLayout();
             this.newMeetingBtnPanel.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
+            this.panel6.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -110,7 +113,7 @@ namespace MeetingScheduler
             // 
             this.newMeetingDetails.Dock = System.Windows.Forms.DockStyle.Fill;
             this.newMeetingDetails.Location = new System.Drawing.Point(6, 41);
-            this.newMeetingDetails.Margin = new System.Windows.Forms.Padding(9, 9, 9, 9);
+            this.newMeetingDetails.Margin = new System.Windows.Forms.Padding(9);
             this.newMeetingDetails.Multiline = true;
             this.newMeetingDetails.Name = "newMeetingDetails";
             this.newMeetingDetails.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -167,7 +170,7 @@ namespace MeetingScheduler
             // newMeetingInvitees
             // 
             this.newMeetingInvitees.Controls.Add(this.participantFlowPanel);
-            this.newMeetingInvitees.Controls.Add(this.panel3);
+            this.newMeetingInvitees.Controls.Add(this.inviteeControlPanel);
             this.newMeetingInvitees.Dock = System.Windows.Forms.DockStyle.Left;
             this.newMeetingInvitees.Location = new System.Drawing.Point(0, 0);
             this.newMeetingInvitees.Name = "newMeetingInvitees";
@@ -180,38 +183,37 @@ namespace MeetingScheduler
             // participantFlowPanel
             // 
             this.participantFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.participantFlowPanel.Location = new System.Drawing.Point(6, 72);
+            this.participantFlowPanel.Location = new System.Drawing.Point(6, 87);
             this.participantFlowPanel.Name = "participantFlowPanel";
-            this.participantFlowPanel.Size = new System.Drawing.Size(401, 308);
+            this.participantFlowPanel.Size = new System.Drawing.Size(401, 293);
             this.participantFlowPanel.TabIndex = 1;
             // 
-            // panel3
+            // inviteeControlPanel
             // 
-            this.panel3.Controls.Add(this.panel4);
-            this.panel3.Controls.Add(this.tableLayoutPanel1);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(6, 20);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(401, 52);
-            this.panel3.TabIndex = 2;
+            this.inviteeControlPanel.Controls.Add(this.inviteeSearchPanel);
+            this.inviteeControlPanel.Controls.Add(this.tableLayoutPanel1);
+            this.inviteeControlPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.inviteeControlPanel.Location = new System.Drawing.Point(6, 20);
+            this.inviteeControlPanel.Name = "inviteeControlPanel";
+            this.inviteeControlPanel.Size = new System.Drawing.Size(401, 67);
+            this.inviteeControlPanel.TabIndex = 2;
             // 
-            // panel4
+            // inviteeSearchPanel
             // 
-            this.panel4.Controls.Add(this.addParticipantButton);
-            this.panel4.Controls.Add(this.label5);
-            this.panel4.Controls.Add(this.userToAddBox);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(0, 0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(401, 31);
-            this.panel4.TabIndex = 2;
+            this.inviteeSearchPanel.Controls.Add(this.participantInfoLbl);
+            this.inviteeSearchPanel.Controls.Add(this.panel6);
+            this.inviteeSearchPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.inviteeSearchPanel.Location = new System.Drawing.Point(0, 0);
+            this.inviteeSearchPanel.Name = "inviteeSearchPanel";
+            this.inviteeSearchPanel.Size = new System.Drawing.Size(401, 46);
+            this.inviteeSearchPanel.TabIndex = 2;
             // 
             // addParticipantButton
             // 
             this.addParticipantButton.Dock = System.Windows.Forms.DockStyle.Right;
             this.addParticipantButton.Location = new System.Drawing.Point(359, 0);
             this.addParticipantButton.Name = "addParticipantButton";
-            this.addParticipantButton.Size = new System.Drawing.Size(42, 31);
+            this.addParticipantButton.Size = new System.Drawing.Size(42, 24);
             this.addParticipantButton.TabIndex = 1;
             this.addParticipantButton.Text = "Add";
             this.addParticipantButton.UseVisualStyleBackColor = true;
@@ -219,9 +221,8 @@ namespace MeetingScheduler
             // 
             // label5
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Left;
             this.label5.Location = new System.Drawing.Point(0, 0);
             this.label5.Name = "label5";
             this.label5.Padding = new System.Windows.Forms.Padding(6);
@@ -233,10 +234,11 @@ namespace MeetingScheduler
             // 
             this.userToAddBox.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
             this.userToAddBox.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.userToAddBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userToAddBox.FormattingEnabled = true;
-            this.userToAddBox.Location = new System.Drawing.Point(62, 4);
+            this.userToAddBox.Location = new System.Drawing.Point(56, 0);
             this.userToAddBox.Name = "userToAddBox";
-            this.userToAddBox.Size = new System.Drawing.Size(266, 21);
+            this.userToAddBox.Size = new System.Drawing.Size(303, 21);
             this.userToAddBox.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -251,7 +253,7 @@ namespace MeetingScheduler
             this.tableLayoutPanel1.Controls.Add(this.label2, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label3, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 31);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 46);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 21F));
@@ -382,6 +384,40 @@ namespace MeetingScheduler
             this.panel2.Size = new System.Drawing.Size(1069, 387);
             this.panel2.TabIndex = 5;
             // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.userToAddBox);
+            this.panel6.Controls.Add(this.label5);
+            this.panel6.Controls.Add(this.addParticipantButton);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(401, 24);
+            this.panel6.TabIndex = 4;
+            // 
+            // participantInfoLbl
+            // 
+            this.participantInfoLbl.AutoSize = true;
+            this.participantInfoLbl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.participantInfoLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.participantInfoLbl.Location = new System.Drawing.Point(0, 24);
+            this.participantInfoLbl.Name = "participantInfoLbl";
+            this.participantInfoLbl.Size = new System.Drawing.Size(129, 13);
+            this.participantInfoLbl.TabIndex = 5;
+            this.participantInfoLbl.Text = "Participant Info Label";
+            // 
+            // calendarPanel1
+            // 
+            this.calendarPanel1.CurrentWeek = new System.DateTime(2020, 12, 6, 0, 0, 0, 0);
+            this.calendarPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calendarPanel1.editedMeeting = null;
+            this.calendarPanel1.Location = new System.Drawing.Point(6, 20);
+            this.calendarPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.calendarPanel1.meetings = new MeetingScheduler.Meeting[0];
+            this.calendarPanel1.Name = "calendarPanel1";
+            this.calendarPanel1.Size = new System.Drawing.Size(644, 360);
+            this.calendarPanel1.TabIndex = 0;
+            // 
             // CreateMeeting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -406,15 +442,17 @@ namespace MeetingScheduler
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.newMeetingInvitees.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
+            this.inviteeControlPanel.ResumeLayout(false);
+            this.inviteeSearchPanel.ResumeLayout(false);
+            this.inviteeSearchPanel.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.newMeetingSlotsGroupBox.ResumeLayout(false);
             this.newMeetingBtnPanel.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -438,13 +476,15 @@ namespace MeetingScheduler
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.FlowLayoutPanel participantFlowPanel;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel inviteeControlPanel;
         private System.Windows.Forms.Button addParticipantButton;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Panel inviteeSearchPanel;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox userToAddBox;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Label participantInfoLbl;
     }
 }

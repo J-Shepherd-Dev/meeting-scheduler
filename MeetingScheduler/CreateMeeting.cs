@@ -101,18 +101,24 @@ namespace MeetingScheduler
             pPanel.Width = this.participantFlowPanel.Width - this.participantFlowPanel.Padding.Left - this.participantFlowPanel.Padding.Right;
             this.participantFlowPanel.Controls.Add(pPanel);
         }
-        private void DrawParticipantList() {
+        public void DrawParticipantList() {
             using (var handle = participantSemaphore.Acquire())
             {
+                this.UpdateParticipantInfoLabel(this._thisMeeting.GuestSpeaker == null ? "" : "The guest speaker is "+this._thisMeeting.GuestSpeaker);
                 this.participantFlowPanel.Controls.Clear();
-                Logging.AddMessage("There are " + this._thisMeeting.Participants.Count + " participants in the created meeting.");
-                foreach (Participant p in this._thisMeeting.Participants)
-                {
+
+                Logging.AddMessage("There are "+this._thisMeeting.Participants.Count+" participants in the created meeting.");
+                foreach(Participant p in this._thisMeeting.Participants) {
                     this.AddParticipantToPanel(p);
                     userToAddBox.Items.Remove(p.user);
                     Logging.AddMessage($"Added participant {p} to panel");
                 }
             }
+        }
+
+        public void UpdateParticipantInfoLabel(string msg="") {
+            this.participantInfoLbl.Visible = (msg == "" || msg == null);
+            this.participantInfoLbl.Text = msg;
         }
 
         public void AddUserToDropdown(User u) {

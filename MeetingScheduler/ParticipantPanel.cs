@@ -61,7 +61,23 @@ namespace MeetingScheduler
 
         private void roleBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.participant.status = (sender as ComboBox).SelectedIndex;
+            int newStatus = (sender as ComboBox).SelectedIndex;
+            //if the newStatus is GS, the old GS will be overwritten
+            //and the display updated
+                if (newStatus == 2)
+                {
+                    this.meeting.GuestSpeaker = this.participant;
+                    //if the parent of this ParticipantPanel is running inside CreateMeeting, call DrawParticipantList()
+                    if (this.Parent != null && this.Parent.Parent.Parent.Parent.GetType() == Type.GetType("MeetingScheduler.CreateMeeting"))
+                    {
+                        Logging.AddMessage("Accessing CreateMeeting from child ParticipantPanel");
+                        CreateMeeting above = this.Parent.Parent.Parent.Parent as CreateMeeting;
+                        above.DrawParticipantList();
+                    }
+                }
+                else {
+                    this.participant.status = newStatus;
+                }
         }
 
         private void removeBtn_Click(object sender, EventArgs e)

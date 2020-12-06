@@ -15,11 +15,11 @@ namespace MeetingScheduler
         public static User tom = new User("Tom", "tom");
 
         public static HashSet<User> Users = new HashSet<User>() {
-            jack,
+            tom,
             mehmet,
             ryan,
             john,
-            tom
+            jack
         };
         public static void Add(User u) {
             if (!AllUsers.Users.Contains(u))
