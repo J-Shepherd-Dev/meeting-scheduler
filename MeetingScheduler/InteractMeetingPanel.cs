@@ -36,8 +36,8 @@ namespace MeetingScheduler
 
             if (_participant != null) {
                 // If we've registered our attendance
-                attendYesBtn.BackColor = (_participant.hasGivenAttendance && !_participant.attending) ? Color.DarkGreen : Color.PaleGreen;
-                attendNoBtn.BackColor = (_participant.hasGivenAttendance && _participant.attending) ? Color.DarkRed : Color.FromArgb(255, 192, 192);
+                attendYesBtn.BackColor = (_participant.hasGivenAttendance && !_participant.attending) ? Color.DarkGray : Color.PaleGreen;
+                attendNoBtn.BackColor = (_participant.hasGivenAttendance && _participant.attending) ? Color.DarkGray : Color.FromArgb(255, 192, 192);
             }
 
             // Update text attributes
@@ -49,7 +49,7 @@ namespace MeetingScheduler
             //if this user is not important or a guest speaker, hide their location choices
             this.locationGB.Visible = this._participant!=null && this._participant.Attendance && this._participant.status != 0;
             //if the participant is not attending, hide their equipment requests
-            this.equipmentGB.Visible = this._participant != null && this._participant.Attendance;
+            this.equipmentGB.Enabled = this._participant != null && this._participant.Attendance;
 
 
             // Show the participants for this meeting in the flow panel

@@ -60,9 +60,9 @@ namespace MeetingScheduler
             //try to set the persons image, if this fails then the background image will be used by default
             try
             {
-                this.pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject(p.user.ImageName.ToString());
+                this.pictureBox1.BackgroundImage = (Image)Properties.Resources.ResourceManager.GetObject(p.user.ImageName.ToString());
                 if (this.meeting.Name.ToLower().Contains("funky") && this.participant.user.ImageName=="mehmet") {
-                    this.pictureBox1.Image = (Image)Properties.Resources.ResourceManager.GetObject("funky");
+                    this.pictureBox1.BackgroundImage = (Image)Properties.Resources.ResourceManager.GetObject("funky");
                 }
             }
             catch (Exception e) {
