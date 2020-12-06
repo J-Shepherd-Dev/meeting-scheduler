@@ -200,6 +200,7 @@
             // equipmentCheckList
             // 
             this.equipmentCheckList.BackColor = System.Drawing.SystemColors.Control;
+            this.equipmentCheckList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.equipmentCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.equipmentCheckList.FormattingEnabled = true;
             this.equipmentCheckList.Location = new System.Drawing.Point(3, 16);
@@ -224,6 +225,7 @@
             // locationCheckList
             // 
             this.locationCheckList.BackColor = System.Drawing.SystemColors.Control;
+            this.locationCheckList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.locationCheckList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.locationCheckList.FormattingEnabled = true;
             this.locationCheckList.Location = new System.Drawing.Point(3, 16);

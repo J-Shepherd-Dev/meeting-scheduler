@@ -17,7 +17,14 @@ namespace MeetingScheduler
         private int mode = 0;
         private CreateMeeting cMCaller;
 
-        private void _basicConstructor(Meeting m,Participant p,int mode) {
+        public ParticipantPanel(Meeting m, Participant p, int mode = 0,CreateMeeting cMCaller=null)
+        {
+            /*Modes:
+             * 0 = initiator (default)
+             * 1 = adding to meeting (instead of selecting role and removing)
+             * 2 = non initiator (hide controls);
+             * */
+            this.cMCaller = cMCaller;
             this.meeting = m;
             this.participant = p;
             InitializeComponent();
@@ -40,23 +47,15 @@ namespace MeetingScheduler
             try
             {
                 this.pictureBox1.BackgroundImage = (Image)Properties.Resources.ResourceManager.GetObject(p.user.ImageName.ToString());
-                if (this.meeting.Name.ToLower().Contains("funky") && this.participant.user.ImageName=="mehmet") {
+                if (this.meeting.Name.ToLower().Contains("funky") && this.participant.user.ImageName == "mehmet")
+                {
                     this.pictureBox1.BackgroundImage = (Image)Properties.Resources.ResourceManager.GetObject("funky");
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 Logging.AddMessage(e.Message);
             }
-        }
-        public ParticipantPanel(Meeting m, Participant p, int mode = 0,CreateMeeting cMCaller=null)
-        {
-            /*Modes:
-             * 0 = initiator (default)
-             * 1 = adding to meeting (instead of selecting role and removing)
-             * 2 = non initiator (hide controls);
-             * */
-            this._basicConstructor(m, p, mode);
-            this.cMCaller = cMCaller;
         }
 
         private void roleBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -66,13 +65,13 @@ namespace MeetingScheduler
             //and the display updated
                 if (newStatus == 2)
                 {
+                bool hasGSChanged = this.participant != this.meeting.GuestSpeaker;
                     this.meeting.GuestSpeaker = this.participant;
                     //if the parent of this ParticipantPanel is running inside CreateMeeting, call DrawParticipantList()
-                    if (this.Parent != null && this.Parent.Parent.Parent.Parent.GetType() == Type.GetType("MeetingScheduler.CreateMeeting"))
+                    if (hasGSChanged && this.cMCaller!=null)
                     {
-                        Logging.AddMessage("Accessing CreateMeeting from child ParticipantPanel");
-                        CreateMeeting above = this.Parent.Parent.Parent.Parent as CreateMeeting;
-                        above.DrawParticipantList();
+                        Logging.AddMessage("Participant list redraw called from child participant panel");
+                        this.cMCaller.DrawParticipantList();
                     }
                 }
                 else {

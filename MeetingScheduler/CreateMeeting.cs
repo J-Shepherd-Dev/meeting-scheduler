@@ -190,10 +190,6 @@ namespace MeetingScheduler
                 }
             }
 
-            // Set meeting attributes
-            _thisMeeting.Name = newMeetingTitle.Text;
-            _thisMeeting.Details = newMeetingDetails.Text;
-
             // Push meeting if it's newly created
             AllMeetings.Update(this._thisMeeting);
 
