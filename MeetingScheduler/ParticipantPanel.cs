@@ -16,12 +16,33 @@ namespace MeetingScheduler
         private Participant participant;
         private int mode = 0;
         private CreateMeeting cMCaller;
+        private User impersonator;
 
         private void _basicConstructor(Meeting m,Participant p,int mode) {
             this.meeting = m;
             this.participant = p;
             InitializeComponent();
             this.nameLbl.Text = p.user.getName();
+            // only show if we are not in create meeting view 
+            if (mode == 0 && impersonator == meeting.Initiator)
+            {
+                if (p.status == 1)
+                {
+                    this.nameLbl.Text += " (Important)";
+                }
+                else if (p.status == 2)
+                {
+                    this.nameLbl.Text += " (Guest Speaker)";
+                }
+            }
+            if (mode == 1)
+            {
+                if(p.status == 2)
+                {
+                    this.nameLbl.Text += " Guest Speaker"; 
+                }
+
+            }
             this.roleBox.SelectedIndex = p.status;
             ToolTip tTip = new ToolTip();
             tTip.ToolTipTitle = "Roles";
@@ -48,15 +69,18 @@ namespace MeetingScheduler
                 Logging.AddMessage(e.Message);
             }
         }
-        public ParticipantPanel(Meeting m, Participant p, int mode = 0,CreateMeeting cMCaller=null)
+        public ParticipantPanel(Meeting m, Participant p, int mode = 0,CreateMeeting cMCaller=null, User _impersonator=null)
         {
             /*Modes:
              * 0 = initiator (default)
              * 1 = adding to meeting (instead of selecting role and removing)
              * 2 = non initiator (hide controls);
              * */
+            this.impersonator = _impersonator;
             this._basicConstructor(m, p, mode);
             this.cMCaller = cMCaller;
+            this.impersonator = _impersonator;
+            
         }
 
         private void roleBox_SelectedIndexChanged(object sender, EventArgs e)

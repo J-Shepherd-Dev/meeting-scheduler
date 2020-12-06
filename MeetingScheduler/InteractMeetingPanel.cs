@@ -58,7 +58,7 @@ namespace MeetingScheduler
             {
                 foreach (Participant p in this._meeting.Participants)
                 {
-                    ParticipantPanel pPanel = new ParticipantPanel(this._meeting, p);
+                    ParticipantPanel pPanel = new ParticipantPanel(this._meeting, p, 0, null, this._impersonator);
                     participantFlowPanel.Controls.Add(pPanel);
                 }
             }
