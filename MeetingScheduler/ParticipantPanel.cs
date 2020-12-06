@@ -18,13 +18,14 @@ namespace MeetingScheduler
         private CreateMeeting cMCaller;
         private User impersonator;
 
-        public ParticipantPanel(Meeting m, Participant p, int mode = 0,CreateMeeting cMCaller=null)
+        public ParticipantPanel(Meeting m, Participant p, int mode = 0, CreateMeeting cMCaller = null, User _impersonator = null)
         {
             /*Modes:
              * 0 = initiator (default)
-             * 1 = non initiator (hide controls);
+             * 1 = adding to meeting (instead of selecting role and removing)
+             * 2 = non initiator (hide controls);
              * */
-            this.cMCaller = cMCaller;
+            this.impersonator = _impersonator;
             this.meeting = m;
             this.participant = p;
             InitializeComponent();
@@ -43,9 +44,9 @@ namespace MeetingScheduler
             }
             if (mode == 1)
             {
-                if(p.status == 2)
+                if (p.status == 2)
                 {
-                    this.nameLbl.Text += " Guest Speaker"; 
+                    this.nameLbl.Text += " Guest Speaker";
                 }
 
             }
@@ -67,9 +68,8 @@ namespace MeetingScheduler
             try
             {
                 this.pictureBox1.BackgroundImage = (Image)Properties.Resources.ResourceManager.GetObject(p.user.ImageName.ToString());
-
-                if (this.meeting.Name.ToLower().Contains("funky") && this.participant.user.ImageName=="mehmet") {
-
+                if (this.meeting.Name.ToLower().Contains("funky") && this.participant.user.ImageName == "mehmet")
+                {
                     this.pictureBox1.BackgroundImage = (Image)Properties.Resources.ResourceManager.GetObject("funky");
                 }
             }
@@ -77,22 +77,10 @@ namespace MeetingScheduler
             {
                 Logging.AddMessage(e.Message);
             }
-        }
-
-        public ParticipantPanel(Meeting m, Participant p, int mode = 0,CreateMeeting cMCaller=null, User _impersonator=null)
-        {
-            /*Modes:
-             * 0 = initiator (default)
-             * 1 = adding to meeting (instead of selecting role and removing)
-             * 2 = non initiator (hide controls);
-             * */
-            this.impersonator = _impersonator;
-            this._basicConstructor(m, p, mode);
             this.cMCaller = cMCaller;
             this.impersonator = _impersonator;
-            
-        }
 
+        }
 
         private void roleBox_SelectedIndexChanged(object sender, EventArgs e)
         {
