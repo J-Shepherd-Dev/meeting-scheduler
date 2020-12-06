@@ -21,8 +21,7 @@ namespace MeetingScheduler
         {
             /*Modes:
              * 0 = initiator (default)
-             * 1 = adding to meeting (instead of selecting role and removing)
-             * 2 = non initiator (hide controls);
+             * 1 = non initiator (hide controls);
              * */
             this.cMCaller = cMCaller;
             this.meeting = m;

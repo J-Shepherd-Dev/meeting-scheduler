@@ -53,12 +53,12 @@ namespace MeetingScheduler
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.newMeetingSlotsGroupBox = new System.Windows.Forms.GroupBox();
+            this.calendarPanel1 = new MeetingScheduler.CalendarPanel();
             this.newMeetingBtnPanel = new System.Windows.Forms.Panel();
+            this.cancelBtn = new System.Windows.Forms.Button();
             this.newMeetingSaveBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.cancelBtn = new System.Windows.Forms.Button();
-            this.calendarPanel1 = new MeetingScheduler.CalendarPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -341,6 +341,18 @@ namespace MeetingScheduler
             this.newMeetingSlotsGroupBox.TabStop = false;
             this.newMeetingSlotsGroupBox.Text = "Meeting Slots";
             // 
+            // calendarPanel1
+            // 
+            this.calendarPanel1.CurrentWeek = new System.DateTime(2020, 12, 6, 0, 0, 0, 0);
+            this.calendarPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.calendarPanel1.editedMeeting = null;
+            this.calendarPanel1.Location = new System.Drawing.Point(6, 19);
+            this.calendarPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.calendarPanel1.meetings = new MeetingScheduler.Meeting[0];
+            this.calendarPanel1.Name = "calendarPanel1";
+            this.calendarPanel1.Size = new System.Drawing.Size(644, 362);
+            this.calendarPanel1.TabIndex = 0;
+            // 
             // newMeetingBtnPanel
             // 
             this.newMeetingBtnPanel.Controls.Add(this.cancelBtn);
@@ -351,6 +363,17 @@ namespace MeetingScheduler
             this.newMeetingBtnPanel.Padding = new System.Windows.Forms.Padding(3, 3, 6, 3);
             this.newMeetingBtnPanel.Size = new System.Drawing.Size(1069, 35);
             this.newMeetingBtnPanel.TabIndex = 4;
+            // 
+            // cancelBtn
+            // 
+            this.cancelBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cancelBtn.Location = new System.Drawing.Point(889, 3);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(99, 29);
+            this.cancelBtn.TabIndex = 1;
+            this.cancelBtn.Text = "Cancel meeting";
+            this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // newMeetingSaveBtn
             // 
@@ -382,29 +405,6 @@ namespace MeetingScheduler
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1069, 387);
             this.panel2.TabIndex = 5;
-            // 
-            // cancelBtn
-            // 
-            this.cancelBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.cancelBtn.Location = new System.Drawing.Point(889, 3);
-            this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(99, 29);
-            this.cancelBtn.TabIndex = 1;
-            this.cancelBtn.Text = "Cancel meeting";
-            this.cancelBtn.UseVisualStyleBackColor = true;
-            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
-            // 
-            // calendarPanel1
-            // 
-            this.calendarPanel1.CurrentWeek = new System.DateTime(2020, 12, 6, 0, 0, 0, 0);
-            this.calendarPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.calendarPanel1.editedMeeting = null;
-            this.calendarPanel1.Location = new System.Drawing.Point(6, 19);
-            this.calendarPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.calendarPanel1.meetings = new MeetingScheduler.Meeting[0];
-            this.calendarPanel1.Name = "calendarPanel1";
-            this.calendarPanel1.Size = new System.Drawing.Size(644, 362);
-            this.calendarPanel1.TabIndex = 0;
             // 
             // CreateMeeting
             // 
