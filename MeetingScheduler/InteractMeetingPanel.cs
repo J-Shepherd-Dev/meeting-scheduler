@@ -44,6 +44,7 @@ namespace MeetingScheduler
             meetingTitleLbl.Text = this._meeting?.Name ?? "No Meeting Selected";
             meetingDescTB.Text = this._meeting?.Details ?? "No description provided...";
             dateTimeInfoLbl.Text = this._meeting==null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
+            dateTimeInfoLbl.Text += this._meeting != null && this._meeting.GetGuestSpeaker()!=null ? " - Guest speaker: "+ this._meeting.GetGuestSpeaker() : "";
 
             //if this user is not important or a guest speaker, hide their location choices
             this.locationGB.Visible = this._participant!=null && this._participant.Attendance && this._participant.status != 0;
@@ -155,6 +156,11 @@ namespace MeetingScheduler
                     this._participant.equipmentRequests.Add((Equipment)equip);
                 }
             }
+        }
+
+        private void dateTimeInfoLbl_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

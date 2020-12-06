@@ -99,6 +99,17 @@ namespace MeetingScheduler
                 return output;
             }
         }
+        
+        public Participant GetGuestSpeaker() {
+            foreach (Participant p in this.Participants)
+            {
+                if (p.status == 2)
+                {
+                    return p;
+                }
+            }
+            return null;
+        }
 
         public override string ToString()
         {

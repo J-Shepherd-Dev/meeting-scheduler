@@ -31,5 +31,10 @@ namespace MeetingScheduler
             this.user = u;
         }
 
+        public override string ToString()
+        {
+            return this.user.ToString();
+        }
+
     }
 }

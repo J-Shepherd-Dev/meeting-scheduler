@@ -36,6 +36,8 @@
             this.meetingTitleLbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.meetingDescTB = new System.Windows.Forms.TextBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.dateTimeInfoLbl = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.equipmentGB = new System.Windows.Forms.GroupBox();
             this.equipmentCheckList = new System.Windows.Forms.CheckedListBox();
@@ -43,15 +45,13 @@
             this.locationCheckList = new System.Windows.Forms.CheckedListBox();
             this.participantGB = new System.Windows.Forms.GroupBox();
             this.participantFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.dateTimeInfoLbl = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panel3.SuspendLayout();
             this.equipmentGB.SuspendLayout();
             this.locationGB.SuspendLayout();
             this.participantGB.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
@@ -144,13 +144,34 @@
             this.meetingDescTB.Dock = System.Windows.Forms.DockStyle.Fill;
             this.meetingDescTB.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.meetingDescTB.Location = new System.Drawing.Point(6, 70);
-            this.meetingDescTB.Margin = new System.Windows.Forms.Padding(12, 12, 12, 12);
+            this.meetingDescTB.Margin = new System.Windows.Forms.Padding(12);
             this.meetingDescTB.Multiline = true;
             this.meetingDescTB.Name = "meetingDescTB";
             this.meetingDescTB.ReadOnly = true;
             this.meetingDescTB.Size = new System.Drawing.Size(639, 97);
             this.meetingDescTB.TabIndex = 3;
             this.meetingDescTB.Text = "meetingDescription";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.dateTimeInfoLbl);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(6, 47);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(639, 23);
+            this.panel4.TabIndex = 4;
+            // 
+            // dateTimeInfoLbl
+            // 
+            this.dateTimeInfoLbl.AutoSize = true;
+            this.dateTimeInfoLbl.Dock = System.Windows.Forms.DockStyle.Left;
+            this.dateTimeInfoLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateTimeInfoLbl.Location = new System.Drawing.Point(0, 0);
+            this.dateTimeInfoLbl.Name = "dateTimeInfoLbl";
+            this.dateTimeInfoLbl.Size = new System.Drawing.Size(52, 17);
+            this.dateTimeInfoLbl.TabIndex = 0;
+            this.dateTimeInfoLbl.Text = "label1";
+            this.dateTimeInfoLbl.Click += new System.EventHandler(this.dateTimeInfoLbl_Click);
             // 
             // panel3
             // 
@@ -230,26 +251,6 @@
             this.participantFlowPanel.Size = new System.Drawing.Size(273, 491);
             this.participantFlowPanel.TabIndex = 0;
             // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.dateTimeInfoLbl);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel4.Location = new System.Drawing.Point(6, 47);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(639, 23);
-            this.panel4.TabIndex = 4;
-            // 
-            // dateTimeInfoLbl
-            // 
-            this.dateTimeInfoLbl.AutoSize = true;
-            this.dateTimeInfoLbl.Dock = System.Windows.Forms.DockStyle.Left;
-            this.dateTimeInfoLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimeInfoLbl.Location = new System.Drawing.Point(0, 0);
-            this.dateTimeInfoLbl.Name = "dateTimeInfoLbl";
-            this.dateTimeInfoLbl.Size = new System.Drawing.Size(52, 17);
-            this.dateTimeInfoLbl.TabIndex = 0;
-            this.dateTimeInfoLbl.Text = "label1";
-            // 
             // InteractMeetingPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,12 +264,12 @@
             this.panel2.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.equipmentGB.ResumeLayout(false);
             this.locationGB.ResumeLayout(false);
             this.participantGB.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
