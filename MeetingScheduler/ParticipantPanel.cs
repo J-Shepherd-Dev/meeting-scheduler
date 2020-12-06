@@ -14,16 +14,13 @@ namespace MeetingScheduler
     {
         private Meeting meeting;
         private Participant participant;
+        //a priviledged user can see ALL information about a meeting (the initiator)
         private bool isPriviledged = false;
         private CreateMeeting cMCaller;
         private User impersonator;
 
         public ParticipantPanel(Meeting m, Participant p, int mode = 0, CreateMeeting cMCaller = null, User _impersonator = null)
         {
-            /*Modes:
-             * 0 = initiator (default)
-             * 1 = non initiator (hide controls);
-             * */
             this.cMCaller = cMCaller;
             this.meeting = m;
             this.participant = p;
@@ -31,7 +28,6 @@ namespace MeetingScheduler
             this.isPriviledged = this.impersonator != null && this.meeting!=null && this.impersonator == this.meeting.Initiator;
             InitializeComponent();
             this.nameLbl.Text = p.user.getName();
-            // only show if we are not in create meeting view 
             if (isPriviledged)
             {
                 //if this panel is being created in view of a user who is not the initiator, hide edit options
