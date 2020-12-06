@@ -25,10 +25,25 @@ namespace MeetingScheduler
             {
                 _isEditing = value;
                 newMeetingSaveBtn.Text = _isEditing ? "Done" : "Create";
+                cancelBtn.Text = _isEditing ? "Cancel Meeting" : "Cancel";
             }
         }
 
         private LayoutSuspensionSemaphore participantSemaphore;
+
+        //Disable Close (X) button
+        //doing this means that the user must click "Done" or "Cancel meeting"
+        //when they are editing a meeting - since changes are actually applied right away
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                const int CS_NOCLOSE = 0x200;
+                CreateParams cp = base.CreateParams;
+                cp.ClassStyle = cp.ClassStyle | CS_NOCLOSE;
+                return cp;
+            }
+        }
 
         public CreateMeeting(User initiator)
         {
@@ -41,6 +56,7 @@ namespace MeetingScheduler
             //ensure all users are displayed in the 'search' dropdown
             userToAddBox.Items.AddRange(AllUsers.Users.ToArray());
             calendarPanel1.editedMeeting = _thisMeeting;
+            this.cancelBtn.Text = editing ? "Cancel Meeting" : "Cancel";
         }
 
         public CreateMeeting(Meeting meeting)
@@ -57,9 +73,9 @@ namespace MeetingScheduler
             newMeetingTitle.Text = meeting.Name;
             newMeetingDetails.Text = meeting.Details;
             numericUpDown1.Value = meeting.Length;
-
             userToAddBox.Items.AddRange(AllUsers.Users.ToArray());
             calendarPanel1.editedMeeting = _thisMeeting;
+            this.cancelBtn.Text = editing ? "Cancel Meeting" : "Cancel";
         }
 
         private void newMeetingDetails_TextChanged(object sender, EventArgs e)
@@ -71,14 +87,6 @@ namespace MeetingScheduler
         {
             this._thisMeeting.Name = (sender as TextBox).Text;
         }
-
-        private void newMeetingCancelBtn_Click(object sender, EventArgs e)
-        {
-            Logging.AddMessage($"Cancelled creation of meeting {_thisMeeting}");
-
-            this.Close();
-        }
-
         private void CreateMeeting_Load(object sender, EventArgs e)
         {
             calendarPanel1.Changed += CheckMeetingLength;
@@ -148,7 +156,7 @@ namespace MeetingScheduler
             DrawParticipantList();
             RefreshParticipantMeetings();
         }
-
+        //updates the CalendarPanel in this form
         public void RefreshParticipantMeetings()
         {
             List<Meeting> meetings = new List<Meeting>();
@@ -231,6 +239,25 @@ namespace MeetingScheduler
         private void CreateMeeting_FormClosing(object sender, FormClosingEventArgs e)
         {
             calendarPanel1.Changed -= CheckMeetingLength;
+        }
+
+        private void cancelBtn_Click(object sender, EventArgs e)
+        {
+            if (this._isEditing)
+            {
+                //the meeting will only be removed if the user confirms this AND
+                // it is already an existing meeting
+                DialogResult confirmCancellation = MessageBox.Show($"Are you sure you want to cancel {this._thisMeeting}?", "Cancel Meeting", MessageBoxButtons.YesNo);
+                if (confirmCancellation == DialogResult.Yes && AllMeetings.meetings.Contains(this._thisMeeting))
+                    {
+                        AllMeetings.Remove(this._thisMeeting);
+                        this.Close();
+                    }
+            }
+            else
+            {
+                this.Close();
+            }
         }
     }
 }

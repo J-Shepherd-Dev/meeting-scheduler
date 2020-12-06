@@ -23,5 +23,17 @@ namespace MeetingScheduler
             // Send event
             meetingsUpdated?.Invoke(null, new EventArgs());
         }
+
+        public static void Remove(Meeting instance)
+        {
+            if (meetings.Contains(instance))
+            {
+                meetings.Remove(instance);
+            }
+            //reset the last meeting, since we've removed this one
+            lastMeeting = null;
+            //Send event
+            meetingsUpdated?.Invoke(null, new EventArgs());
+        }
     }
 }

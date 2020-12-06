@@ -57,6 +57,7 @@ namespace MeetingScheduler
             this.newMeetingSaveBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.cancelBtn = new System.Windows.Forms.Button();
             this.calendarPanel1 = new MeetingScheduler.CalendarPanel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -342,6 +343,7 @@ namespace MeetingScheduler
             // 
             // newMeetingBtnPanel
             // 
+            this.newMeetingBtnPanel.Controls.Add(this.cancelBtn);
             this.newMeetingBtnPanel.Controls.Add(this.newMeetingSaveBtn);
             this.newMeetingBtnPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.newMeetingBtnPanel.Location = new System.Drawing.Point(0, 671);
@@ -380,6 +382,17 @@ namespace MeetingScheduler
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1069, 387);
             this.panel2.TabIndex = 5;
+            // 
+            // cancelBtn
+            // 
+            this.cancelBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.cancelBtn.Location = new System.Drawing.Point(889, 3);
+            this.cancelBtn.Name = "cancelBtn";
+            this.cancelBtn.Size = new System.Drawing.Size(99, 29);
+            this.cancelBtn.TabIndex = 1;
+            this.cancelBtn.Text = "Cancel meeting";
+            this.cancelBtn.UseVisualStyleBackColor = true;
+            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // calendarPanel1
             // 
@@ -460,5 +473,6 @@ namespace MeetingScheduler
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label participantInfoLbl;
+        private System.Windows.Forms.Button cancelBtn;
     }
 }
