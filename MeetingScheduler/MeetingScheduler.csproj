@@ -160,5 +160,8 @@
   <ItemGroup>
     <None Include="resources\funky.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\Grey thingy.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
