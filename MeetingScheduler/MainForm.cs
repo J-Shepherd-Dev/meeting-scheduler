@@ -46,10 +46,12 @@ namespace MeetingScheduler
             );
 
             // Everyone is invited to Mehmet's funky dance party
-            foreach (User u in AllUsers.Users)
-            {
-                funkyDanceParty.Participants.Add(new Participant(u));
-            }
+            funkyDanceParty.Participants.Add(new Participant(AllUsers.jack));
+            funkyDanceParty.Participants.Add(new Participant(AllUsers.john));
+            //Tom, Ryan, and Mehmet are all attending with varying statuses 
+            funkyDanceParty.Participants.Add(new Participant(AllUsers.mehmet,2,true));
+            funkyDanceParty.Participants.Add(new Participant(AllUsers.ryan,0,true));
+            funkyDanceParty.Participants.Add(new Participant(AllUsers.tom,1,true));
 
             AllMeetings.Update(funkyDanceParty);
 

@@ -10,7 +10,7 @@ namespace MeetingScheduler
     {
         public static Location MeetingRoomA = new Location("Meeting Room A",5);
         public static Location MeetingRoomB = new Location("Meeting Room B",5);
-        public static Location BigConferenceRoom = new Location("Conference Room",20);
+        public static Location BigConferenceRoom = new Location("Conference Room",30);
         public static Location OfficeC = new Location("Office C", 4);
         public static Location OfficeD = new Location("Office D",3);
         public static Location OfficeE = new Location("Office E", 2);

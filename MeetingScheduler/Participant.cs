@@ -32,6 +32,13 @@ namespace MeetingScheduler
             this.status = status;
         }
 
+        public Participant(User u, int status, bool attending)
+        {
+            this.user = u;
+            this.status = status;
+            this.Attendance = attending;
+        }
+
         public override string ToString()
         {
             return this.user.ToString();
