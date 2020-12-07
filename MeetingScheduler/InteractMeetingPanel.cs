@@ -36,8 +36,8 @@ namespace MeetingScheduler
 
             if (_participant != null) {
                 // If we've registered our attendance
-                attendYesBtn.BackColor = (_participant.hasGivenAttendance && !_participant.attending) ? Color.DarkGray : Color.PaleGreen;
-                attendNoBtn.BackColor = (_participant.hasGivenAttendance && _participant.attending) ? Color.DarkGray : Color.FromArgb(255, 192, 192);
+                attendYesBtn.BackColor = (_participant.hasGivenAttendance && !_participant.attending) ? Color.LightGray : Color.PaleGreen;
+                attendNoBtn.BackColor = (_participant.hasGivenAttendance && _participant.attending) ? Color.LightGray : Color.FromArgb(255, 192, 192);
             }
 
             // Update text attributes
