@@ -26,9 +26,42 @@ namespace MeetingScheduler
             NetworkLab
         };
 
+        //using this constructor ensures we can add fixed equipment to each Location
         public AllLocations()
         {
+            MeetingRoomA.fixedEquipment.Add(AllEquipment.WheelchairAccess);
+            MeetingRoomA.fixedEquipment.Add(AllEquipment.Whiteboard);
+            MeetingRoomA.fixedEquipment.Add(AllEquipment.Projector);
 
+            MeetingRoomB.fixedEquipment.Add(AllEquipment.LaptopRack);
+            MeetingRoomB.fixedEquipment.Add(AllEquipment.Computer);
+            MeetingRoomB.fixedEquipment.Add(AllEquipment.Printer);
+
+            BigConferenceRoom.fixedEquipment.Add(AllEquipment.Computer);
+            BigConferenceRoom.fixedEquipment.Add(AllEquipment.LaptopRack);
+            BigConferenceRoom.fixedEquipment.Add(AllEquipment.Printer);
+            BigConferenceRoom.fixedEquipment.Add(AllEquipment.Projector);
+            BigConferenceRoom.fixedEquipment.Add(AllEquipment.WheelchairAccess);
+            BigConferenceRoom.fixedEquipment.Add(AllEquipment.Whiteboard);
+
+            OfficeC.fixedEquipment.Add(AllEquipment.WheelchairAccess);
+            OfficeC.fixedEquipment.Add(AllEquipment.Printer);
+            OfficeC.fixedEquipment.Add(AllEquipment.Computer);
+
+            OfficeD.fixedEquipment.Add(AllEquipment.Printer);
+            OfficeD.fixedEquipment.Add(AllEquipment.Computer);
+            OfficeD.fixedEquipment.Add(AllEquipment.Whiteboard);
+
+            OfficeE.fixedEquipment.Add(AllEquipment.Printer);
+            OfficeE.fixedEquipment.Add(AllEquipment.Computer);
+            OfficeE.fixedEquipment.Add(AllEquipment.Whiteboard);
+
+            NetworkLab.fixedEquipment.Add(AllEquipment.Computer);
+            NetworkLab.fixedEquipment.Add(AllEquipment.LaptopRack);
+            NetworkLab.fixedEquipment.Add(AllEquipment.Printer);
+            NetworkLab.fixedEquipment.Add(AllEquipment.Projector);
+            NetworkLab.fixedEquipment.Add(AllEquipment.WheelchairAccess);
+            NetworkLab.fixedEquipment.Add(AllEquipment.Whiteboard);
         }
     }
 }
