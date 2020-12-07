@@ -44,6 +44,8 @@ namespace MeetingScheduler
                 ),
                 2
             );
+            //add a description
+            funkyDanceParty.Details = "Mehmet's holding his annual funky dance party! Don your best 60's outfit then get ready to dance and feel a rhythm through a mixture of soul, jazz, and R&B!";
 
             // Everyone is invited to Mehmet's funky dance party
             funkyDanceParty.Participants.Add(new Participant(AllUsers.jack));
