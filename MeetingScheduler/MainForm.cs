@@ -35,6 +35,9 @@ namespace MeetingScheduler
 
             DateTime currentWeek = (DateTime.Today - untilBeginning).Date;
 
+            /*
+             * Add the meetings we need for user stories
+             */
             Meeting funkyDanceParty = new Meeting(
                 AllUsers.tom,
                 "Mehmet's Funky Dance Party",
