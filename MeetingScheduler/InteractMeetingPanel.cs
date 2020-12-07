@@ -32,6 +32,7 @@ namespace MeetingScheduler
 
             // Update visibility based on user access and stance
             editBtn.Enabled = this._meeting != null && this._meeting.Initiator == impersonating;
+            viewRequestsBtn.Enabled = editBtn.Enabled;
             attendNoBtn.Visible = attendYesBtn.Visible = attendLabel.Visible = (_participant != null);
 
             if (_participant != null) {
@@ -162,6 +163,37 @@ namespace MeetingScheduler
         private void dateTimeInfoLbl_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void viewRequestsBtn_Click(object sender, EventArgs e)
+        {
+
+            string equipMsg = "Equipment requested:\n";
+            string locMsg = "\nLocations preferred:\n";
+            if (this._meeting.EquipmentRequests.Count > 0)
+            {
+                foreach (Equipment equip in this._meeting.EquipmentRequests)
+                {
+                    equipMsg += equip + "\n";
+                }
+            }
+            else
+            {
+                equipMsg += "There are no equipment requests\n";
+            }
+            if (this._meeting.LocationPreferences.Count > 0)
+            {
+                foreach (Location loc in this._meeting.LocationPreferences)
+            {
+                locMsg += loc + "\n";
+            }
+            }
+            else
+            {
+                locMsg += "There are no location requests\n";
+            }
+            DialogResult requestDialog = MessageBox.Show(equipMsg + locMsg, "Indications made for " + this._meeting, MessageBoxButtons.OK);
+            //we don't care about the result so nothing else happens
         }
     }
 }

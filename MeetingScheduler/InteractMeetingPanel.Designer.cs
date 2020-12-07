@@ -33,6 +33,7 @@
             this.attendYesBtn = new System.Windows.Forms.Button();
             this.attendNoBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
+            this.viewRequestsBtn = new System.Windows.Forms.Button();
             this.meetingTitleLbl = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.meetingDescTB = new System.Windows.Forms.TextBox();
@@ -60,6 +61,7 @@
             this.panel2.Controls.Add(this.attendYesBtn);
             this.panel2.Controls.Add(this.attendNoBtn);
             this.panel2.Controls.Add(this.editBtn);
+            this.panel2.Controls.Add(this.viewRequestsBtn);
             this.panel2.Controls.Add(this.meetingTitleLbl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(6, 7);
@@ -72,7 +74,7 @@
             this.attendLabel.AutoSize = true;
             this.attendLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.attendLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.attendLabel.Location = new System.Drawing.Point(326, 0);
+            this.attendLabel.Location = new System.Drawing.Point(251, 0);
             this.attendLabel.Name = "attendLabel";
             this.attendLabel.Padding = new System.Windows.Forms.Padding(6, 12, 0, 0);
             this.attendLabel.Size = new System.Drawing.Size(88, 32);
@@ -83,7 +85,7 @@
             // 
             this.attendYesBtn.BackColor = System.Drawing.Color.PaleGreen;
             this.attendYesBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.attendYesBtn.Location = new System.Drawing.Point(414, 0);
+            this.attendYesBtn.Location = new System.Drawing.Point(339, 0);
             this.attendYesBtn.Name = "attendYesBtn";
             this.attendYesBtn.Size = new System.Drawing.Size(75, 40);
             this.attendYesBtn.TabIndex = 3;
@@ -96,7 +98,7 @@
             this.attendNoBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.attendNoBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.attendNoBtn.FlatAppearance.BorderColor = System.Drawing.Color.DarkRed;
-            this.attendNoBtn.Location = new System.Drawing.Point(489, 0);
+            this.attendNoBtn.Location = new System.Drawing.Point(414, 0);
             this.attendNoBtn.Name = "attendNoBtn";
             this.attendNoBtn.Size = new System.Drawing.Size(75, 40);
             this.attendNoBtn.TabIndex = 2;
@@ -107,13 +109,24 @@
             // editBtn
             // 
             this.editBtn.Dock = System.Windows.Forms.DockStyle.Right;
-            this.editBtn.Location = new System.Drawing.Point(564, 0);
+            this.editBtn.Location = new System.Drawing.Point(489, 0);
             this.editBtn.Name = "editBtn";
             this.editBtn.Size = new System.Drawing.Size(75, 40);
             this.editBtn.TabIndex = 1;
             this.editBtn.Text = "Edit Meeting";
             this.editBtn.UseVisualStyleBackColor = true;
             this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
+            // 
+            // viewRequestsBtn
+            // 
+            this.viewRequestsBtn.Dock = System.Windows.Forms.DockStyle.Right;
+            this.viewRequestsBtn.Location = new System.Drawing.Point(564, 0);
+            this.viewRequestsBtn.Name = "viewRequestsBtn";
+            this.viewRequestsBtn.Size = new System.Drawing.Size(75, 40);
+            this.viewRequestsBtn.TabIndex = 5;
+            this.viewRequestsBtn.Text = "View Requests";
+            this.viewRequestsBtn.UseVisualStyleBackColor = true;
+            this.viewRequestsBtn.Click += new System.EventHandler(this.viewRequestsBtn_Click);
             // 
             // meetingTitleLbl
             // 
@@ -294,5 +307,6 @@
         private System.Windows.Forms.CheckedListBox locationCheckList;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label dateTimeInfoLbl;
+        private System.Windows.Forms.Button viewRequestsBtn;
     }
 }

@@ -27,6 +27,43 @@ namespace MeetingScheduler
             }
         }
 
+        public HashSet<Equipment> EquipmentRequests
+        {
+            get
+            {
+                HashSet<Equipment> output = new HashSet<Equipment>();
+                foreach (Participant p in this.Participants) {
+                    if (p.Attendance)
+                    {
+                        foreach (Equipment e in p.equipmentRequests)
+                        {
+                            output.Add(e);
+                        }
+                    }
+                }
+                return output;
+            }
+        }
+
+        public HashSet<Location> LocationPreferences
+        {
+            get
+            {
+                HashSet<Location> output = new HashSet<Location>();
+                foreach (Participant p in this.Participants)
+                {
+                    if (p.Attendance)
+                    {
+                        foreach (Location l in p.locationPreferences)
+                        {
+                            output.Add(l);
+                        }
+                    }
+                }
+                return output;
+            }
+        }
+
         public Meeting(User initiator) {
             this.StartTime = System.DateTime.Today + new TimeSpan(8, 0, 0);
             this.Length = 1;
