@@ -38,6 +38,8 @@ namespace MeetingScheduler
             /*
              * Add the meetings we need for user stories
              */
+
+            //DANCE PARTY
             Meeting funkyDanceParty = new Meeting(
                 AllUsers.tom,
                 "Mehmet's Funky Dance Party",
@@ -49,7 +51,6 @@ namespace MeetingScheduler
             );
             //add a description
             funkyDanceParty.Details = "Mehmet's holding his annual funky dance party! Don your best 60's outfit then get ready to dance and feel a rhythm through a mixture of soul, jazz, and R&B!";
-
             // Everyone is invited to Mehmet's funky dance party
             funkyDanceParty.Participants.Add(new Participant(AllUsers.jack));
             funkyDanceParty.Participants.Add(new Participant(AllUsers.john));
@@ -58,7 +59,24 @@ namespace MeetingScheduler
             funkyDanceParty.Participants.Add(new Participant(AllUsers.ryan,0,true));
             funkyDanceParty.Participants.Add(new Participant(AllUsers.tom,1,true));
 
+            //USER STORY 1
+            Meeting UserStory1AccCrit1 = new Meeting(
+                AllUsers.jack,
+                "Meeting for Ryan",
+                currentWeek + new TimeSpan(1, 11, 0, 0),
+                1
+                );
+            UserStory1AccCrit1.Details = "Jack and Ryan chit-chat.";
+            Participant us1ac1Jack = new Participant(AllUsers.jack);
+            Participant us1ac1Ryan = new Participant(AllUsers.ryan);
+            UserStory1AccCrit1.Participants.Add(us1ac1Jack);
+            UserStory1AccCrit1.Participants.Add(us1ac1Ryan);
+
+
+
+            //save the meetings in the static class
             AllMeetings.Update(funkyDanceParty);
+            AllMeetings.Update(UserStory1AccCrit1);
 
             Logging.AddMessage("Initialisation complete");
         }
