@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks;   
 
 namespace MeetingScheduler
 {
@@ -69,14 +69,14 @@ namespace MeetingScheduler
             get
             {
                 int total = 0;
-                foreach(Participant p in this.Participants)
+                foreach (Participant p in this.Participants)
                 {
-                    if(p.hasGivenAttendance && p.attending)
+                    if (p.hasGivenAttendance && p.attending)
                     {
                         ++total;
                     }
                 }
-                foreach(Equipment equip in this.EquipmentRequests)
+                foreach (Equipment equip in this.EquipmentRequests)
                 {
                     total += equip.requiresCapacity;
                 }
@@ -87,10 +87,10 @@ namespace MeetingScheduler
             get
             {
                 HashSet<Location> output = new HashSet<Location>();
-                foreach(Location loc in AllLocations.Locations)
+                foreach (Location loc in AllLocations.Locations)
                 {
                     //if there isn't enough capacity in this room, skip it
-                    if(loc.capacity < this.CapacityNeeded) { break; }
+                    if (loc.capacity < this.CapacityNeeded) { break; }
 
                     //debug line - add the location
                     output.Add(loc);
@@ -100,7 +100,57 @@ namespace MeetingScheduler
                     {
 
                     }
-                    
+
+                }
+                return output;
+            }
+        }
+
+        public bool isScheduled
+        {
+            get
+            {
+                return this.PotentialLocations.Count == 1;
+            }
+        }
+
+        //returns the first potential location
+        public Location CurrentLocation{
+            get
+            {
+                if(this.PotentialLocations.Count < 1)
+                {
+                    return null;
+                }
+                //default the location on the first one
+                Location output = this.PotentialLocations.ElementAt(0);
+                Dictionary<Location, int> votes = new Dictionary<Location, int>();
+                if (this.PotentialLocations.Count > 0)
+                {
+                    foreach (Location loc in this.PotentialLocations)
+                    {
+                        foreach (Participant p in this.Participants)
+                        {
+                            if (p.status > 0 && p.locationPreferences.Contains(loc))
+                            {
+                                //Guest speakers preferences have a weight of 1 million on the location of this meeting
+                                int voteWeight = p.status == 2 ? 1000000 : p.status == 1 ? 1 : 0;
+                                if (votes.ContainsKey(loc))
+                                {
+                                    votes[loc] += voteWeight;
+                                }
+                                else
+                                {
+                                    votes.Add(loc, voteWeight);
+                                }
+                            }
+                        }
+                    }
+                    if (votes.Count > 0)
+                    {
+                        //set the location to the one with the most votes
+                        output = votes.Aggregate((l, r) => l.Value > r.Value ? l : r).Key;
+                    }
                 }
                 return output;
             }
