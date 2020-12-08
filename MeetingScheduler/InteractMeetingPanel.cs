@@ -44,15 +44,25 @@ namespace MeetingScheduler
             // Update text attributes
             meetingTitleLbl.Text = this._meeting?.Name ?? "No Meeting Selected";
             meetingDescTB.Text = this._meeting?.Details ?? "No description provided...";
-            dateTimeInfoLbl.Text = this._meeting==null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
-            dateTimeInfoLbl.Text += this._meeting != null && this._meeting.GuestSpeaker!=null ? " - Guest speaker: "+ this._meeting.GuestSpeaker : "";
+            dateTimeInfoLbl.Text = this._meeting == null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
+            dateTimeInfoLbl.Text += this._meeting != null && this._meeting.GuestSpeaker != null ? " - Guest speaker: " + this._meeting.GuestSpeaker : "";
 
             //if this user is not important or a guest speaker, hide/disable their location choices
-            this.locationGB.Enabled = this._participant!=null && this._participant.Attendance && this._participant.status != 0;
+            this.locationGB.Enabled = this._participant != null && this._participant.Attendance && this._participant.status != 0;
             this.locationGB.Visible = this._participant != null && this._participant.status != 0;
             //if the participant is not attending, hide their equipment requests
             this.equipmentGB.Enabled = this._participant != null && this._participant.Attendance;
 
+            //update the info text panel above the participant list
+            meetingInfoBox.Text = "";
+            if (this._meeting != null) {
+                meetingInfoBox.Text = this._meeting.CapacityNeeded + " confirmed attendees. Potential Locations: ";
+                for(int i=0;i< this._meeting.PotentialLocations.Count;++i)
+                {
+                    meetingInfoBox.Text += (i > 0 ? "," : "");
+                    meetingInfoBox.Text += this._meeting.PotentialLocations.ElementAt(i);
+                }
+            }
 
             // Show the participants for this meeting in the flow panel
             participantFlowPanel.Controls.Clear();

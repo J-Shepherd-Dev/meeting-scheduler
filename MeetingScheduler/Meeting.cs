@@ -64,6 +64,48 @@ namespace MeetingScheduler
             }
         }
 
+        public int CapacityNeeded
+        {
+            get
+            {
+                int total = 0;
+                foreach(Participant p in this.Participants)
+                {
+                    if(p.hasGivenAttendance && p.attending)
+                    {
+                        ++total;
+                    }
+                }
+                foreach(Equipment equip in this.EquipmentRequests)
+                {
+                    total += equip.requiresCapacity;
+                }
+                return total;
+            }
+        }
+        public HashSet<Location> PotentialLocations {
+            get
+            {
+                HashSet<Location> output = new HashSet<Location>();
+                foreach(Location loc in AllLocations.Locations)
+                {
+                    //if there isn't enough capacity in this room, skip it
+                    if(loc.capacity < this.CapacityNeeded) { break; }
+
+                    //debug line - add the location
+                    output.Add(loc);
+
+                    //then check the equipmentRequests
+                    foreach (Equipment fixedE in loc.fixedEquipment)
+                    {
+
+                    }
+                    
+                }
+                return output;
+            }
+        }
+
         public Meeting(User initiator) {
             this.StartTime = System.DateTime.Today + new TimeSpan(8, 0, 0);
             this.Length = 1;

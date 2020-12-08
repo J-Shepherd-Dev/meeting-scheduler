@@ -46,6 +46,7 @@
             this.locationCheckList = new System.Windows.Forms.CheckedListBox();
             this.participantGB = new System.Windows.Forms.GroupBox();
             this.participantFlowPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.meetingInfoBox = new System.Windows.Forms.TextBox();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -250,21 +251,34 @@
             // participantGB
             // 
             this.participantGB.Controls.Add(this.participantFlowPanel);
+            this.participantGB.Controls.Add(this.meetingInfoBox);
             this.participantGB.Dock = System.Windows.Forms.DockStyle.Right;
             this.participantGB.Location = new System.Drawing.Point(651, 0);
             this.participantGB.Name = "participantGB";
             this.participantGB.Size = new System.Drawing.Size(279, 510);
             this.participantGB.TabIndex = 4;
             this.participantGB.TabStop = false;
-            this.participantGB.Text = "Participants";
+            this.participantGB.Text = "Information";
             // 
             // participantFlowPanel
             // 
             this.participantFlowPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.participantFlowPanel.Location = new System.Drawing.Point(3, 16);
+            this.participantFlowPanel.Location = new System.Drawing.Point(3, 70);
             this.participantFlowPanel.Name = "participantFlowPanel";
-            this.participantFlowPanel.Size = new System.Drawing.Size(273, 491);
+            this.participantFlowPanel.Size = new System.Drawing.Size(273, 437);
             this.participantFlowPanel.TabIndex = 0;
+            // 
+            // meetingInfoBox
+            // 
+            this.meetingInfoBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.meetingInfoBox.Dock = System.Windows.Forms.DockStyle.Top;
+            this.meetingInfoBox.Location = new System.Drawing.Point(3, 16);
+            this.meetingInfoBox.Multiline = true;
+            this.meetingInfoBox.Name = "meetingInfoBox";
+            this.meetingInfoBox.ReadOnly = true;
+            this.meetingInfoBox.Size = new System.Drawing.Size(273, 54);
+            this.meetingInfoBox.TabIndex = 1;
+            this.meetingInfoBox.Text = "Potential Locations:";
             // 
             // InteractMeetingPanel
             // 
@@ -285,6 +299,7 @@
             this.equipmentGB.ResumeLayout(false);
             this.locationGB.ResumeLayout(false);
             this.participantGB.ResumeLayout(false);
+            this.participantGB.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -308,5 +323,6 @@
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label dateTimeInfoLbl;
         private System.Windows.Forms.Button viewRequestsBtn;
+        private System.Windows.Forms.TextBox meetingInfoBox;
     }
 }
