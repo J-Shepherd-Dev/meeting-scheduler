@@ -72,7 +72,16 @@ namespace MeetingScheduler
             UserStory1AccCrit1.Participants.Add(us1ac1Jack);
             UserStory1AccCrit1.Participants.Add(us1ac1Ryan);
 
-
+            Meeting UserStory1AccCrit2 = new Meeting(
+            AllUsers.tom,
+            "User Story 1 - Acceptance Criteria 2",
+            currentWeek + new TimeSpan(1, 12, 00, 0),
+            1);
+            UserStory1AccCrit2.Details = "User Story 1 - Acceptance Criteria 2";
+            Participant us1ac2Jack = new Participant(AllUsers.jack);
+            Participant us1ac2Ryan = new Participant(AllUsers.ryan);
+            UserStory1AccCrit2.Participants.Add(us1ac2Jack);
+            UserStory1AccCrit2.Participants.Add(us1ac2Ryan);
 
             //USER STORY 2
 
@@ -129,9 +138,12 @@ namespace MeetingScheduler
             JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.jack, 0, true));
             JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.mehmet, 0, true));
 
-            //Save the meetings in the static class
+            /*
+             * Save the meetings in the static class
+             */
             AllMeetings.Update(funkyDanceParty);
             AllMeetings.Update(UserStory1AccCrit1);
+            AllMeetings.Update(UserStory1AccCrit2);
             AllMeetings.Update(NetworkLabMeeting);
             AllMeetings.Update(JohnsNetworkLabMeeting);
             AllMeetings.Update(JohnsNetworkLabMeeting2);

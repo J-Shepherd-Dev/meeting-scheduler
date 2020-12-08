@@ -130,6 +130,40 @@ namespace MeetingScheduler
             }
         }
 
+        public HashSet<Equipment> UnavailableEquipment
+        {
+            get
+            {
+                HashSet<Equipment> output = new HashSet<Equipment>();
+                foreach(Meeting m in AllMeetings.meetings)
+                {
+                    //if we're looking at a  different meeting
+                    //and it intersects with this one
+                    //then we'll check its equipment list
+                    if(m != this && this.Intersects(m))
+                    {
+                        foreach(Equipment equip in this.EquipmentRequests)
+                        {
+                            //if the other meeting contains this piece of equipment
+                            //there is a chance it will not be available
+                            if (m.EquipmentRequests.Contains(equip))
+                            {
+                                if (AllEquipment.OnlyOne.Contains(equip))
+                                {
+                                    output.Add(equip);
+                                }
+                            }
+                        }
+                    }
+                    else if(m==this)
+                    {
+                     //need to check this meetings locations fixed equipmenmt against this meetings requests
+                    }
+                }
+                return output;
+            }
+        }
+
         //returns the first potential location
         public Location CurrentLocation{
             get

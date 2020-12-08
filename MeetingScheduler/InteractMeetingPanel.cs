@@ -106,7 +106,26 @@ namespace MeetingScheduler
                 }
             }
 
-            //message box alerts for user stories
+            /*
+             * Message box alerts for user stories
+             */
+            //user story 1 - acceptance criteria 1 - no message box
+            //user story 1 - acceptance criteria 3 - no message box
+            //user story 1 - acceptance criteria 2 & 4
+            if (this._meeting != null && this._meeting.UnavailableEquipment.Count>1)
+            {
+                if(this._meeting.Initiator== this._impersonator)
+                {
+                    string unavailEquip = "";
+                    foreach(Equipment equip in this._meeting.UnavailableEquipment)
+                    {
+                        unavailEquip += "\n" + equip;
+                    }
+                    MessageBox.Show("The equipment below has been requested but is unavailable. Please consider rearranging the meeting to accomodate these requests.\n"+ unavailEquip);
+                }
+            }
+
+            //user story 4
             if (this._meeting!=null && !this._meeting.canGoAhead)
             {
                 MessageBox.Show("A guest speaker cannot attend "+ this._meeting +". " + (this._meeting.Initiator==this._impersonator ? " Please edit the meeting." : "Be prepared for it to be re-arranged or cancelled."));
