@@ -77,7 +77,24 @@ namespace MeetingScheduler
             //USER STORY 2
 
             //USER STORY 3
+            Meeting LaptoprackInspection = new Meeting(
+                AllUsers.john,
+                "Laptop Rack Inspection",
+                currentWeek + new TimeSpan(2, 9, 0, 0), 
+                9);
+            Participant laptoprackJohn = new Participant(AllUsers.john, 1, true);
+            laptoprackJohn.equipmentRequests.Add(AllEquipment.LaptopRack);
+            LaptoprackInspection.Details = "John will be checking the laptop rack for inspections";
+            LaptoprackInspection.Participants.Add(laptoprackJohn);
 
+
+
+
+
+
+
+
+          
             //User STORY 4
 
             //USER STORY 5
@@ -118,6 +135,7 @@ namespace MeetingScheduler
             AllMeetings.Update(NetworkLabMeeting);
             AllMeetings.Update(JohnsNetworkLabMeeting);
             AllMeetings.Update(JohnsNetworkLabMeeting2);
+            AllMeetings.Update(LaptoprackInspection);
 
             Logging.AddMessage("Initialisation complete");
         }
