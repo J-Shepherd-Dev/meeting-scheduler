@@ -72,9 +72,24 @@ namespace MeetingScheduler
             UserStory1AccCrit1.Participants.Add(us1ac1Jack);
             UserStory1AccCrit1.Participants.Add(us1ac1Ryan);
 
+            //USER STORY 2
 
+            //USER STORY 3
 
-            //save the meetings in the static class
+            //User STORY 4
+
+            //USER STORY 5
+            Meeting NetworkLabMeeting = new Meeting(
+                AllUsers.tom,
+                "Network Lab Demonstration",
+                currentWeek+ new TimeSpan(3,8,0,0),
+                11);
+            Participant networkLabTom = new Participant(AllUsers.tom, 1, true);
+            networkLabTom.locationPreferences.Add(AllLocations.NetworkLab);
+            NetworkLabMeeting.Participants.Add(networkLabTom);
+            NetworkLabMeeting.Participants.Add(new Participant(AllUsers.ryan, 1, true));
+
+            //Save the meetings in the static class
             AllMeetings.Update(funkyDanceParty);
             AllMeetings.Update(UserStory1AccCrit1);
 
