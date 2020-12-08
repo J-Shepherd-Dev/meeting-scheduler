@@ -114,6 +114,22 @@ namespace MeetingScheduler
             }
         }
 
+        public bool canGoAhead
+        {
+            get
+            {
+                foreach(Participant p in this.GuestSpeakers)
+                {
+                    //if a guest speaker cannot attend, the meeting cannot go ahead
+                    if(p.hasGivenAttendance && !p.attending)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
         //returns the first potential location
         public Location CurrentLocation{
             get

@@ -82,16 +82,40 @@ namespace MeetingScheduler
             Meeting NetworkLabMeeting = new Meeting(
                 AllUsers.tom,
                 "Network Lab Demonstration",
-                currentWeek+ new TimeSpan(3,8,0,0),
-                11);
+                currentWeek+ new TimeSpan(3,9,0,0),
+                9);
             Participant networkLabTom = new Participant(AllUsers.tom, 1, true);
             networkLabTom.locationPreferences.Add(AllLocations.NetworkLab);
+            NetworkLabMeeting.Details = "Tom and Ryan use the network lab";
             NetworkLabMeeting.Participants.Add(networkLabTom);
             NetworkLabMeeting.Participants.Add(new Participant(AllUsers.ryan, 1, true));
+
+            Meeting JohnsNetworkLabMeeting = new Meeting(AllUsers.john,
+                "Johns Network Lab #1",
+                currentWeek + new TimeSpan(3,10,0,0),
+                1);
+            Participant networkJohn = new Participant(AllUsers.john, 1, true);
+            networkJohn.locationPreferences.Add(AllLocations.NetworkLab);
+            JohnsNetworkLabMeeting.Participants.Add(networkJohn);
+            JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.jack, 0, true));
+            JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.mehmet, 0, true));
+
+            Meeting JohnsNetworkLabMeeting2 = new Meeting(AllUsers.john,
+                "Johns Network Lab #2",
+                currentWeek + new TimeSpan(4, 10, 0, 0),
+                1);
+            Participant networkJohn2 = new Participant(AllUsers.john, 1, true);
+            networkJohn.locationPreferences.Add(AllLocations.NetworkLab);
+            JohnsNetworkLabMeeting.Participants.Add(networkJohn2);
+            JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.jack, 0, true));
+            JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.mehmet, 0, true));
 
             //Save the meetings in the static class
             AllMeetings.Update(funkyDanceParty);
             AllMeetings.Update(UserStory1AccCrit1);
+            AllMeetings.Update(NetworkLabMeeting);
+            AllMeetings.Update(JohnsNetworkLabMeeting);
+            AllMeetings.Update(JohnsNetworkLabMeeting2);
 
             Logging.AddMessage("Initialisation complete");
         }

@@ -105,6 +105,12 @@ namespace MeetingScheduler
                             );
                 }
             }
+
+            //message box alerts for user stories
+            if (this._meeting!=null && !this._meeting.canGoAhead)
+            {
+                MessageBox.Show("A guest speaker cannot attend "+ this._meeting +". " + (this._meeting.Initiator==this._impersonator ? " Please edit the meeting." : "Be prepared for it to be re-arranged or cancelled."));
+            }
         }
 
         private string FormatDate(DateTime date)
