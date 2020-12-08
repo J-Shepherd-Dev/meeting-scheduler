@@ -16,6 +16,7 @@ namespace MeetingScheduler
         public static Equipment WheelchairAccess = new Equipment("Wheelchair Access");
 
         public static Equipment LaptopRack = new Equipment("Laptop Rack",0,true);
+        public static Equipment OHP = new Equipment("Overhead Projector", 0,true);
         public static Equipment PrintOuts = new Equipment("Print-outs",0,true);
         public static Equipment HighContrastSlides = new Equipment("High Contrast Slides",0,true);
 
@@ -34,7 +35,8 @@ namespace MeetingScheduler
             HighContrastSlides,
             WheelchairAccess,
             Assisstant,
-            Translator
+            Translator,
+            OHP
         };
 
         /* Items in this list are mobile */
@@ -44,13 +46,15 @@ namespace MeetingScheduler
             PrintOuts,
             HighContrastSlides,
             Assisstant,
-            Translator
+            Translator,
+            OHP
         };
 
         /* Items in this list only exist once */
         public static List<Equipment> OnlyOne = new List<Equipment>()
         {
-            LaptopRack
+            LaptopRack,
+            OHP
         };
 
         /* We can check against this list to potentially alert the user in the case of conflicts*/
