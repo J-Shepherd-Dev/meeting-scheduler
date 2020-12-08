@@ -72,6 +72,8 @@ namespace MeetingScheduler
             UserStory1AccCrit1.Participants.Add(us1ac1Jack);
             UserStory1AccCrit1.Participants.Add(us1ac1Ryan);
 
+
+
             //USER STORY 2
 
             //USER STORY 3

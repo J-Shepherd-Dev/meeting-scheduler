@@ -37,5 +37,19 @@ namespace MeetingScheduler
             Assisstant,
             Translator
         };
+        /* Items in this list only exist once */
+        public static List<Equipment> OnlyOne = new List<Equipment>()
+        {
+            LaptopRack
+        };
+
+        /* We can check against this list to potentially alert the user in the case of conflicts*/
+        public static List<Equipment> UnlimitedInventory = new List<Equipment>() {
+            Assisstant,
+            Translator,
+            PrintOuts,
+            HighContrastSlides
+        };
+
     }
 }

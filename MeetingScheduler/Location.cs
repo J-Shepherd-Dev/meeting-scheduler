@@ -36,6 +36,15 @@ namespace MeetingScheduler
             }
         }
 
+        public bool canAccomodateMeeting(Meeting m)
+        {
+            if (this.capacity < m.CapacityNeeded)
+            {
+                return false;
+            }
+            return true;
+        }
+
         public override string ToString()
         {
             return this.Name;
