@@ -11,13 +11,17 @@ namespace MeetingScheduler
         /*Equipment*/
         public static Equipment Projector = new Equipment("Projector");
         public static Equipment Whiteboard = new Equipment("Whiteboard");
-        public static Equipment LaptopRack = new Equipment("Laptop Rack");
         public static Equipment Printer = new Equipment("Printer");
         public static Equipment Computer = new Equipment("Computer");
         public static Equipment WheelchairAccess = new Equipment("Wheelchair Access");
 
+        /* Always Mobile */
+        public static Equipment LaptopRack = new Equipment("Laptop Rack",0,true);
+        public static Equipment PrintOuts = new Equipment("Print-outs",0,true);
+        public static Equipment HighContrastSlides = new Equipment("High Contrast Slides",0,true);
+
         /*Humans*/
-        public static Equipment Assisitant = new Equipment("Assistant", 1);
+        public static Equipment Assisstant = new Equipment("Assistant", 1);
         public static Equipment Translator = new Equipment("Translator", 1);
 
         /*All*/
@@ -27,8 +31,10 @@ namespace MeetingScheduler
             LaptopRack,
             Printer,
             Computer,
+            PrintOuts,
+            HighContrastSlides,
             WheelchairAccess,
-            Assisitant,
+            Assisstant,
             Translator
         };
     }
