@@ -20,6 +20,10 @@ namespace MeetingScheduler
         public InteractMeetingPanel()
         {
             InitializeComponent();
+            ToolTip initOnlyTooltip = new ToolTip();
+            initOnlyTooltip.ToolTipTitle = "";
+            initOnlyTooltip.SetToolTip(this.editBtn, "Only initiators can edit meetings");
+            initOnlyTooltip.SetToolTip(this.viewRequestsBtn, "Only initiators can view requests");
             UpdatePanels(null, null);
         }
 
@@ -45,6 +49,7 @@ namespace MeetingScheduler
             meetingTitleLbl.Text = this._meeting?.Name ?? "No Meeting Selected";
             meetingDescTB.Text = this._meeting?.Details ?? "No description provided...";
             dateTimeInfoLbl.Text = this._meeting == null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
+            dateTimeInfoLbl.Text += this?._meeting?.CurrentLocation == null ? "" : " @ " + this._meeting.CurrentLocation;
             dateTimeInfoLbl.Text += this._meeting != null && this._meeting.GuestSpeaker != null ? " - Guest speaker: " + this._meeting.GuestSpeaker : "";
 
             //if this user is not important or a guest speaker, hide/disable their location choices
@@ -56,11 +61,16 @@ namespace MeetingScheduler
             //update the info text panel above the participant list
             meetingInfoBox.Text = "";
             if (this._meeting != null) {
-                meetingInfoBox.Text = this._meeting.CapacityNeeded + " confirmed attendees. Potential Locations: ";
-                for(int i=0;i< this._meeting.PotentialLocations.Count;++i)
-                {
-                    meetingInfoBox.Text += (i > 0 ? "," : "");
-                    meetingInfoBox.Text += this._meeting.PotentialLocations.ElementAt(i);
+                meetingInfoBox.Text = this._meeting.CapacityNeeded + " confirmed attendees. ";
+                if (this._meeting.PotentialLocations.Count == 1) {
+                    meetingInfoBox.Text += "Scheduled Location: " + this._meeting.CurrentLocation;
+                } else {
+                    meetingInfoBox.Text += "Potential Locations: ";
+                    for (int i = 0; i < this._meeting.PotentialLocations.Count; ++i)
+                    {
+                        meetingInfoBox.Text += (i > 0 ? "," : "");
+                        meetingInfoBox.Text += this._meeting.PotentialLocations.ElementAt(i);
+                    }
                 }
             }
 
@@ -84,21 +94,17 @@ namespace MeetingScheduler
             {
                 for (int i = 0; i < this.equipmentCheckList.Items.Count; ++i)
                 {
-                    if (this._participant.equipmentRequests.Contains(equipmentCheckList.Items[i]))
-                    {
-                        equipmentCheckList.SetItemChecked(i, true);
-                    }
+                    equipmentCheckList.SetItemChecked(i,
+                        this._participant.equipmentRequests.Contains(equipmentCheckList.Items[i])
+                        );
                 }
                 for (int i = 0; i < this.locationCheckList.Items.Count; ++i)
                 {
-                    if (this._participant.locationPreferences.Contains(locationCheckList.Items[i]))
-                    {
-                        locationCheckList.SetItemChecked(i, true);
-                    }
+                        locationCheckList.SetItemChecked(i,
+                            this._participant.locationPreferences.Contains(locationCheckList.Items[i])
+                            );
                 }
             }
-
-
         }
 
         private string FormatDate(DateTime date)
