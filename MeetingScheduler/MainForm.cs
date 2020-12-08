@@ -121,7 +121,9 @@ namespace MeetingScheduler
             JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.jack, 0, true));
             JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.mehmet, 0, true));
 
-            //Save the meetings in the static class
+            /*
+             * Save the meetings in the static class
+             */
             AllMeetings.Update(funkyDanceParty);
             AllMeetings.Update(UserStory1AccCrit1);
             AllMeetings.Update(UserStory1AccCrit2);
