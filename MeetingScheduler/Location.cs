@@ -27,13 +27,14 @@ namespace MeetingScheduler
                 this.capacity = capacity;
             }
         }
-        public Location(string name, int capacity,List<Equipment> fixedEquipment)
+        public Location(string name, int capacity, List<Equipment> fixedEquipment)
         {
             this.Name = name;
             if (capacity >= 1)
             {
                 this.capacity = capacity;
             }
+            this.fixedEquipment = fixedEquipment;
         }
 
         public bool canAccomodateMeeting(Meeting m)
