@@ -18,6 +18,7 @@ namespace MeetingScheduler
         private Participant _participant;  // Participant version of _impersonator
 
         private LayoutSuspensionSemaphore semaphore;
+        private bool dontUpdateChecks = false;
 
         public InteractMeetingPanel()
         {
@@ -30,6 +31,11 @@ namespace MeetingScheduler
             initOnlyTooltip.SetToolTip(this.viewRequestsBtn, "Only initiators can view requests");
 
             UpdatePanels(null, null);
+        }
+
+        public void UpdatePanels()
+        {
+            UpdatePanels(this._meeting, this._impersonator);
         }
 
         public void UpdatePanels(Meeting m, User impersonating)
@@ -179,7 +185,7 @@ namespace MeetingScheduler
                 _participant.hasGivenAttendance = true;
                 _participant.attending = true;
 
-                UpdatePanels(this._meeting, this._impersonator);
+                UpdatePanels();
             }
         }
 
@@ -190,7 +196,7 @@ namespace MeetingScheduler
                 _participant.hasGivenAttendance = true;
                 _participant.attending = false;
 
-                UpdatePanels(this._meeting, this._impersonator);
+                UpdatePanels();
             }
         }
 
@@ -203,19 +209,6 @@ namespace MeetingScheduler
                 foreach (Object loc in checkedItems)
                 {
                     this._participant.locationPreferences.Add((Location)loc);
-                }
-            }
-        }
-
-        private void equipmentCheckList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this._participant != null)
-            {
-                CheckedListBox.CheckedItemCollection checkedItems = (sender as CheckedListBox).CheckedItems;
-                this._participant.equipmentRequests.Clear();
-                foreach (Object equip in checkedItems)
-                {
-                    this._participant.equipmentRequests.Add((Equipment)equip);
                 }
             }
         }
@@ -254,6 +247,24 @@ namespace MeetingScheduler
             }
             DialogResult requestDialog = MessageBox.Show(equipMsg + locMsg, "Indications made for " + this._meeting, MessageBoxButtons.OK);
             //we don't care about the result so nothing else happens
+        }
+
+        private void equipmentCheckList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (dontUpdateChecks) return;
+
+            if (this._participant != null)
+            {
+
+                if (e.NewValue == CheckState.Checked)
+                    this._participant.equipmentRequests.Add((Equipment)(sender as CheckedListBox).Items[e.Index]);
+                else if (e.NewValue == CheckState.Unchecked)
+                    this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
+
+                dontUpdateChecks = true;
+                UpdatePanels();
+                dontUpdateChecks = false;
+            }
         }
     }
 }
