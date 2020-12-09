@@ -12,7 +12,6 @@ namespace MeetingScheduler
         public static Meeting lastMeeting = null;
         public static event EventHandler meetingsUpdated;
 
-
         public static void Update(Meeting instance)
         {
             if (!meetings.Contains(instance))

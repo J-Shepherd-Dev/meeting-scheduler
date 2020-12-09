@@ -184,5 +184,13 @@ namespace MeetingScheduler
         {
 
         }
+
+        private void resetAllButton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to reset the prototype?", "Reset all", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+                AllMeetings.Reset();
+        }
     }
 }

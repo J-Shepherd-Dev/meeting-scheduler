@@ -156,10 +156,10 @@ namespace MeetingScheduler
                     // Create an entry for each grid space this meeting takes up
                     for (int column = meeting.Column; column < meeting.Column + meeting.Length; ++column)
                     {
-                        if (slots[meeting.Row, column] is null)
-                            slots[meeting.Row, column] = new List<Meeting>();
+                        if (slots[meeting.Row - 1, column - 1] is null)
+                            slots[meeting.Row - 1, column - 1] = new List<Meeting>();
 
-                        slots[meeting.Row, column].Add(meeting);
+                        slots[meeting.Row - 1, column - 1].Add(meeting);
                     }
                 }
 
@@ -171,7 +171,7 @@ namespace MeetingScheduler
                         if (slots[row, column] is null) continue;
 
                         // Skip slots in the edited range because we want the edited meeting to always have display priority
-                        bool isEditedRange = (_editedMeeting != null) && (_editedMeeting.Row == row && column >= _editedMeeting.Column && column < _editedMeeting.Column + _editedMeeting.Length);
+                        bool isEditedRange = (_editedMeeting != null) && (_editedMeeting.Row - 1 == row && column >= _editedMeeting.Column - 1 && column < _editedMeeting.Column - 1 + _editedMeeting.Length);
                         if (isEditedRange) continue;
 
                         var entry = slots[row, column];
@@ -186,14 +186,14 @@ namespace MeetingScheduler
                         {
                             ++column;
                             ++length;
-                            isEditedRange = (_editedMeeting != null) && (_editedMeeting.Row == row && column >= _editedMeeting.Column && column < _editedMeeting.Column + _editedMeeting.Length);
+                            isEditedRange = (_editedMeeting != null) && (_editedMeeting.Row - 1 == row && column >= _editedMeeting.Column - 1 && column < _editedMeeting.Column - 1 + _editedMeeting.Length);
                         }
 
                         // Undo extraneous advance when breaking out of the loop
                         --column;
 
                         meetingPanels.Add(CreateMeetingPanel(
-                            rootColumn, row, length,
+                            rootColumn + 1, row + 1, length,
                             name,
                             backColor, entry.Count == 1 ? Color.Blue : (Color?)null
                         ));
