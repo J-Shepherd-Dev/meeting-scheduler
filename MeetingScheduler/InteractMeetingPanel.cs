@@ -127,6 +127,10 @@ namespace MeetingScheduler
                 /*
                  * Message box alerts for user stories
                  */
+                //if there is no location for this meeting, let the initiator know
+                if (this._meeting!=null && this._meeting.Initiator == this._impersonator) {
+                    MessageBox.Show("There is no available location for "+this._meeting+". Please consider editing the meeting to move it to a different slot.");
+                }
                 //user story 1 - acceptance criteria 1 - no message box
                 //user story 1 - acceptance criteria 3 - no message box
                 //user story 1 - acceptance criteria 2 & 4
