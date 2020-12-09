@@ -17,124 +17,137 @@ namespace MeetingScheduler
         private User _impersonator;
         private Participant _participant;  // Participant version of _impersonator
 
+        private LayoutSuspensionSemaphore semaphore;
+
         public InteractMeetingPanel()
         {
             InitializeComponent();
+            semaphore = new LayoutSuspensionSemaphore(this);
+
             ToolTip initOnlyTooltip = new ToolTip();
             initOnlyTooltip.ToolTipTitle = "";
             initOnlyTooltip.SetToolTip(this.editBtn, "Only initiators can edit meetings");
             initOnlyTooltip.SetToolTip(this.viewRequestsBtn, "Only initiators can view requests");
+
             UpdatePanels(null, null);
         }
 
         public void UpdatePanels(Meeting m, User impersonating)
         {
-            this._meeting = m;
-            this._impersonator = impersonating;
-            this._participant = this._meeting?.GetParticipant(impersonating);
-            Logging.AddMessage($"Meeting set to {_meeting} and impersonating {impersonating}");
+            using (var handle = semaphore.Acquire())
+            {
+                this._meeting = m;
+                this._impersonator = impersonating;
+                this._participant = this._meeting?.GetParticipant(impersonating);
+                Logging.AddMessage($"Meeting set to {_meeting} and impersonating {impersonating}");
 
-            // Update visibility based on user access and stance
-            editBtn.Enabled = this._meeting != null && this._meeting.Initiator == impersonating;
-            viewRequestsBtn.Enabled = editBtn.Enabled;
-            attendNoBtn.Visible = attendYesBtn.Visible = attendLabel.Visible = (_participant != null);
+                // Update visibility based on user access and stance
+                editBtn.Enabled = this._meeting != null && this._meeting.Initiator == impersonating;
+                viewRequestsBtn.Enabled = editBtn.Enabled;
+                attendNoBtn.Visible = attendYesBtn.Visible = attendLabel.Visible = (_participant != null);
 
-            if (_participant != null) {
-                // If we've registered our attendance
-                attendYesBtn.BackColor = (_participant.hasGivenAttendance && !_participant.attending) ? Color.LightGray : Color.PaleGreen;
-                attendNoBtn.BackColor = (_participant.hasGivenAttendance && _participant.attending) ? Color.LightGray : Color.FromArgb(255, 192, 192);
-            }
+                if (_participant != null)
+                {
+                    // If we've registered our attendance
+                    attendYesBtn.BackColor = (_participant.hasGivenAttendance && !_participant.attending) ? Color.LightGray : Color.PaleGreen;
+                    attendNoBtn.BackColor = (_participant.hasGivenAttendance && _participant.attending) ? Color.LightGray : Color.FromArgb(255, 192, 192);
+                }
 
-            // Update text attributes
-            meetingTitleLbl.Text = this._meeting?.Name ?? "No Meeting Selected";
-            meetingDescTB.Text = this._meeting?.Details ?? "No description provided...";
-            dateTimeInfoLbl.Text = this._meeting == null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
-            dateTimeInfoLbl.Text += this?._meeting?.CurrentLocation == null ? "" : " @ " + this._meeting.CurrentLocation;
-            dateTimeInfoLbl.Text += this._meeting != null && this._meeting.GuestSpeaker != null ? " - Guest speaker: " + this._meeting.GuestSpeaker : "";
+                // Update text attributes
+                meetingTitleLbl.Text = this._meeting?.Name ?? "No Meeting Selected";
+                meetingDescTB.Text = this._meeting?.Details ?? "No description provided...";
+                dateTimeInfoLbl.Text = this._meeting == null ? "" : FormatDate(this._meeting.StartTime) + " to " + FormatHour(this._meeting.EndTime);
+                dateTimeInfoLbl.Text += this?._meeting?.CurrentLocation == null ? "" : " @ " + this._meeting.CurrentLocation;
+                dateTimeInfoLbl.Text += this._meeting != null && this._meeting.GuestSpeaker != null ? " - Guest speaker: " + this._meeting.GuestSpeaker : "";
 
-            //if this user is not important or a guest speaker, hide/disable their location choices
-            this.locationGB.Enabled = this._participant != null && this._participant.Attendance && this._participant.status != 0;
-            this.locationGB.Visible = this._participant != null && this._participant.status != 0;
-            //if the participant is not attending, hide their equipment requests
-            this.equipmentGB.Enabled = this._participant != null && this._participant.Attendance;
+                //if this user is not important or a guest speaker, hide/disable their location choices
+                this.locationGB.Enabled = this._participant != null && this._participant.Attendance && this._participant.status != 0;
+                this.locationGB.Visible = this._participant != null && this._participant.status != 0;
+                //if the participant is not attending, hide their equipment requests
+                this.equipmentGB.Enabled = this._participant != null && this._participant.Attendance;
 
-            //update the info text panel above the participant list
-            meetingInfoBox.Text = "";
-            if (this._meeting != null) {
-                meetingInfoBox.Text = this._meeting.CapacityNeeded + " confirmed attendees. ";
-                if (this._meeting.PotentialLocations.Count == 1) {
-                    meetingInfoBox.Text += "Scheduled Location: " + this._meeting.CurrentLocation;
-                } else {
-                    meetingInfoBox.Text += "Potential Locations: ";
-                    for (int i = 0; i < this._meeting.PotentialLocations.Count; ++i)
+                //update the info text panel above the participant list
+                meetingInfoBox.Text = "";
+                if (this._meeting != null)
+                {
+                    meetingInfoBox.Text = this._meeting.CapacityNeeded + " confirmed attendees. ";
+                    if (this._meeting.PotentialLocations.Count == 1)
                     {
-                        meetingInfoBox.Text += (i > 0 ? "," : "");
-                        meetingInfoBox.Text += this._meeting.PotentialLocations.ElementAt(i);
+                        meetingInfoBox.Text += "Scheduled Location: " + this._meeting.CurrentLocation;
+                    }
+                    else
+                    {
+                        meetingInfoBox.Text += "Potential Locations: ";
+                        for (int i = 0; i < this._meeting.PotentialLocations.Count; ++i)
+                        {
+                            meetingInfoBox.Text += (i > 0 ? "," : "");
+                            meetingInfoBox.Text += this._meeting.PotentialLocations.ElementAt(i);
+                        }
                     }
                 }
-            }
 
-            // Show the participants for this meeting in the flow panel
-            participantFlowPanel.Controls.Clear();
-            if (this._meeting != null && this._meeting.Participants.Count > 0)
-            {
-                foreach (Participant p in this._meeting.Participants)
+                // Show the participants for this meeting in the flow panel
+                participantFlowPanel.Controls.Clear();
+                if (this._meeting != null && this._meeting.Participants.Count > 0)
                 {
-                    ParticipantPanel pPanel = new ParticipantPanel(this._meeting, p, 0, null, this._impersonator);
-                    participantFlowPanel.Controls.Add(pPanel);
+                    foreach (Participant p in this._meeting.Participants)
+                    {
+                        ParticipantPanel pPanel = new ParticipantPanel(this._meeting, p, 0, null, this._impersonator);
+                        participantFlowPanel.Controls.Add(pPanel);
+                    }
                 }
-            }
 
-            //load options into the equipment list and location list
-            this.equipmentCheckList.Items.Clear();
-            this.locationCheckList.Items.Clear();
-            this.equipmentCheckList.Items.AddRange(AllEquipment.Equipment.ToArray());
-            this.locationCheckList.Items.AddRange(AllLocations.Locations.ToArray());
-            if (this._participant != null)
-            {
-                for (int i = 0; i < this.equipmentCheckList.Items.Count; ++i)
+                //load options into the equipment list and location list
+                this.equipmentCheckList.Items.Clear();
+                this.locationCheckList.Items.Clear();
+                this.equipmentCheckList.Items.AddRange(AllEquipment.Equipment.ToArray());
+                this.locationCheckList.Items.AddRange(AllLocations.Locations.ToArray());
+                if (this._participant != null)
                 {
-                    equipmentCheckList.SetItemChecked(i,
-                        this._participant.equipmentRequests.Contains(equipmentCheckList.Items[i])
-                        );
-                }
-                for (int i = 0; i < this.locationCheckList.Items.Count; ++i)
-                {
+                    for (int i = 0; i < this.equipmentCheckList.Items.Count; ++i)
+                    {
+                        equipmentCheckList.SetItemChecked(i,
+                            this._participant.equipmentRequests.Contains(equipmentCheckList.Items[i])
+                            );
+                    }
+                    for (int i = 0; i < this.locationCheckList.Items.Count; ++i)
+                    {
                         locationCheckList.SetItemChecked(i,
                             this._participant.locationPreferences.Contains(locationCheckList.Items[i])
                             );
-                }
-            }
-
-            /*
-             * Message box alerts for user stories
-             */
-            //user story 1 - acceptance criteria 1 - no message box
-            //user story 1 - acceptance criteria 3 - no message box
-            //user story 1 - acceptance criteria 2 & 4
-            if (this._meeting != null && this._meeting.UnavailableEquipment.Count>1)
-            {
-                if(this._meeting.Initiator== this._impersonator)
-                {
-                    string unavailEquip = "";
-                    foreach(Equipment equip in this._meeting.UnavailableEquipment)
-                    {
-                        unavailEquip += "\n" + equip;
                     }
-                    MessageBox.Show("The equipment below has been requested but is unavailable. Please consider rearranging the meeting to accomodate these requests.\n"+ unavailEquip);
                 }
-            }
 
-            //user story 2
-            if (this._meeting != null && this._meeting.HasBeenMoved)
-            {
-                MessageBox.Show("This meeting has been moved from its original time. You may need to recheck your attendance.", "Meeting update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+                /*
+                 * Message box alerts for user stories
+                 */
+                //user story 1 - acceptance criteria 1 - no message box
+                //user story 1 - acceptance criteria 3 - no message box
+                //user story 1 - acceptance criteria 2 & 4
+                if (this._meeting != null && this._meeting.UnavailableEquipment.Count > 1)
+                {
+                    if (this._meeting.Initiator == this._impersonator)
+                    {
+                        string unavailEquip = "";
+                        foreach (Equipment equip in this._meeting.UnavailableEquipment)
+                        {
+                            unavailEquip += "\n" + equip;
+                        }
+                        MessageBox.Show("The equipment below has been requested but is unavailable. Please consider rearranging the meeting to accomodate these requests.\n" + unavailEquip);
+                    }
+                }
 
-            //user story 4
-            if (this._meeting!=null && !this._meeting.canGoAhead)
-            {
-                MessageBox.Show("A guest speaker cannot attend "+ this._meeting +". " + (this._meeting.Initiator==this._impersonator ? " Please edit the meeting." : "Be prepared for it to be re-arranged or cancelled."), "Meeting update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                //user story 2
+                if (this._meeting != null && this._meeting.HasBeenMoved)
+                {
+                    MessageBox.Show("This meeting has been moved from its original time. You may need to recheck your attendance.", "Meeting update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+
+                //user story 4
+                if (this._meeting != null && !this._meeting.canGoAhead)
+                {
+                    MessageBox.Show("A guest speaker cannot attend " + this._meeting + ". " + (this._meeting.Initiator == this._impersonator ? " Please edit the meeting." : "Be prepared for it to be re-arranged or cancelled."), "Meeting update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 

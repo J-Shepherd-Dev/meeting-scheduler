@@ -93,15 +93,20 @@ namespace MeetingScheduler
                     //if there isn't enough capacity in this room, skip it
                     if (loc.capacity < this.CapacityNeeded) { break; }
 
-                    //debug line - add the location
-                    output.Add(loc);
-
                     //then check the equipmentRequests
-                    foreach (Equipment fixedE in loc.fixedEquipment)
-                    {
+                    bool equipmentSatisfied = true;
 
+                    foreach (Equipment e in EquipmentRequests)
+                    {
+                        if (!loc.fixedEquipment.Contains(e)) {
+                            if (!AllEquipment.IsPortable.Contains(e))
+                                equipmentSatisfied = false;
+                        }
                     }
 
+                    if (!equipmentSatisfied) continue;
+
+                    output.Add(loc);
                 }
                 return output;
             }
