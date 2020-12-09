@@ -258,6 +258,75 @@ namespace MeetingScheduler
                 if (e.NewValue == CheckState.Checked)
                 {
                     this._participant.equipmentRequests.Add((Equipment)(sender as CheckedListBox).Items[e.Index]);
+
+                    Location previousLocation = this._meeting.CurrentLocation;
+                    this._meeting.CurrentLocation = this._meeting.ProvisionalLocation;
+
+                    // Can't satisfy this equipment
+                    if (this._meeting.CurrentLocation == null)
+                    {
+                        // List of meetings that, if moved, would give us a suitable location for this meeting.
+                        List<Meeting> wouldFreeSlotForUs = new List<Meeting>();
+                        List<Meeting> lowerImportance = new List<Meeting>();
+
+                        foreach (Meeting m in this._meeting.IntersectingMeetings)
+                        {
+                            if (this._meeting.PotentialLocations.Contains(m.CurrentLocation))
+                            {
+                                wouldFreeSlotForUs.Add(m);
+
+                                if (this._meeting.ComparePriority(m) < 0)
+                                {
+                                    lowerImportance.Add(m);
+                                }
+                            }
+                        }
+
+                        if (lowerImportance.Count < wouldFreeSlotForUs.Count)
+                        {
+                            string meetingsText = "";
+                            foreach (Meeting m in wouldFreeSlotForUs)
+                                if (!lowerImportance.Contains(m))
+                                    meetingsText += $"- {m} ({m.CurrentLocation})\n";
+
+                            MessageBox.Show($"There is no available location that satisfies this equipment request because all rooms are taken by existing, higher priority meetings:\n\n{meetingsText}", "Meeting conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            // Revert change
+                            this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
+                            this._meeting.CurrentLocation = previousLocation;
+                        }
+                        else
+                        {
+                            string listOfMeetings = "";
+                            foreach (Meeting m in lowerImportance)
+                            {
+                                listOfMeetings += $"- {m} ({m.CurrentLocation})\n";
+                            }
+
+                            DialogResult result = MessageBox.Show($"There is no available location that satisfies this equipment request because all rooms are taken by existing meetings, but there are lower importance meetings that, if moved, would allow the requirements to be met::\n\n{listOfMeetings}\nYou can choose to move these meetings out of their room to free up resources for your meeting.\n\nDo you want to move the conflicting meetings?", "Meeting conflict", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                foreach (Meeting m in lowerImportance)
+                                {
+                                    m.CurrentLocation = null;
+                                }
+
+                                this._meeting.CurrentLocation = this._meeting.ProvisionalLocation;
+
+                                foreach (Meeting m in lowerImportance)
+                                {
+                                    m.CurrentLocation = m.ProvisionalLocation;
+                                }
+                            }
+                            else
+                            {
+                                // Revert change
+                                this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
+                                this._meeting.CurrentLocation = previousLocation;
+                            }
+                        }
+                    }
                 }
                 else if (e.NewValue == CheckState.Unchecked)
                     this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);

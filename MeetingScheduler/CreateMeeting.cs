@@ -259,7 +259,7 @@ namespace MeetingScheduler
 
             if (_thisMeeting.CurrentLocation == null)
             {
-                // List of meeting that, if moved, would give us a suitable location for this meeting.
+                // List of meetings that, if moved, would give us a suitable location for this meeting.
                 List<Meeting> wouldFreeSlotForUs = new List<Meeting>();
                 lowerImportance.Clear();
 
@@ -274,7 +274,6 @@ namespace MeetingScheduler
                             lowerImportance.Add(m);
                         }
                     }
-
                 }
 
                 if (lowerImportance.Count < wouldFreeSlotForUs.Count)
