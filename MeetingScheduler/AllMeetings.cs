@@ -35,6 +35,12 @@ namespace MeetingScheduler
             meetingsUpdated?.Invoke(null, new EventArgs());
         }
 
+        private static void Add(Meeting instance)
+        {
+            instance.CurrentLocation = instance.ProvisionalLocation;
+            meetings.Add(instance);
+        }
+
         public static void Reset()
         {
             // Reset meetings
@@ -151,13 +157,13 @@ namespace MeetingScheduler
             /*
              * Save the meetings in the static class
              */
-            meetings.Add(funkyDanceParty);
-            meetings.Add(UserStory1AccCrit1);
-            meetings.Add(UserStory1AccCrit2);
-            meetings.Add(NetworkLabMeeting);
-            meetings.Add(JohnsNetworkLabMeeting);
-            meetings.Add(JohnsNetworkLabMeeting2);
-            meetings.Add(UserStory1AccCrit3);
+            Add(funkyDanceParty);
+            Add(UserStory1AccCrit1);
+            Add(UserStory1AccCrit2);
+            Add(NetworkLabMeeting);
+            Add(JohnsNetworkLabMeeting);
+            Add(JohnsNetworkLabMeeting2);
+            Add(UserStory1AccCrit3);
             
             //Send event
             meetingsUpdated?.Invoke(null, new EventArgs());

@@ -239,6 +239,7 @@ namespace MeetingScheduler
             }
 
             // Update the meeting
+            _thisMeeting.CurrentLocation = _thisMeeting.ProvisionalLocation;
             AllMeetings.Update(this._thisMeeting);
 
             if (editing)
