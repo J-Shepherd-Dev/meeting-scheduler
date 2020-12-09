@@ -212,19 +212,6 @@ namespace MeetingScheduler
             }
         }
 
-        private void locationCheckList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (this._participant != null)
-            {
-                CheckedListBox.CheckedItemCollection checkedItems = (sender as CheckedListBox).CheckedItems;
-                this._participant.locationPreferences.Clear();
-                foreach (Object loc in checkedItems)
-                {
-                    this._participant.locationPreferences.Add((Location)loc);
-                }
-            }
-        }
-
         private void dateTimeInfoLbl_Click(object sender, EventArgs e)
         {
 
@@ -274,6 +261,26 @@ namespace MeetingScheduler
                 }
                 else if (e.NewValue == CheckState.Unchecked)
                     this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
+
+                dontUpdateChecks = true;
+                UpdatePanels();
+                dontUpdateChecks = false;
+            }
+        }
+
+        private void locationCheckList_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (dontUpdateChecks) return;
+
+            if (this._participant != null)
+            {
+                if (e.NewValue == CheckState.Checked)
+                    this._participant.locationPreferences.Add((Location)(sender as CheckedListBox).Items[e.Index]);
+                else if (e.NewValue == CheckState.Unchecked)
+                    this._participant.locationPreferences.Remove((Location)(sender as CheckedListBox).Items[e.Index]);
+
+                // Location changes are easy, a null transition should never be possible because no location possibilities are removed due to a location preference.
+                this._meeting.CurrentLocation = this._meeting.ProvisionalLocation;
 
                 dontUpdateChecks = true;
                 UpdatePanels();
