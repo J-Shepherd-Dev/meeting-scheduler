@@ -125,10 +125,16 @@ namespace MeetingScheduler
                 }
             }
 
+            //user story 2
+            if (this._meeting != null && this._meeting.HasBeenMoved)
+            {
+                MessageBox.Show("This meeting has been moved from its original time. You may need to recheck your attendance.", "Meeting update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             //user story 4
             if (this._meeting!=null && !this._meeting.canGoAhead)
             {
-                MessageBox.Show("A guest speaker cannot attend "+ this._meeting +". " + (this._meeting.Initiator==this._impersonator ? " Please edit the meeting." : "Be prepared for it to be re-arranged or cancelled."));
+                MessageBox.Show("A guest speaker cannot attend "+ this._meeting +". " + (this._meeting.Initiator==this._impersonator ? " Please edit the meeting." : "Be prepared for it to be re-arranged or cancelled."), "Meeting update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 

@@ -14,6 +14,7 @@ namespace MeetingScheduler
         public int Length;  // in hours
         public User Initiator;
         public HashSet<Participant> Participants;
+        public bool HasBeenMoved = false;
         public DateTime EndTime
         {
             get

@@ -14,6 +14,7 @@ namespace MeetingScheduler
     {
         public Meeting _thisMeeting;
         private bool _isEditing = false;
+        private DateTime? originalTime = null;
 
         public bool editing
         {
@@ -72,9 +73,12 @@ namespace MeetingScheduler
 
             // Ensure data on screen matches the meeting
             editing = true;
+
             newMeetingTitle.Text = meeting.Name;
             newMeetingDetails.Text = meeting.Details;
             numericUpDown1.Value = meeting.Length;
+            originalTime = meeting.StartTime;
+
             userToAddBox.Items.AddRange(AllUsers.Users.ToArray());
             calendarPanel1.editedMeeting = _thisMeeting;
             this.cancelBtn.Text = editing ? "Cancel Meeting" : "Cancel";
@@ -251,13 +255,19 @@ namespace MeetingScheduler
                 return;
             }
 
-            // Push meeting if it's newly created
+            // Update the meeting
             AllMeetings.Update(this._thisMeeting);
 
             if (editing)
+            {
+                if (originalTime != _thisMeeting.StartTime)
+                    _thisMeeting.HasBeenMoved = true;
                 Logging.AddMessage($"Edited meeting {_thisMeeting}");
+            }
             else
+            {
                 Logging.AddMessage($"Created meeting {_thisMeeting}");
+            }
 
             this.Close();
         }
