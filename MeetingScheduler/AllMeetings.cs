@@ -97,7 +97,7 @@ namespace MeetingScheduler
                 currentWeek + new TimeSpan(1, 12, 00, 0),
                 1
             );
-            UserStory1AccCrit2.Details = "User Story 1 - Acceptance Criteria 2. Are Taro Chiezo's Lamb Banana's still a reflection on genetic engineering and Liverpool's history, or have they become merely an art piece?";
+            UserStory1AccCrit2.Details = "User Story 1 - Acceptance Criteria 2. Are Taro Chiezo's Lamb Banana's still a reflection on genetic engineering and Liverpool's history, or have they become merely an fanciful sculpture?";
             Participant us1ac2Jack = new Participant(AllUsers.jack);
             Participant us1ac2Ryan = new Participant(AllUsers.ryan);
             UserStory1AccCrit2.Participants.Add(us1ac2Jack);
