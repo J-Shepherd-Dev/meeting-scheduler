@@ -257,7 +257,9 @@ namespace MeetingScheduler
             {
 
                 if (e.NewValue == CheckState.Checked)
+                {
                     this._participant.equipmentRequests.Add((Equipment)(sender as CheckedListBox).Items[e.Index]);
+                }
                 else if (e.NewValue == CheckState.Unchecked)
                     this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
 

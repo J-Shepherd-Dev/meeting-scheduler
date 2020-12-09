@@ -179,7 +179,7 @@ namespace MeetingScheduler
             {
                 foreach (Participant p in m.Participants)
                 {
-                    if (users.Contains(p.user))
+                    if (p.hasGivenAttendance && p.attending && users.Contains(p.user))
                     {
                         meetings.Add(m);
                         break;
@@ -193,21 +193,14 @@ namespace MeetingScheduler
         private void newMeetingSaveBtn_Click(object sender, EventArgs e)
         {
             // Check to make sure the user hasn't put the meeting in a conflicting position
-            List<Meeting> conflicting = new List<Meeting>();
+            List<Meeting> conflicting = _thisMeeting.IntersectingMeetings;
             List<Meeting> lowerImportance = new List<Meeting>();
 
-            foreach (Meeting m in calendarPanel1.meetings)
+            foreach (Meeting m in conflicting)
             {
-                if (m == _thisMeeting) continue;
-
-                if (_thisMeeting.Intersects(m))
+                if (_thisMeeting.ComparePriority(m) < 0)
                 {
-                    conflicting.Add(m);
-
-                    if (_thisMeeting.ComparePriority(m) < 0)
-                    {
-                        lowerImportance.Add(m);
-                    }
+                    lowerImportance.Add(m);
                 }
             }
 
@@ -218,41 +211,31 @@ namespace MeetingScheduler
 
                 if (lowerImportance.Count < conflicting.Count)
                 {
-                    MessageBox.Show($"A meeting of higher importance occurs at this time slot and so this meeting cannot be arranged at this time.\n\nYou must either increase the importance of this meeting or move it to a new time.", "Meeting conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    DialogResult result = MessageBox.Show($"One of your participants has already said they will attend a meeting of higher importance at this time.\n\nYou can choose to schedule the meeting here anyway, but it is unlikely they will attend.\n\nDo you want to schedule the meeting at this time?", "Meeting conflict", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Cancel)
+                        return;
                 } else
                 {
-                    // If there is only one meeting of lower importance, addressing it is simple, we can just direct the user to edit that meeting.
-                    // Otherwise, we have to direct them to edit them individually.
-                    if (lowerImportance.Count == 1)
-                    {
-                        DialogResult result = MessageBox.Show($"A meeting of lower importance occurs at this time:\n\n{lowerImportance[0]}\n\nYou can choose to move it, otherwise, please move this meeting to another time.\nDo you want to move the conflicting meeting?", "Meeting conflict", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                    string listOfMeetings = "";
+                    foreach (Meeting m in lowerImportance)
+                        listOfMeetings += $"- {m}\n";
 
-                        if (result == DialogResult.OK)
+                    DialogResult result = MessageBox.Show($"One or more of your participants have already said they will attend a meeting of lower importance at this time::\n\n{listOfMeetings}\nYou can choose to move these meetings to make yours easier to attend.\n\nDo you want to move the conflicting meetings?", "Meeting conflict", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        foreach (Meeting m in lowerImportance)
                         {
-                            CreateMeeting cM = new CreateMeeting(lowerImportance[0]);
+                            CreateMeeting cM = new CreateMeeting(m);
                             cM.Show();
                         }
-                    } else
+                        return;
+                    } else if (result == DialogResult.Cancel)
                     {
-                        string listOfMeetings = "";
-                        foreach (Meeting m in lowerImportance)
-                            listOfMeetings += $"- {m}\n";
-
-                        DialogResult result = MessageBox.Show($"Multiple meetings of lower importance occur at this time:\n\n{listOfMeetings}\nYou will need to move all of them to have your meeting occur at this time.\nYou can choose to move them, otherwise, please move this meeting to another time.\n\nDo you want to move the conflicting meetings?", "Meeting conflict", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-
-                        if (result == DialogResult.OK)
-                        {
-                            foreach (Meeting m in lowerImportance)
-                            {
-                                CreateMeeting cM = new CreateMeeting(m);
-                                cM.Show();
-                            }
-                        }
+                        return;
                     }
                 }
-
-                return;
             }
 
             // Update the meeting

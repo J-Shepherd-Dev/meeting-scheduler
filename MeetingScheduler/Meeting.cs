@@ -253,6 +253,24 @@ namespace MeetingScheduler
             }
         }
 
+        public List<Meeting> IntersectingMeetings
+        {
+            get
+            {
+                List<Meeting> output = new List<Meeting>();
+
+                foreach (Meeting m in AllMeetings.meetings)
+                {
+                    if (m == this) continue;
+
+                    if (m.Intersects(this))
+                        output.Add(m);
+                }
+
+                return output;
+            }
+        }
+
         public HashSet<Participant> ImportantParticipants
         {
             get
