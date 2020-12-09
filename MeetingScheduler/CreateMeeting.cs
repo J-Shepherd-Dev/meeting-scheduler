@@ -188,16 +188,67 @@ namespace MeetingScheduler
         }
         private void newMeetingSaveBtn_Click(object sender, EventArgs e)
         {
-            // Check to make sure the user hasn't put the meeting in an unresolved position
+            // Check to make sure the user hasn't put the meeting in a conflicting position
+            List<Meeting> conflicting = new List<Meeting>();
+            List<Meeting> lowerImportance = new List<Meeting>();
+
             foreach (Meeting m in calendarPanel1.meetings)
             {
                 if (m == _thisMeeting) continue;
 
                 if (_thisMeeting.Intersects(m))
                 {
-                    MessageBox.Show($"The position you have chosen for the new meeting intersects with a meeting one of your participants is already attending. Please resolve the conflict first.", "Meeting conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    conflicting.Add(m);
+
+                    if (_thisMeeting.ComparePriority(m) < 0)
+                    {
+                        lowerImportance.Add(m);
+                    }
                 }
+            }
+
+            if (conflicting.Count > 0)
+            {
+                // If there is a meeting of higher importance, the meeting cannot occur at this time.
+                // Otherwise, offer to move one of the meetings.
+
+                if (lowerImportance.Count < conflicting.Count)
+                {
+                    MessageBox.Show($"A meeting of higher importance occurs at this time slot and so this meeting cannot be arranged at this time.\n\nYou must either increase the importance of this meeting or move it to a new time.", "Meeting conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                } else
+                {
+                    // If there is only one meeting of lower importance, addressing it is simple, we can just direct the user to edit that meeting.
+                    // Otherwise, we have to direct them to edit them individually.
+                    if (lowerImportance.Count == 1)
+                    {
+                        DialogResult result = MessageBox.Show($"A meeting of lower importance occurs at this time:\n\n{lowerImportance[0]}\n\nYou can choose to move it, otherwise, please move this meeting to another time.\nDo you want to move the conflicting meeting?", "Meeting conflict", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                        if (result == DialogResult.OK)
+                        {
+                            CreateMeeting cM = new CreateMeeting(lowerImportance[0]);
+                            cM.Show();
+                        }
+                    } else
+                    {
+                        string listOfMeetings = "";
+                        foreach (Meeting m in lowerImportance)
+                            listOfMeetings += $"- {m}\n";
+
+                        DialogResult result = MessageBox.Show($"Multiple meetings of lower importance occur at this time:\n\n{listOfMeetings}\nYou will need to move all of them to have your meeting occur at this time.\nYou can choose to move them, otherwise, please move this meeting to another time.\n\nDo you want to move the conflicting meetings?", "Meeting conflict", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+
+                        if (result == DialogResult.OK)
+                        {
+                            foreach (Meeting m in lowerImportance)
+                            {
+                                CreateMeeting cM = new CreateMeeting(m);
+                                cM.Show();
+                            }
+                        }
+                    }
+                }
+
+                return;
             }
 
             // Push meeting if it's newly created

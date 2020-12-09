@@ -201,7 +201,7 @@ namespace MeetingScheduler
                     meetingPanels.Add(CreateMeetingPanel(
                         editedMeeting.Column, editedMeeting.Row, editedMeeting.Length,
                         editedHasConflict ? $"[CONFLICT] {editedMeeting.Name}" : editedMeeting.Name,
-                        Color.White, Color.DarkGray
+                        editedHasConflict ? Color.Red : Color.White, Color.DarkGray
                     ));
             }
         }
@@ -287,27 +287,9 @@ namespace MeetingScheduler
             // Move edited meeting
             if (editedMeeting != null)
             {
-                // We know the time the user wants to move to.
-                // Now we need to check if any meetings intersect with that time.
-                List<Meeting> intersecting = new List<Meeting>();
-
-                foreach (Meeting m in meetings)
-                {
-                    if (m == editedMeeting) continue;
-
-                    if (editedMeeting.WouldIntersect(time, m))
-                        intersecting.Add(m);
-                }
-
-                if (intersecting.Count == 0)
-                {
-                    editedMeeting.StartTime = time;
-                    Changed?.Invoke(null, new EventArgs());
-                    Logging.AddMessage($"Moved meeting {editedMeeting} to {time}");
-                } else
-                {
-                    MessageBox.Show($"There are {intersecting.Count} meeting(s) that conflict with this meeting time.", "Meeting conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                editedMeeting.StartTime = time;
+                Changed?.Invoke(null, new EventArgs());
+                Logging.AddMessage($"Moved meeting {editedMeeting} to {time}");
             } else
             {
                 Logging.AddMessage($"Selected time {time} but there is no meeting to move");
