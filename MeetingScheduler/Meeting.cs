@@ -171,10 +171,18 @@ namespace MeetingScheduler
         }
 
         //returns the first potential location
-        public Location CurrentLocation{
+        public Location CurrentLocation = null;
+
+        public Location ProvisionalLocation {
             get
             {
-                if(this.PotentialLocations.Count < 1)
+                HashSet<Location> takenLocations = new HashSet<Location>();
+                foreach (Meeting m in IntersectingMeetings)
+                {
+                    takenLocations.Add(m.CurrentLocation);
+                }
+
+                if (this.PotentialLocations.Count < 1)
                 {
                     return null;
                 }
@@ -185,6 +193,9 @@ namespace MeetingScheduler
                 {
                     foreach (Location loc in this.PotentialLocations)
                     {
+                        if (takenLocations.Contains(loc))
+                            continue;
+
                         foreach (Participant p in this.Participants)
                         {
                             if (p.status > 0 && p.locationPreferences.Contains(loc))
