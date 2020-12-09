@@ -70,46 +70,53 @@ namespace MeetingScheduler
             funkyDanceParty.Participants.Add(new Participant(AllUsers.ryan, 0, true));
             funkyDanceParty.Participants.Add(new Participant(AllUsers.tom, 1, true));
 
-            //USER STORY 1
+            // -- USER STORY 1 --
+            // Acceptance Criteria 1
             Meeting UserStory1AccCrit1 = new Meeting(
                 AllUsers.jack,
                 "Meeting for Ryan",
                 currentWeek + new TimeSpan(1, 11, 0, 0),
                 1
-                );
+            );
             UserStory1AccCrit1.Details = "Jack and Ryan chit-chat.";
             Participant us1ac1Jack = new Participant(AllUsers.jack);
             Participant us1ac1Ryan = new Participant(AllUsers.ryan);
             UserStory1AccCrit1.Participants.Add(us1ac1Jack);
             UserStory1AccCrit1.Participants.Add(us1ac1Ryan);
 
+            // Acceptance Criteria 2
             Meeting UserStory1AccCrit2 = new Meeting(
-            AllUsers.tom,
-            "User Story 1 - Acceptance Criteria 2",
-            currentWeek + new TimeSpan(1, 12, 00, 0),
-            1);
+                AllUsers.tom,
+                "An Analysis of Lamb Bananas",
+                currentWeek + new TimeSpan(1, 12, 00, 0),
+                1
+            );
             UserStory1AccCrit2.Details = "User Story 1 - Acceptance Criteria 2";
             Participant us1ac2Jack = new Participant(AllUsers.jack);
             Participant us1ac2Ryan = new Participant(AllUsers.ryan);
             UserStory1AccCrit2.Participants.Add(us1ac2Jack);
             UserStory1AccCrit2.Participants.Add(us1ac2Ryan);
 
-            //USER STORY 2
-
-            //USER STORY 3
-            Meeting LaptoprackInspection = new Meeting(
-                AllUsers.john,
+            // Acceptance Criteria 3
+            Meeting UserStory1AccCrit3 = new Meeting(
+                AllUsers.tom,
                 "Laptop Rack Inspection",
                 currentWeek + new TimeSpan(2, 9, 0, 0),
-                9);
-            Participant laptoprackJohn = new Participant(AllUsers.john, 1, true);
-            laptoprackJohn.equipmentRequests.Add(AllEquipment.LaptopRack);
-            LaptoprackInspection.Details = "John will be checking the laptop rack for inspections";
-            LaptoprackInspection.Participants.Add(laptoprackJohn);
+                9
+            );
+            Participant us1ac3John = new Participant(AllUsers.john, 1, true);
+            Participant us1ac3Ryan = new Participant(AllUsers.ryan, 1);
+            UserStory1AccCrit3.Details = "John will be checking the laptop rack for inspections";
+            UserStory1AccCrit3.Participants.Add(us1ac3John);
+            UserStory1AccCrit3.Participants.Add(us1ac3Ryan);
 
-            //User STORY 4
+            // -- USER STORY 2 --
 
-            //USER STORY 5
+            // -- USER STORY 3 --
+
+            // -- User STORY 4 --
+
+            // -- USER STORY 5 --
             Meeting NetworkLabMeeting = new Meeting(
                 AllUsers.tom,
                 "Network Lab Demonstration",
@@ -150,7 +157,7 @@ namespace MeetingScheduler
             meetings.Add(NetworkLabMeeting);
             meetings.Add(JohnsNetworkLabMeeting);
             meetings.Add(JohnsNetworkLabMeeting2);
-            meetings.Add(LaptoprackInspection);
+            meetings.Add(UserStory1AccCrit3);
             
             //Send event
             meetingsUpdated?.Invoke(null, new EventArgs());
