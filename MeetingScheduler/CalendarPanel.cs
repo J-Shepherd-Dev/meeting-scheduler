@@ -113,6 +113,9 @@ namespace MeetingScheduler
         {
             using (var handle = Suspend())
             {
+                // Clear tooltips
+                toolTip1.RemoveAll();
+
                 // If panels for meetings already exist, remove them
                 foreach (Panel panel in meetingPanels)
                 {
@@ -233,6 +236,7 @@ namespace MeetingScheduler
             label.AutoSize = false;
             label.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
             label.Text = name;
+            toolTip1.SetToolTip(label, name);
             label.Location = new Point(color == null ? 3 : 13, 3);
             label.Size = new Size(panel.Width - 15, 50);
             label.Margin = new Padding(3);
