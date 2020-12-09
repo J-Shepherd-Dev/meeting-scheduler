@@ -94,8 +94,11 @@ namespace MeetingScheduler
             // Acceptance Criteria 2
             // Two meetings to disrupt the equipment requirements for our test meeting
             Meeting refurbishMeetingA = new Meeting(AllUsers.jack, "Refurbish Meeting Room A", currentWeek + new TimeSpan(1, 8, 00, 0), 11);
-            refurbishMeetingA.Participants.Add(new Participant(AllUsers.jack));
+            Participant refurbishJack = new Participant(AllUsers.jack, 1, true);
+            refurbishMeetingA.Participants.Add(refurbishJack);
             refurbishMeetingA.CurrentLocation = AllLocations.MeetingRoomA;
+            // Jack needs an overhead projector as a guide for a pretty pattern on the wall
+            refurbishJack.equipmentRequests.Add(AllEquipment.OHP);
 
             Meeting refurbishConference = new Meeting(AllUsers.jack, "Refurbish Conference Room", currentWeek + new TimeSpan(1, 8, 00, 0), 11);
             refurbishConference.Participants.Add(new Participant(AllUsers.jack));

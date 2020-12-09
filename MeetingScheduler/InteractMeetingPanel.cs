@@ -40,6 +40,8 @@ namespace MeetingScheduler
 
         public void UpdatePanels(Meeting m, User impersonating)
         {
+            dontUpdateChecks = true;
+
             using (var handle = semaphore.Acquire())
             {
                 this._meeting = m;
@@ -167,6 +169,8 @@ namespace MeetingScheduler
                     MessageBox.Show("A guest speaker cannot attend " + this._meeting + ". " + (this._meeting.Initiator == this._impersonator ? " Please edit the meeting." : "Be prepared for it to be re-arranged or cancelled."), "Meeting update", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
+
+            dontUpdateChecks = false;
         }
 
         private string FormatDate(DateTime date)
@@ -386,9 +390,7 @@ namespace MeetingScheduler
                 else if (e.NewValue == CheckState.Unchecked)
                     this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
 
-                dontUpdateChecks = true;
                 UpdatePanels();
-                dontUpdateChecks = false;
             }
         }
 
@@ -406,9 +408,7 @@ namespace MeetingScheduler
                 // Location changes are easy, a null transition should never be possible because no location possibilities are removed due to a location preference.
                 this._meeting.CurrentLocation = this._meeting.ProvisionalLocation;
 
-                dontUpdateChecks = true;
                 UpdatePanels();
-                dontUpdateChecks = false;
             }
         }
     }
