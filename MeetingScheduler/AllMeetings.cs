@@ -152,7 +152,6 @@ namespace MeetingScheduler
                 currentWeek + new TimeSpan(3, 10, 0, 0),
                 1);
             Participant networkJohn = new Participant(AllUsers.john, 1, true);
-            networkJohn.locationPreferences.Add(AllLocations.NetworkLab);
             JohnsNetworkLabMeeting.Participants.Add(networkJohn);
             JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.jack, 0, true));
             JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.mehmet, 0, true));
@@ -162,7 +161,6 @@ namespace MeetingScheduler
                 currentWeek + new TimeSpan(4, 10, 0, 0),
                 1);
             Participant networkJohn2 = new Participant(AllUsers.john, 1, true);
-            networkJohn2.locationPreferences.Add(AllLocations.NetworkLab);
             JohnsNetworkLabMeeting2.Participants.Add(networkJohn2);
             JohnsNetworkLabMeeting2.Participants.Add(new Participant(AllUsers.jack, 0, true));
             JohnsNetworkLabMeeting2.Participants.Add(new Participant(AllUsers.mehmet, 0, true));

@@ -91,7 +91,7 @@ namespace MeetingScheduler
                 foreach (Location loc in AllLocations.Locations)
                 {
                     //if there isn't enough capacity in this room, skip it
-                    if (loc.capacity < this.CapacityNeeded) { break; }
+                    if (loc.capacity < this.CapacityNeeded) { continue; }
 
                     //then check the equipmentRequests
                     bool equipmentSatisfied = true;

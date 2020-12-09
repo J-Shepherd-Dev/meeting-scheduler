@@ -198,10 +198,31 @@ namespace MeetingScheduler
         {
             if (_participant != null)
             {
-                _participant.hasGivenAttendance = true;
-                _participant.attending = true;
+                List<Meeting> conflicts = new List<Meeting>();
 
-                UpdatePanels();
+                foreach (Meeting m in this._meeting.IntersectingMeetings)
+                {
+                    if (m.GetParticipant(_impersonator)?.Attendance == true)
+                    {
+                        conflicts.Add(m);
+                    }
+                }
+
+                if (conflicts.Count > 0)
+                {
+                    string meetingText = "";
+                    foreach (Meeting m in conflicts)
+                        meetingText += $"- {m}\n";
+
+                    MessageBox.Show($"You have already agreed to attend these meetings:\n\n{meetingText}\nYou must change your registered attendance for those meetings to attend this one.", "Meeting Conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    _participant.hasGivenAttendance = true;
+                    _participant.attending = true;
+
+                    UpdatePanels();
+                }
             }
         }
 
