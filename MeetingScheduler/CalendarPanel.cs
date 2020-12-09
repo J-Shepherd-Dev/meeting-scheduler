@@ -129,7 +129,7 @@ namespace MeetingScheduler
                 // Recreate panels
                 // Create a hashset for each of the available slots
                 List<Meeting>[,] slots = new List<Meeting>[7, 11];
-                bool editedHasConflict = false;
+                int editedConflicts = 0;
 
 
                 foreach (Meeting meeting in meetings)
@@ -148,7 +148,7 @@ namespace MeetingScheduler
 
                     // If the currently edited meeting conflicts, record it
                     if (_editedMeeting != null && meeting.Intersects(_editedMeeting))
-                        editedHasConflict = true;
+                        editedConflicts++;
 
                     // Create an entry for each grid space this meeting takes up
                     for (int column = meeting.Column; column < meeting.Column + meeting.Length; ++column)
@@ -176,7 +176,7 @@ namespace MeetingScheduler
                         int rootColumn = column;
                         int length = 0;
                         string name = entry.Count == 1 ? entry[0].Name : $"{entry.Count} meetings";
-                        Color backColor = entry.Count == 1 ? Color.White : Color.LightPink;
+                        Color backColor = entry.Count == 1 ? Color.White : Color.LightBlue;
 
                         // Now attempt to advance
                         while (column < 11 && !isEditedRange && slots[row, column] != null && slots[row, column].SequenceEqual(entry))
@@ -192,7 +192,7 @@ namespace MeetingScheduler
                         meetingPanels.Add(CreateMeetingPanel(
                             rootColumn, row, length,
                             name,
-                            backColor, entry.Count == 1 ? Color.Red : (Color?)null
+                            backColor, entry.Count == 1 ? Color.Blue : (Color?)null
                         ));
                     }
                 }
@@ -200,8 +200,8 @@ namespace MeetingScheduler
                 if (editedMeeting != null)
                     meetingPanels.Add(CreateMeetingPanel(
                         editedMeeting.Column, editedMeeting.Row, editedMeeting.Length,
-                        editedHasConflict ? $"[CONFLICT] {editedMeeting.Name}" : editedMeeting.Name,
-                        editedHasConflict ? Color.Red : Color.White, Color.DarkGray
+                        editedConflicts > 0 ? (editedConflicts == 1 ? $"[1 CONFLICT] {editedMeeting.Name}" : $"[{editedConflicts} CONFLICTS] {editedMeeting.Name}") : editedMeeting.Name,
+                        editedConflicts > 0 ? Color.Red : Color.White, Color.DarkGray
                     ));
             }
         }
