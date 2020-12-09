@@ -178,7 +178,19 @@ namespace MeetingScheduler
 
                         int rootColumn = column;
                         int length = 0;
-                        string name = entry.Count == 1 ? entry[0].Name : $"{entry.Count} meetings";
+                        string name = "";
+                        if (entry.Count == 1)
+                        {
+                            name = $"{entry[0].Name}\n{entry[0].CurrentLocation}";
+                        }
+                        else
+                        {
+                            name = $"{entry.Count} meetings:";
+                            foreach(Meeting m in entry)
+                            {
+                                name += $"\n{m}";
+                            }
+                        }
                         Color backColor = entry.Count == 1 ? Color.White : Color.LightBlue;
 
                         // Now attempt to advance
