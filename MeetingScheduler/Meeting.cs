@@ -112,14 +112,6 @@ namespace MeetingScheduler
             }
         }
 
-        public bool isScheduled
-        {
-            get
-            {
-                return this.PotentialLocations.Count == 1;
-            }
-        }
-
         public bool canGoAhead
         {
             get

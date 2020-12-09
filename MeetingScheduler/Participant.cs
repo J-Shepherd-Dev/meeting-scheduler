@@ -20,8 +20,9 @@ namespace MeetingScheduler
 
         public bool Attendance { 
             get {
+                //essentially removes ambiguity of attendance
                 return hasGivenAttendance && attending;
-                    }
+                }
             set {
                 this.hasGivenAttendance = true;
                 this.attending = value;
