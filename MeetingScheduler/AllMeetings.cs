@@ -37,7 +37,8 @@ namespace MeetingScheduler
 
         private static void Add(Meeting instance)
         {
-            instance.CurrentLocation = instance.ProvisionalLocation;
+            if (instance.CurrentLocation == null)
+                instance.CurrentLocation = instance.ProvisionalLocation;
             meetings.Add(instance);
         }
 
@@ -82,7 +83,7 @@ namespace MeetingScheduler
                 AllUsers.jack,
                 "Meeting for Ryan",
                 currentWeek + new TimeSpan(1, 11, 0, 0),
-                1
+                2
             );
             UserStory1AccCrit1.Details = "Jack and Ryan chit-chat.";
             Participant us1ac1Jack = new Participant(AllUsers.jack);
@@ -91,6 +92,15 @@ namespace MeetingScheduler
             UserStory1AccCrit1.Participants.Add(us1ac1Ryan);
 
             // Acceptance Criteria 2
+            // Two meetings to disrupt the equipment requirements for our test meeting
+            Meeting refurbishMeetingA = new Meeting(AllUsers.jack, "Refurbish Meeting Room A", currentWeek + new TimeSpan(1, 8, 00, 0), 11);
+            refurbishMeetingA.Participants.Add(new Participant(AllUsers.jack));
+            refurbishMeetingA.CurrentLocation = AllLocations.MeetingRoomA;
+
+            Meeting refurbishConference = new Meeting(AllUsers.jack, "Refurbish Conference Room", currentWeek + new TimeSpan(1, 8, 00, 0), 11);
+            refurbishConference.Participants.Add(new Participant(AllUsers.jack));
+            refurbishConference.CurrentLocation = AllLocations.BigConferenceRoom;
+
             Meeting UserStory1AccCrit2 = new Meeting(
                 AllUsers.tom,
                 "An Analysis of Lamb Bananas",
@@ -158,8 +168,13 @@ namespace MeetingScheduler
              * Save the meetings in the static class
              */
             Add(funkyDanceParty);
+
             Add(UserStory1AccCrit1);
+
+            Add(refurbishMeetingA);
+            Add(refurbishConference);
             Add(UserStory1AccCrit2);
+
             Add(NetworkLabMeeting);
             Add(JohnsNetworkLabMeeting);
             Add(JohnsNetworkLabMeeting2);
