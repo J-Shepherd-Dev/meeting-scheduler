@@ -274,15 +274,18 @@ namespace MeetingScheduler
                             if (this._meeting.PotentialLocations.Contains(m.CurrentLocation))
                             {
                                 wouldFreeSlotForUs.Add(m);
-
-                                if (this._meeting.ComparePriority(m) < 0)
-                                {
-                                    lowerImportance.Add(m);
-                                }
                             }
                         }
 
-                        if (lowerImportance.Count < wouldFreeSlotForUs.Count)
+                        foreach (Meeting m in wouldFreeSlotForUs)
+                        {
+                            if (this._meeting.ComparePriority(m) < 0)
+                            {
+                                lowerImportance.Add(m);
+                            }
+                        }
+
+                        if (lowerImportance.Count == 0)
                         {
                             string meetingsText = "";
                             foreach (Meeting m in wouldFreeSlotForUs)
@@ -324,6 +327,58 @@ namespace MeetingScheduler
                                 // Revert change
                                 this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
                                 this._meeting.CurrentLocation = previousLocation;
+                            }
+                        }
+                    } else if (this._meeting.MeetingsUsingOurPortableEquipment.Count > 0)
+                    {
+                        // List of meetings that, if moved, would give us a suitable location for this meeting.
+                        List<Meeting> wouldFreeSlotForUs = this._meeting.MeetingsUsingOurPortableEquipment.ToList();
+                        List<Meeting> lowerImportance = new List<Meeting>();
+
+                        foreach (Meeting m in wouldFreeSlotForUs)
+                        {
+                            if (this._meeting.ComparePriority(m) < 0)
+                            {
+                                lowerImportance.Add(m);
+                            }
+                        }
+
+                        if (lowerImportance.Count == 0)
+                        {
+                            string meetingsText = "";
+                            foreach (Meeting m in wouldFreeSlotForUs)
+                                if (!lowerImportance.Contains(m))
+                                    meetingsText += $"- {m} ({m.CurrentLocation})\n";
+
+                            MessageBox.Show($"This equipment request cannot be satisfied because limited portable equipment is taken up by other meetings:\n\n{meetingsText}", "Meeting conflict", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                            // Revert change
+                            this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
+                        }
+                        else
+                        {
+                            string listOfMeetings = "";
+                            foreach (Meeting m in lowerImportance)
+                            {
+                                listOfMeetings += $"- {m} ({m.CurrentLocation})\n";
+                            }
+
+                            DialogResult result = MessageBox.Show($"This equipment request cannot be satisfied because limited portable equipment is taken up by other meetings, but there are lower importance meetings that could be changed to free up equipment:\n\n{listOfMeetings}\nYou can choose to change the equipment requirements of this meeting to free up resources for your meeting.\n\nDo you want to edit the conflicting meetings?", "Meeting conflict", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                            if (result == DialogResult.Yes)
+                            {
+                                foreach (Meeting m in lowerImportance)
+                                {
+                                    foreach (Participant p in m.Participants)
+                                    {
+                                        p.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                // Revert change
+                                this._participant.equipmentRequests.Remove((Equipment)(sender as CheckedListBox).Items[e.Index]);
                             }
                         }
                     }

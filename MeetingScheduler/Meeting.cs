@@ -112,6 +112,57 @@ namespace MeetingScheduler
             }
         }
 
+        public HashSet<Equipment> UnavailablePortableEquipment
+        {
+            get
+            {
+                HashSet<Equipment> output = new HashSet<Equipment>();
+
+                foreach (Equipment e in EquipmentRequests)
+                {
+                    if (AllEquipment.OnlyOne.Contains(e))
+                    {
+                        // Check if this is already in use
+                        foreach (Meeting m in IntersectingMeetings)
+                        {
+                            if (m.EquipmentRequests.Contains(e))
+                            {
+                                output.Add(e);
+                            }
+                        }
+                    }
+                }
+
+                return output;
+            }
+        }
+
+        public HashSet<Meeting> MeetingsUsingOurPortableEquipment
+        {
+            get
+            {
+                HashSet<Meeting> output = new HashSet<Meeting>();
+
+                foreach (Equipment e in EquipmentRequests)
+                {
+                    if (AllEquipment.OnlyOne.Contains(e))
+                    {
+                        // Check if this is already in use
+                        foreach (Meeting m in IntersectingMeetings)
+                        {
+                            if (m.EquipmentRequests.Contains(e))
+                            {
+                                output.Add(m);
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                return output;
+            }
+        }
+
         public bool canGoAhead
         {
             get
@@ -169,6 +220,8 @@ namespace MeetingScheduler
             get
             {
                 HashSet<Location> takenLocations = new HashSet<Location>();
+                HashSet<Location> unsuitableBecauseNoEquipment = new HashSet<Location>();
+
                 foreach (Meeting m in IntersectingMeetings)
                 {
                     takenLocations.Add(m.CurrentLocation);
