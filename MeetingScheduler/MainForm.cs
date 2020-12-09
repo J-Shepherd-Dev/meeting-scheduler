@@ -77,6 +77,10 @@ namespace MeetingScheduler
                     if (p.user == _activeUser)
                     {
                         invitedTabList.Items.Add(m);
+                        if (m.CurrentLocation != null)
+                        {
+                            scheduledTabList.Items.Add(m);
+                        }
                         break;
                     }
                 }
