@@ -110,7 +110,7 @@ namespace MeetingScheduler
                 currentWeek + new TimeSpan(2, 9, 0, 0),
                 9
             );
-            Participant us1ac3John = new Participant(AllUsers.john, 1, true);
+            Participant us1ac3John = new Participant(AllUsers.john, 1);
             Participant us1ac3Ryan = new Participant(AllUsers.ryan, 1);
             UserStory1AccCrit3.Details = "John will be checking the laptop rack for inspections";
             UserStory1AccCrit3.Participants.Add(us1ac3John);
@@ -120,7 +120,7 @@ namespace MeetingScheduler
 
             // -- USER STORY 3 --
 
-            // -- User STORY 4 --
+            // -- USER STORY 4 --
 
             // -- USER STORY 5 --
             Meeting NetworkLabMeeting = new Meeting(
@@ -149,10 +149,10 @@ namespace MeetingScheduler
                 currentWeek + new TimeSpan(4, 10, 0, 0),
                 1);
             Participant networkJohn2 = new Participant(AllUsers.john, 1, true);
-            networkJohn.locationPreferences.Add(AllLocations.NetworkLab);
-            JohnsNetworkLabMeeting.Participants.Add(networkJohn2);
-            JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.jack, 0, true));
-            JohnsNetworkLabMeeting.Participants.Add(new Participant(AllUsers.mehmet, 0, true));
+            networkJohn2.locationPreferences.Add(AllLocations.NetworkLab);
+            JohnsNetworkLabMeeting2.Participants.Add(networkJohn2);
+            JohnsNetworkLabMeeting2.Participants.Add(new Participant(AllUsers.jack, 0, true));
+            JohnsNetworkLabMeeting2.Participants.Add(new Participant(AllUsers.mehmet, 0, true));
 
             /*
              * Save the meetings in the static class

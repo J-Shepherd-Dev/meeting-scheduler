@@ -179,7 +179,7 @@ namespace MeetingScheduler
             {
                 foreach (Participant p in m.Participants)
                 {
-                    if (p.hasGivenAttendance && p.attending && users.Contains(p.user))
+                    if (p.Attendance == true && users.Contains(p.user))
                     {
                         meetings.Add(m);
                         break;
@@ -193,14 +193,26 @@ namespace MeetingScheduler
         private void newMeetingSaveBtn_Click(object sender, EventArgs e)
         {
             // Check to make sure the user hasn't put the meeting in a conflicting position
-            List<Meeting> conflicting = _thisMeeting.IntersectingMeetings;
+            Dictionary<Meeting, List<User>> conflicting = new Dictionary<Meeting, List<User>>();
             List<Meeting> lowerImportance = new List<Meeting>();
 
-            foreach (Meeting m in conflicting)
+            foreach (Meeting m in _thisMeeting.IntersectingMeetings)
             {
-                if (_thisMeeting.ComparePriority(m) < 0)
+                List<User> conflictingUsers = new List<User>();
+
+                foreach (Participant p in _thisMeeting.Participants) {
+                    if (m.GetParticipant(p.user)?.Attendance == true)
+                        conflictingUsers.Add(p.user);
+                }
+
+                if (conflictingUsers.Count > 0)
                 {
-                    lowerImportance.Add(m);
+                    conflicting.Add(m, conflictingUsers);
+
+                    if (_thisMeeting.ComparePriority(m) < 0)
+                    {
+                        lowerImportance.Add(m);
+                    }
                 }
             }
 
@@ -219,7 +231,11 @@ namespace MeetingScheduler
                 {
                     string listOfMeetings = "";
                     foreach (Meeting m in lowerImportance)
-                        listOfMeetings += $"- {m}\n";
+                    {
+                        string userList = string.Join(", ", conflicting[m]);
+
+                        listOfMeetings += $"- {m} ({userList})\n";
+                    }
 
                     DialogResult result = MessageBox.Show($"One or more of your participants have already said they will attend a meeting of lower importance at this time::\n\n{listOfMeetings}\nYou can choose to move these meetings to make yours easier to attend.\n\nDo you want to move the conflicting meetings?", "Meeting conflict", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
@@ -238,8 +254,63 @@ namespace MeetingScheduler
                 }
             }
 
-            // Update the meeting
+            // If we've reached this point time slot conflicts have been sorted.
             _thisMeeting.CurrentLocation = _thisMeeting.ProvisionalLocation;
+
+            if (_thisMeeting.CurrentLocation == null)
+            {
+                // List of meeting that, if moved, would give us a suitable location for this meeting.
+                List<Meeting> wouldFreeSlotForUs = new List<Meeting>();
+                lowerImportance.Clear();
+
+                foreach (Meeting m in _thisMeeting.IntersectingMeetings)
+                {
+                    if (_thisMeeting.PotentialLocations.Contains(m.CurrentLocation))
+                    {
+                        wouldFreeSlotForUs.Add(m);
+
+                        if (_thisMeeting.ComparePriority(m) < 0)
+                        {
+                            lowerImportance.Add(m);
+                        }
+                    }
+
+                }
+
+                if (lowerImportance.Count < wouldFreeSlotForUs.Count)
+                {
+                    DialogResult result = MessageBox.Show($"There is no suitable location for this meeting to take place at this time with its requirements.\n\nYou can choose to schedule the meeting here anyway, but there will be no location scheduled unless one becomes free or you edit the meeting.\n\nDo you want to schedule the meeting at this time?", "Meeting conflict", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                    if (result == DialogResult.Cancel)
+                        return;
+                }
+                else
+                {
+                    string listOfMeetings = "";
+                    foreach (Meeting m in lowerImportance)
+                    {
+                        listOfMeetings += $"- {m} ({m.CurrentLocation})\n";
+                    }
+
+                    DialogResult result = MessageBox.Show($"There is no suitable location for this meeting to take place at this time with its requirements, but there are lower importance meetings that, if moved, would allow the requirements to be met::\n\n{listOfMeetings}\nYou can choose to move these meetings to free up resources for your meeting.\n\nDo you want to move the conflicting meetings?", "Meeting conflict", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        foreach (Meeting m in lowerImportance)
+                        {
+                            CreateMeeting cM = new CreateMeeting(m);
+                            cM.Show();
+                        }
+                        return;
+                    }
+                    else if (result == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+                }
+            }
+
+            // Update the meeting
             AllMeetings.Update(this._thisMeeting);
 
             if (editing)

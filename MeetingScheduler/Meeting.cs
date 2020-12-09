@@ -72,7 +72,7 @@ namespace MeetingScheduler
                 int total = 0;
                 foreach (Participant p in this.Participants)
                 {
-                    if (p.hasGivenAttendance && p.attending)
+                    if (p.Attendance == true)
                     {
                         ++total;
                     }
@@ -179,7 +179,7 @@ namespace MeetingScheduler
                     return null;
                 }
                 //default the location on the first one
-                Location output = this.PotentialLocations.ElementAt(0);
+                Location output = null;
                 Dictionary<Location, int> votes = new Dictionary<Location, int>();
                 if (this.PotentialLocations.Count > 0)
                 {
@@ -188,20 +188,16 @@ namespace MeetingScheduler
                         if (takenLocations.Contains(loc))
                             continue;
 
+                        if (!votes.ContainsKey(loc))
+                            votes.Add(loc, 0);
+
                         foreach (Participant p in this.Participants)
                         {
                             if (p.status > 0 && p.locationPreferences.Contains(loc))
                             {
                                 //Guest speakers preferences have a weight of 1 million on the location of this meeting
                                 int voteWeight = p.status == 2 ? 1000000 : p.status == 1 ? 1 : 0;
-                                if (votes.ContainsKey(loc))
-                                {
-                                    votes[loc] += voteWeight;
-                                }
-                                else
-                                {
-                                    votes.Add(loc, voteWeight);
-                                }
+                                votes[loc] += voteWeight;
                             }
                         }
                     }
